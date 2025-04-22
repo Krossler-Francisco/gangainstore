@@ -1,0 +1,118 @@
+.product_list_container{
+    display: flex;
+    margin: 0 auto;
+    max-width: 1360px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.product {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.product.visible {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.image-wrapper {
+    position: relative;
+    width: 310px;
+    height: 450px;
+  }
+
+  .product-porcentagem{
+    position: absolute;
+    z-index: 1;
+    background-color: rgb(147, 19, 202);
+    color: white;
+    font-size: 14px;
+    padding: 3px 19px;
+    font-weight: 600;
+    top: 18px;
+    right: 0px;
+  }
+
+  .product-stock{
+    position: absolute;
+    z-index: 2;
+    background-color: rgb(163, 163, 163);
+    color: white;
+    font-size: 14px;
+    padding: 3px 16px;
+    font-weight: 600;
+    top: 2px;
+    left: 0px;
+  }
+  
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 310px;
+    height: 450px;
+    object-fit: cover;
+    transition: opacity 0.4s ease-in-out;
+    opacity: 1;
+  }
+  
+  .img2 {
+    opacity: 0;
+  }
+  
+  .product:hover .img2 {
+    opacity: 1;
+  }
+  
+  .product:hover .img1 {
+    opacity: 0;
+  }
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    padding-block: 8px;
+}
+
+.product-name{
+    text-transform: uppercase;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+a{
+    text-decoration: none;
+}
+
+.product-price{
+    color: #444;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.product-desconto{
+    font-size: 18px;
+    color: black;
+    font-weight: 600;
+}
+
+.product-desconto .transferencia{
+    color: #444;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+.product-frete{
+    font-size: 12px;
+    color: #444;
+}
+
+.product-disponible{
+    color: rgb(92, 12, 146);
+    font-weight: 600;
+}

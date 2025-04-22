@@ -1,12 +1,77 @@
-.store-container{
-    display: flex;
-    flex-direction: column;
+.store-container {
+    min-height: 100vh;
+    position: relative;
     align-items: center;
-}
-
-.store-header{
+  }
+  
+  .store-header {
     background: url(/src/pages/store/wallpaper.webp);
     background-size: cover;
-    height: 800px;
+    height: 700px;
     width: 100%;
+    transition: height 0.7s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .store-header-content{
+    font-size: 3.8rem;
+    max-width: 1360px;
+    margin: 0 auto;
+    width: 100%;
+    color: transparent;
+    text-shadow: -2px 0px 20px rgba(0, 0, 0, 0.15);
+    -webkit-text-stroke: .8px rgb(0, 0, 0);
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+  }
+
+  .store-header-content h1{
+    margin-block: -120px 10px;
+  }
+
+  .store-header-content h2{
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.103);
+    -webkit-text-stroke: 0;
+    font-weight: 200;
+    margin-block: 10px;
+  }
+
+  .store-header-button{
+    border: 1px solid rgb(0, 0, 0);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.103);
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.403);
+    color: rgb(0, 0, 0);
+    padding: 6px 32px;
+    text-transform: uppercase;
+    font-weight: 400;
+    -webkit-text-stroke: 0;
+    transition: .3s ease;
+  }
+
+  .store-header-button:hover{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.203);
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.403);
+  }
+  
+  .hide-header {
+    height: 0;
+    overflow: hidden;
+  }
+
+.product-list {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
+
+.product-list.visible {
+  opacity: 1;
+  transform: translateY(0);
+} 

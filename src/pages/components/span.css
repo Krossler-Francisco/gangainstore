@@ -1,0 +1,9 @@
+.span_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri;
+    color: #222;
+    padding-block: 4px;
+    border-bottom: 1px solid #f5f5f5;
+}
