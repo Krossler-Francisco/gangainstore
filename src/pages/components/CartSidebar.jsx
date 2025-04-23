@@ -85,12 +85,12 @@ function CartSidebar({ isOpen, onClose }) {
 
         {preferenceId && (
           <div className="mercado-pago-wallet">
-            <h3>Completa tu compra</h3>
+            <h3>Completa tu compra con Mercado Pago</h3>
             <div className="wallet-box">
               <Wallet initialization={{ preferenceId }} />
             </div>
           </div>
-)}
+        )}
       </div>
     </div>
   );
