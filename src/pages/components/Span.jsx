@@ -45,7 +45,7 @@ function Span() {
       <strong className="span_content">
         Envío gratis en compras superiores a $200.000
       </strong>
-      <button onClick={handleBuyClick}>Comprar</button>
+      {/*<button onClick={handleBuyClick}>Comprar</button>*/}
 
       {preferenceId && (
         <div style={{ marginTop: '20px', width: '300px' }}>
