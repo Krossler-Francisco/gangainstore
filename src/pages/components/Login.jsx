@@ -64,7 +64,7 @@ function Login() {
               />
             </div>
             <button className="aling" type="submit">Iniciar Sesión</button>
-            <p className="forgot-password">¿Olvidaste tu contraseña?</p>
+            <p onClick={() => navigate("/forgot-password")} className="forgot-password">¿Olvidaste tu contraseña?</p>
           </form>
         </div>
 
