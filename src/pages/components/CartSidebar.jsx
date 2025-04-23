@@ -20,7 +20,7 @@ function CartSidebar({ isOpen, onClose }) {
               <img src={item.img} alt={item.name} />
               <div className="item-details">
                 <p>{item.name}</p>
-                <p>${item.price}</p>
+                <p>${Number(item.price)}</p>
                 <div className="quantity-control">
                   <button onClick={() => updateQuantity(item.id, -1)}>-</button>
                   <span>{item.quantity}</span>
