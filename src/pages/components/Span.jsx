@@ -7,7 +7,7 @@ function Span() {
         items: [
           {
             title: 'Compra destacada',
-            unit_price: 20000,
+            unit_price: 200,
             quantity: 1,
             currency_id: 'ARS',  // Moeda para a Argentina
           },
@@ -30,7 +30,14 @@ function Span() {
         body: JSON.stringify(payload),  // Enviando com a estrutura correta
       });
   
+      // Verificar se a requisição foi bem-sucedida
+      if (!res.ok) {
+        throw new Error('Falha ao criar a preferência no Mercado Pago');
+      }
+  
       const data = await res.json();
+  
+      console.log('Resposta da API:', data);  // Verifique o que a API retorna
   
       if (data.init_point) {
         window.location.href = data.init_point; // Redireciona ao checkout
