@@ -3,15 +3,35 @@ import { useParams } from 'react-router-dom';
 import data from '../store/data/products.json';
 import { FaTruck } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useCart } from '../../hooks/useCart';
 import './ProductDetail.css';
+import { toast } from 'react-hot-toast';
 
 function ProductDetail() {
   const { id } = useParams();
   const product = data.find(item => item._id === id);
   const [selectedImage, setSelectedImage] = useState(product?.img1 || '');
+  const { addToCart } = useCart();
 
   const handleImageClick = (img) => {
     setSelectedImage(img);
+  };
+
+
+  const handleAddToCart = () => {
+    const productToAdd = {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      desconto: product.desconto,
+      img: product.img1,
+      quantity: 1,
+    };
+  
+    addToCart(productToAdd);
+    
+    toast.success(`${product.name} adicionado ao carrinho!`);
+
   };
 
   const images = [product?.img1, product?.img2, product?.img3, product?.img4].filter(Boolean);
@@ -62,7 +82,7 @@ function ProductDetail() {
         </p>
         </div>
 
-        <button className="add-to-cart">
+        <button className="add-to-cart" onClick={handleAddToCart}>
           Agregar al carrito
         </button>
 

@@ -3,11 +3,15 @@ import { FiShoppingCart, FiUser, FiSearch } from "react-icons/fi";
 import "./Navbar.css";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import CartSidebar from "./CartSidebar";
+
 
 function Navbar({ setSearchTerm }) {
   const [input, setInput] = useState("");
   const { user, logout } = useAuth();
   const [showAccountComponent, setShowAccountComponent] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+
 
   const toggleAccontComponent = () => {
     setShowAccountComponent(!showAccountComponent);
@@ -73,12 +77,12 @@ function Navbar({ setSearchTerm }) {
               </div>
             )}
           </Link>
-          <div className="cart-button">
+          <div className="cart-button" onClick={() => setShowCart(!showCart)}>
             <FiShoppingCart size={18} />
-            <span className="cart-count"></span>
           </div>
         </div>
       </div>
+      <CartSidebar isOpen={showCart} onClose={() => setShowCart(false)} />
     </div>
   );
 }
