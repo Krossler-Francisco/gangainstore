@@ -29,8 +29,8 @@ function Span() {
 
       const data = await res.json();
 
-      if (data.id) {
-        setPreferenceId(data.id); // Agora usamos o ID da preferência!
+      if (data.preferenceId) {
+        setPreferenceId(data.preferenceId); // Agora estamos usando "preferenceId"
       } else {
         alert('No se pudo iniciar el pago');
       }
