@@ -1,8 +1,7 @@
 import mercadopago from 'mercadopago';
 
-mercadopago.configure({
-  access_token: process.env.MP_ACCESS_TOKEN 
-});
+
+mercadopago.configurations.setAccessToken(process.env.MP_ACCESS_TOKEN);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
