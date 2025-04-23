@@ -1,7 +1,9 @@
-import mercadopago from 'mercadopago';
+import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-// Configuração do Mercado Pago com o token de acesso
-mercadopago.configurations.setAccessToken(process.env.MERCADO_PAGO_ACCESS_TOKEN);  // Token configurado a partir de variáveis de ambiente
+// Configuração do Mercado Pago usando a classe MercadoPagoConfig
+const client = new MercadoPagoConfig({
+  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN, // Token via variável de ambiente
+});
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -10,14 +12,14 @@ export default async function handler(req, res) {
 
   const { title, unit_price, quantity } = req.body;
 
-  // Validação simples para garantir que os parâmetros necessários estão presentes
+  // Validação simples para garantir que os parâmetros estão presentes
   if (!title || !unit_price || !quantity) {
     return res.status(400).json({ error: 'Missing required fields: title, unit_price, quantity' });
   }
 
   try {
     // Criando a preferência no Mercado Pago
-    const preference = await mercadopago.preferences.create({
+    const preference = await client.preferences.create({
       items: [
         {
           title: title,
@@ -27,9 +29,9 @@ export default async function handler(req, res) {
         },
       ],
       back_urls: {
-        success: 'https://tusitio.com/success',  // URL de sucesso
-        failure: 'https://tusitio.com/failure',  // URL de falha
-        pending: 'https://tusitio.com/pending',  // URL de pendência
+        success: 'https://tusitio.com/success',
+        failure: 'https://tusitio.com/failure',
+        pending: 'https://tusitio.com/pending',
       },
       auto_return: 'approved',  // Retorno automático ao completar o pagamento
     });
