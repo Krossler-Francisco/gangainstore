@@ -14,33 +14,39 @@ export default async function handler(req, res) {
 
   // Validação simples para garantir que os parâmetros estão presentes
   if (!title || !unit_price || !quantity) {
-    console.log('Erro: Dados incompletos - title, unit_price, quantity são obrigatórios');
     return res.status(400).json({ error: 'Missing required fields: title, unit_price, quantity' });
   }
 
   try {
-    // Criando a preferência no Mercado Pago
+    // Criando a preferência no Mercado Pago com back_urls e auto_return
     const preference = await client.preferences.create({
-      items: [
-        {
-          title: title,
-          unit_price: parseFloat(unit_price),  // Garantir que o preço seja um número
-          quantity: parseInt(quantity, 10),    // Garantir que a quantidade seja um número inteiro
-          currency_id: 'ARS',  // Moeda correta para a Argentina
+      body: {
+        items: [
+          {
+            title: title,
+            unit_price: parseFloat(unit_price),
+            quantity: parseInt(quantity, 10),
+          },
+        ],
+        back_urls: {
+          success: 'https://www.seusite.com/success',
+          failure: 'https://www.seusite.com/failure',
+          pending: 'https://www.seusite.com/pending',
         },
-      ],
-      back_urls: {
-        success: 'https://tusitio.com/success',
-        failure: 'https://tusitio.com/failure',
-        pending: 'https://tusitio.com/pending',
+        auto_return: 'approved',
+        // Opcional: external_reference para rastrear internamente a transação
+        external_reference: `pedido_${Date.now()}`, // Exemplo de referência única
       },
-      auto_return: 'approved',  // Retorno automático ao completar o pagamento
     });
 
-    // Enviar o URL de pagamento gerado para o frontend
-    res.status(200).json({ init_point: preference.body.init_point });
+    // Retorna a resposta com o ID da preferência e o link para redirecionar o cliente
+    return res.status(200).json({
+      preferenceId: preference.id,
+      init_point: preference.init_point, // Link de redirecionamento para o checkout
+    });
+
   } catch (error) {
-    console.error('Erro ao criar a preferência:', error.response ? error.response.body : error);
-    res.status(500).json({ error: 'Erro ao criar preferência', details: error.response ? error.response.body : error });
+    console.error('Erro ao criar preferência:', error);
+    return res.status(500).json({ error: 'Erro ao criar preferência' });
   }
 }
