@@ -1,7 +1,7 @@
-import mercadopago from 'mercadopago'; // Importando corretamente o SDK
+import mercadopago from 'mercadopago';
 
-// Configuração do Mercado Pago com o token de acesso
-mercadopago.configurations.setAccessToken(process.env.MP_ACCESS_TOKEN);
+// Configuração do Mercado Pago usando a versão v2.x
+mercadopago.configurations.setAccessToken(process.env.MP_ACCESS_TOKEN);  // Agora isso deve funcionar se for v2.x
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
           title,
           unit_price: Number(unit_price),
           quantity: Number(quantity),
-          currency_id: 'ARS', // Moeda da Argentina
+          currency_id: 'ARS',  // Moeda correta para a Argentina
         },
       ],
       back_urls: {
