@@ -1,6 +1,7 @@
-import mercadopago from 'mercadopago';
+import mercadopago from 'mercadopago'; // Importando corretamente o SDK
 
-mercadopago.configurations.setAccessToken(process.env.MP_ACCESS_TOKEN);  // Inicializa o Mercado Pago com o token
+// Configuração do Mercado Pago com o token de acesso
+mercadopago.configurations.setAccessToken(process.env.MP_ACCESS_TOKEN);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
@@ -8,14 +9,13 @@ export default async function handler(req, res) {
   const { title, unit_price, quantity } = req.body;
 
   try {
-    // Certifique-se de que está criando a preferência corretamente
     const preference = await mercadopago.preferences.create({
       items: [
         {
           title,
           unit_price: Number(unit_price),
           quantity: Number(quantity),
-          currency_id: 'ARS', // Usando ARS para Argentina
+          currency_id: 'ARS', // Moeda da Argentina
         },
       ],
       back_urls: {
