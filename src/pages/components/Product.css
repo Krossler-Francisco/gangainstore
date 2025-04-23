@@ -8,13 +8,11 @@
 
 .product {
   opacity: 0;
-  transform: translateY(40px);
-  transition: 2s ease;
+  transition: 1s ease;
 }
 
 .product.visible {
   opacity: 1;
-  transform: translateY(0px);
 }
 
 .image-wrapper {
