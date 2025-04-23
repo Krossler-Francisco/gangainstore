@@ -9,7 +9,8 @@ export default async function handler(req, res) {
     return res.status(405).send('Method not allowed');
   }
 
-  const { title, unit_price, quantity } = req.body;
+    const { items } = req.body;
+    const { title, unit_price, quantity } = items[0] || {};
 
   if (!title || !unit_price || !quantity) {
     return res.status(400).json({ error: 'Missing required fields: title, unit_price, quantity' });
