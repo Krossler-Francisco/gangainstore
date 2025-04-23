@@ -11,10 +11,10 @@
       "ancho": "20",
       "anchoCerrada": "3"
     },
-    "price": 5.500,
-    "sinImpuesto": 5.200,
+    "price": 5500,
+    "sinImpuesto": 5200,
     "stock": 100,
-    "desconto": 5.300,
+    "desconto": 5300,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
@@ -31,10 +31,10 @@
       "ancho": "25",
       "anchoCerrada": "3"
     },
-    "price": 5.900,
-    "sinImpuesto": 5.500,
+    "price": 5900,
+    "sinImpuesto": 5500,
     "stock": 95,
-    "desconto": "5.700",
+    "desconto": 5700,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
@@ -51,10 +51,10 @@
       "ancho": "30",
       "anchoCerrada": "3"
     },
-    "price": "6.100",
-    "sinImpuesto": 5.700,
+    "price": 6100,
+    "sinImpuesto": 5700,
     "stock": 90,
-    "desconto": 5.900,
+    "desconto": 5900,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
@@ -71,10 +71,10 @@
       "ancho": "35",
       "anchoCerrada": "3"
     },
-    "price": "6.300",
-    "sinImpuesto": 5.900,
+    "price": 6300,
+    "sinImpuesto": 5900,
     "stock": 85,
-    "desconto": 6.100,
+    "desconto": 6100,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
