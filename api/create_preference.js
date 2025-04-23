@@ -1,7 +1,7 @@
-import mercadopago from 'mercadopago'; // Importação correta
+import mercadopago from 'mercadopago';
 
 // Configuração do Mercado Pago com o token de acesso
-mercadopago.configurations.setAccessToken(process.env.MERCADO_PAGO_ACCESS_TOKEN);  // Usando variável de ambiente para segurança
+mercadopago.configurations.setAccessToken(process.env.MERCADO_PAGO_ACCESS_TOKEN);  // Token configurado a partir de variáveis de ambiente
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
