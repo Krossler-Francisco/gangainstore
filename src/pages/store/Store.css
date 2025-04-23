@@ -5,9 +5,9 @@
   }
   
   .store-header {
-    background: url(/src/pages/store/wallpaper.webp);
+    background: url(/wallpaper.webp);
     background-size: cover;
-    height: 700px;
+    height: 84vh;
     width: 100%;
     transition: height 0.7s ease;
     display: flex;
@@ -64,14 +64,3 @@
     height: 0;
     overflow: hidden;
   }
-
-.product-list {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.product-list.visible {
-  opacity: 1;
-  transform: translateY(0);
-} 

@@ -9,7 +9,7 @@
 .product {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: 2s ease;
 }
 
 .product.visible {
@@ -54,7 +54,7 @@
     width: 310px;
     height: 450px;
     object-fit: cover;
-    transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
     opacity: 1;
   }
   

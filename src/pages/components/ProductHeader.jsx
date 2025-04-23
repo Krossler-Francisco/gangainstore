@@ -1,7 +1,7 @@
 import { SlidersHorizontal } from 'lucide-react';
 import './ProductHeader.css';
 
-export default function ProductHeader( {count}) {
+export default function ProductHeader({count}) {
 
   return (
     <section className='product-header-container'>

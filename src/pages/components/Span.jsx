@@ -1,4 +1,4 @@
-import './span.css'
+import './Span.css'
 
 function Span() {
   return (

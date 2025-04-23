@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import data from '../data/products.json';
-import "./product.css";
+import data from '../store/data/products.json';
+import "./Product.css";
 import { Link } from 'react-router-dom';
 
 function Product({ searchTerm, onCountChange }) {

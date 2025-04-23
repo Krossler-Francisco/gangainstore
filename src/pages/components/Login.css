@@ -1,0 +1,80 @@
+.login-container{
+    height: 82vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-content{
+    display: flex;
+    box-shadow: 1px 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgb(232, 232, 232);
+    border-radius: 15px;
+}
+
+.login-form{
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    background-color: #fefefe;
+}
+
+.login-form-line{
+    border-right: 1px solid rgb(232, 232, 232);
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.login-form form{
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.login-form form label{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: .4rem;
+}
+
+.login-form form input{
+    font-size: 14px;
+    color: rgb(47, 47, 47);
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 6px;
+    width: 340px;
+    height: 8px;
+    padding: 1rem .5rem;
+}
+
+input:focus{
+    outline: 1px solid rgb(120, 120, 120);
+}
+
+.login-form form button{
+    background-color: rgb(14, 14, 14);
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    padding: .8rem .4rem;
+    transition: .2s ease;
+    margin-top: 1.3rem;
+}
+
+.login-form form button:hover{
+    background-color: rgb(0, 0, 0);
+    color: white;
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.2);
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+}

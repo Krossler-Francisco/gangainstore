@@ -43,10 +43,10 @@ function Navbar({ setSearchTerm }) {
         </form>
 
         <div className="user-actions">
-          <div className="user-profile">
+          <Link to="/login" className="user-profile">
             <FiUser size={18} />
             <p>Iniciar Sesión</p>
-          </div>
+          </Link>
           <div className="cart-button">
             <FiShoppingCart size={18} />
             <span className="cart-count"></span>
