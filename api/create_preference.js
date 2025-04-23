@@ -1,8 +1,6 @@
-import { MercadoPagoConfig } from 'mercadopago';
+import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MP_ACCESS_TOKEN,
-});
+const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
@@ -10,7 +8,7 @@ export default async function handler(req, res) {
   const { title, unit_price, quantity } = req.body;
 
   try {
-    const preference = await client.preferences.create({
+    const preference = await new Preference(client).create({
       items: [
         {
           title,
