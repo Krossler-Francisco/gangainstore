@@ -1,9 +1,11 @@
-import mercadopago from 'mercadopago';
-import 'dotenv/config';
+import { MercadoPagoConfig } from 'mercadopago';
+import { Preference } from 'mercadopago/resources';
 
-mercadopago.configure({
-    access_token: process.env.MP_ACCESS_TOKEN
-  });
+const client = new MercadoPagoConfig({
+  accessToken: process.env.MP_ACCESS_TOKEN,
+});
+
+const preferenceClient = new Preference(client);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
@@ -12,24 +14,26 @@ export default async function handler(req, res) {
 
   try {
     const preference = {
-      items: [
-        {
-          title,
-          unit_price: Number(unit_price),
-          quantity: Number(quantity),
-          currency_id: 'ARS',
+      body: {
+        items: [
+          {
+            title,
+            unit_price: Number(unit_price),
+            quantity: Number(quantity),
+            currency_id: 'ARS', // ou 'BRL' se for Brasil
+          },
+        ],
+        back_urls: {
+          success: 'https://tusitio.com/success',
+          failure: 'https://tusitio.com/failure',
+          pending: 'https://tusitio.com/pending',
         },
-      ],
-      back_urls: {
-        success: 'https://tusitio.com/success',
-        failure: 'https://tusitio.com/failure',
-        pending: 'https://tusitio.com/pending',
+        auto_return: 'approved',
       },
-      auto_return: 'approved',
     };
 
-    const response = await mercadopago.preferences.create(preference);
-    res.status(200).json({ init_point: response.body.init_point });
+    const response = await preferenceClient.create(preference);
+    res.status(200).json({ init_point: response.init_point });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Hubo un error al crear la preferencia' });
