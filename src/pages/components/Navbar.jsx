@@ -71,10 +71,10 @@ function Navbar({ setSearchTerm }) {
                 )}
               </div>
             ) : (
-              <div to="/login" className="login-button">
+              <Link to="/login" className="login-button">
                 <FiUser size={18} />
                 <p>Iniciar Sesión</p>
-              </div>
+              </Link>
             )}
           </Link>
           <div className="cart-button" onClick={() => setShowCart(!showCart)}>
