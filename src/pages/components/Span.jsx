@@ -3,22 +3,26 @@ import './Span.css'
 function Span() {
   const handleBuyClick = async () => {
     try {
+      const payload = {
+        title: 'Compra destacada',
+        unit_price: 20000,
+        quantity: 1,
+      };
+  
+      console.log('Corpo da requisição:', JSON.stringify(payload));  // Verifique a saída
+  
       const res = await fetch('/api/create_preference', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          title: 'Compra destacada',
-          unit_price: 20000,
-          quantity: 1,
-        }),
+        body: JSON.stringify(payload),
       });
-
+  
       const data = await res.json();
-
+  
       if (data.init_point) {
-        window.location.href = data.init_point; // Redirige al checkout
+        window.location.href = data.init_point; // Redireciona ao checkout
       } else {
         alert('No se pudo iniciar el pago');
       }
