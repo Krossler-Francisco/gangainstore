@@ -16,7 +16,7 @@ export default async function handler(req, res) {
           title,
           unit_price: Number(unit_price),
           quantity: Number(quantity),
-          currency_id: 'BRL', // Certifique-se de usar BRL para Brasil
+          currency_id: 'ARS', // Certifique-se de usar BRL para Brasil
         },
       ],
       back_urls: {
