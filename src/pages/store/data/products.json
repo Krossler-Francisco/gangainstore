@@ -2,10 +2,10 @@
   {
     "_id": "1",
     "name": "Lámpara de Papel China 20cm",
-    "img1": "https://collection.cloudinary.com/dwnf4oghd/ba384e7f63c6ce635758d479bb3d95d7",
-    "img2": "https://collection.cloudinary.com/dwnf4oghd/ba384e7f63c6ce635758d479bb3d95d7",
-    "img3": "https://collection.cloudinary.com/dwnf4oghd/ba384e7f63c6ce635758d479bb3d95d7",
-    "img4": "https://collection.cloudinary.com/dwnf4oghd/ba384e7f63c6ce635758d479bb3d95d7",
+    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
     "details": {
       "altura": "20",
       "ancho": "20",

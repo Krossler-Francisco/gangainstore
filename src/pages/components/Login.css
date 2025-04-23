@@ -78,3 +78,44 @@ input:focus{
     display: flex;
     flex-direction: column;
 }
+
+@media (max-width: 768px) {
+    .login-container {
+      align-items: flex-start;
+      padding-bottom: 4rem;
+    }
+  
+    .login-content {
+        display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      margin: 0 auto;
+      border: none;
+      border-radius: 12px;
+    }
+  
+    .login-form-line {
+        border-bottom: 1px solid rgb(232, 232, 232);
+        border-right: none;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        padding-block: 2rem;
+    }
+
+    .form-group{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+  
+    .login-form form input {
+      width: 280px;
+    }
+
+    .login-form form button{
+        width: 300px;
+        margin: none;
+    }
+  }
