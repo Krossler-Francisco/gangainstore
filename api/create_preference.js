@@ -14,6 +14,7 @@ export default async function handler(req, res) {
 
   // Validação simples para garantir que os parâmetros estão presentes
   if (!title || !unit_price || !quantity) {
+    console.log('Erro: Dados incompletos - title, unit_price, quantity são obrigatórios');
     return res.status(400).json({ error: 'Missing required fields: title, unit_price, quantity' });
   }
 
@@ -39,7 +40,7 @@ export default async function handler(req, res) {
     // Enviar o URL de pagamento gerado para o frontend
     res.status(200).json({ init_point: preference.body.init_point });
   } catch (error) {
-    console.error('Erro ao criar a preferência:', error);
-    res.status(500).json({ error: 'Erro ao criar preferência' });
+    console.error('Erro ao criar a preferência:', error.response ? error.response.body : error);
+    res.status(500).json({ error: 'Erro ao criar preferência', details: error.response ? error.response.body : error });
   }
 }
