@@ -20,7 +20,8 @@ function Span() {
         auto_return: 'approved',
       };
   
-      console.log('Corpo da requisição enviado:', JSON.stringify(payload));  // Verifique a saída
+      // Log para verificar o payload antes de enviar
+      console.log('Payload enviado:', JSON.stringify(payload));
   
       const res = await fetch('/api/create_preference', {
         method: 'POST',
@@ -30,14 +31,7 @@ function Span() {
         body: JSON.stringify(payload),  // Enviando com a estrutura correta
       });
   
-      // Verificar se a requisição foi bem-sucedida
-      if (!res.ok) {
-        throw new Error('Falha ao criar a preferência no Mercado Pago');
-      }
-  
       const data = await res.json();
-  
-      console.log('Resposta da API:', data);  // Verifique o que a API retorna
   
       if (data.init_point) {
         window.location.href = data.init_point; // Redireciona ao checkout
@@ -49,6 +43,7 @@ function Span() {
       alert('Error al procesar el pago');
     }
   };
+  
 
   return (
     <div className="span_container">
