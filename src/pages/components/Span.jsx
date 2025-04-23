@@ -4,19 +4,30 @@ function Span() {
   const handleBuyClick = async () => {
     try {
       const payload = {
-        title: 'Compra destacada',
-        unit_price: 20000,
-        quantity: 1,
+        items: [
+          {
+            title: 'Compra destacada',
+            unit_price: 20000,
+            quantity: 1,
+            currency_id: 'ARS',  // Moeda para a Argentina
+          },
+        ],
+        back_urls: {
+          success: 'https://tusitio.com/success',
+          failure: 'https://tusitio.com/failure',
+          pending: 'https://tusitio.com/pending',
+        },
+        auto_return: 'approved',
       };
   
-      console.log('Corpo da requisição:', JSON.stringify(payload));  // Verifique a saída
+      console.log('Corpo da requisição enviado:', JSON.stringify(payload));  // Verifique a saída
   
       const res = await fetch('/api/create_preference', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(payload),  // Enviando com a estrutura correta
       });
   
       const data = await res.json();
