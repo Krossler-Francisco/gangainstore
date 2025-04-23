@@ -4,20 +4,13 @@ function Span() {
   const handleBuyClick = async () => {
     try {
       const payload = {
-        items: [
+        items: 
           {
             title: 'Compra destacada',
             unit_price: 200,
             quantity: 1,
-            currency_id: 'ARS',  // Moeda para a Argentina
           },
-        ],
-        back_urls: {
-          success: 'https://tusitio.com/success',
-          failure: 'https://tusitio.com/failure',
-          pending: 'https://tusitio.com/pending',
-        },
-        auto_return: 'approved',
+        
       };
   
       // Log para verificar o payload antes de enviar
