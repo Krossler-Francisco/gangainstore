@@ -61,20 +61,20 @@
   },
   {
     "_id": "4",
-    "name": "Lámpara de Papel China 35cm",
+    "name": "Lámpara de Papel China 75cm",
     "img1": "https://room.r10s.jp/d/strg/ctrl/22/5333160eb13929381286d3d0075c266dee88d88f.91.9.22.3.jpg?thum=166&resize=600:*",
     "img2": "https://i.pinimg.com/564x/d6/2d/c7/d62dc75b43b7b9c5dd72727ce3560d2b.jpg",
     "img3": "",
     "img4": "",
     "details": {
-      "altura": "35",
-      "ancho": "35",
+      "altura": "75",
+      "ancho": "75",
       "anchoCerrada": "3"
     },
-    "price": 6300,
-    "sinImpuesto": 5900,
+    "price": 44000,
+    "sinImpuesto": 36000,
     "stock": 85,
-    "desconto": 6100,
+    "desconto": 40000,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
