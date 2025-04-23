@@ -5,6 +5,8 @@ const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
 
+  console.log('Corpo da requisição recebido:', req.body);  // Adicione isso para depuração
+
   const { title, unit_price, quantity } = req.body;
 
   try {
@@ -14,7 +16,7 @@ export default async function handler(req, res) {
           title,
           unit_price: Number(unit_price),
           quantity: Number(quantity),
-          currency_id: 'ARS',
+          currency_id: 'BRL', // Certifique-se de usar BRL para Brasil
         },
       ],
       back_urls: {
