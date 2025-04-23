@@ -37,7 +37,7 @@ function CartSidebar({ isOpen, onClose }) {
         <div className="cart-footer">
             <div className="total-row">
                 <span>Total:</span>
-                <span>${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString('es-AR')}</span>
+                <span>${cart.reduce((sum, item) => sum + (Number(item.price) * item.quantity), 0).toLocaleString('es-AR')}</span>
             </div>
             <button className="checkout-btn">FINALIZAR PEDIDO</button>
         </div>
