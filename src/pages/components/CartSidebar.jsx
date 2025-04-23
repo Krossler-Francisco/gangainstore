@@ -84,10 +84,13 @@ function CartSidebar({ isOpen, onClose }) {
         </button>
 
         {preferenceId && (
-          <div style={{ marginTop: '20px', width: '100%' }}>
-            <Wallet initialization={{ preferenceId }} />
+          <div className="mercado-pago-wallet">
+            <h3>Completa tu compra</h3>
+            <div className="wallet-box">
+              <Wallet initialization={{ preferenceId }} />
+            </div>
           </div>
-        )}
+)}
       </div>
     </div>
   );
