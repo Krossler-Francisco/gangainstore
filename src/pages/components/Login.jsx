@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Login.css";
 
 function Login() {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const [registerData, setRegisterData] = useState({ username: "", email: "", password: "" });
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -12,8 +16,15 @@ function Login() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginData),
     });
+
     const data = await res.json();
-    alert(data.message || data.error);
+
+    if (res.ok) {
+      login(data.user);
+      navigate("/");
+    } else {
+      alert(data.error || "Erro ao fazer login.");
+    }
   };
 
   const handleRegister = async (e) => {
@@ -23,8 +34,15 @@ function Login() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(registerData),
     });
+
     const data = await res.json();
-    alert(data.message || data.error);
+
+    if (res.ok) {
+      login(data.user);
+      navigate("/");
+    } else {
+      alert(data.error || "Erro ao registrar.");
+    }
   };
 
   return (

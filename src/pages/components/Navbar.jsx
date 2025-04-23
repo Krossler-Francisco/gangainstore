@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { FiShoppingCart, FiUser, FiSearch } from "react-icons/fi";
 import "./Navbar.css";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 function Navbar({ setSearchTerm }) {
   const [input, setInput] = useState("");
+  const { user, logout } = useAuth();
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -45,7 +47,11 @@ function Navbar({ setSearchTerm }) {
         <div className="user-actions">
           <Link to="/login" className="user-profile">
             <FiUser size={18} />
-            <p>Iniciar Sesión</p>
+            {user ? (
+              <p onClick={logout}></p>
+            ) : (
+              <p>Iniciar Sesión</p>
+            )}
           </Link>
           <div className="cart-button">
             <FiShoppingCart size={18} />
