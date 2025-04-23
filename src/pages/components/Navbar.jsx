@@ -7,6 +7,11 @@ import { useAuth } from "../../context/AuthContext";
 function Navbar({ setSearchTerm }) {
   const [input, setInput] = useState("");
   const { user, logout } = useAuth();
+  const [showAccountComponent, setShowAccountComponent] = useState(false);
+
+  const toggleAccontComponent = () => {
+    setShowAccountComponent(!showAccountComponent);
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -45,12 +50,27 @@ function Navbar({ setSearchTerm }) {
         </form>
 
         <div className="user-actions">
-          <Link to="/login" className="user-profile">
-            <FiUser size={18} />
+          <Link className="user-profile">
             {user ? (
-              <p onClick={logout}></p>
+              <div onMouseEnter={toggleAccontComponent} onMouseLeave={toggleAccontComponent} className="login-button">
+                <FiUser size={18} />
+                <p>Mi cuenta</p>
+                {showAccountComponent && (
+                  <div className="account-component">
+                    <Link to={"/my-account"} className="account-option" >Escritorio</Link>
+                    <Link to={"/my-account/orders"} className="account-option" >Pedidos</Link>
+                    <Link to={"/my-account/addresses"} className="account-option" >Direcciones</Link>
+                    <Link to={"/my-account/details"} className="account-option" >Detalles de la cuenta</Link>
+                    <Link to={"/my-account/favorites"} className="account-option" >Favoritos</Link>
+                    <Link to={"/login"} className="account-option" onClick={logout}>Salir</Link>
+                  </div>
+                )}
+              </div>
             ) : (
-              <p>Iniciar Sesión</p>
+              <div to="/login" className="login-button">
+                <FiUser size={18} />
+                <p>Iniciar Sesión</p>
+              </div>
             )}
           </Link>
           <div className="cart-button">

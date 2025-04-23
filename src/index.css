@@ -2,6 +2,7 @@
 body{
     margin: 0;
     padding: 0;
+    
 }
 
 p{
@@ -11,4 +12,5 @@ p{
 
 html{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow: scroll;
 }

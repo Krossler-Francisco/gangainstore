@@ -122,12 +122,45 @@
     text-decoration: none;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+    position: relative;
 }
 
 .user-actions .user-profile:hover{
     color: #9900ff;
 }
 
+.login-button{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-button .account-component{
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1) ;
+    border: 1px solid rgb(240, 240, 240);
+    z-index: 5;
+    padding-block: 1rem;
+}
+
+.account-option{
+    padding: .4rem 1rem .4rem 1rem;
+    text-decoration: none;
+    font-size: 16px;
+    color: #333;
+    transition: 0.2s ease-in-out;
+}
+
+.account-option:hover{
+    color: #9900ff;
+    background-color: rgba(0, 0, 0, 0.079);
+}
 
 .user-actions .user-profile img{
     width: 40px;
@@ -167,3 +200,4 @@
 .cart-button:hover{
     color: #9900ff;
 }
+
