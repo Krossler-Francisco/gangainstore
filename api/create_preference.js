@@ -2,7 +2,7 @@ import { MercadoPagoConfig, Preference } from 'mercadopago';
 
 // Configuração do Mercado Pago usando a classe MercadoPagoConfig
 const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN, // Token via variável de ambiente
+  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN, // Certifique-se que está configurado corretamente no ambiente
 });
 
 export default async function handler(req, res) {
@@ -10,39 +10,36 @@ export default async function handler(req, res) {
     return res.status(405).send('Method not allowed');
   }
 
-  const { title, unit_price, quantity } = req.body;
+  const { items } = req.body;
 
-  // Validação simples para garantir que os parâmetros estão presentes
-  if (!title || !unit_price || !quantity) {
-    return res.status(400).json({ error: 'Missing required fields: title, unit_price, quantity' });
+  // Validação simples para garantir que os parâmetros estão presentes e são um array
+  if (!Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ error: 'Missing or invalid items array' });
   }
 
   try {
-    // Criando a preferência no Mercado Pago com back_urls e auto_return
+    // Criando a preferência no Mercado Pago
     const preference = await client.preferences.create({
       body: {
-        items: [
-          {
-            title: title,
-            unit_price: parseFloat(unit_price),
-            quantity: parseInt(quantity, 10),
-          },
-        ],
+        items: items.map(item => ({
+          title: item.title,
+          unit_price: parseFloat(item.unit_price),
+          quantity: parseInt(item.quantity, 10),
+        })),
         back_urls: {
           success: 'https://www.seusite.com/success',
           failure: 'https://www.seusite.com/failure',
           pending: 'https://www.seusite.com/pending',
         },
         auto_return: 'approved',
-        // Opcional: external_reference para rastrear internamente a transação
-        external_reference: `pedido_${Date.now()}`, // Exemplo de referência única
+        external_reference: `pedido_${Date.now()}`,
       },
     });
 
-    // Retorna a resposta com o ID da preferência e o link para redirecionar o cliente
+    // Responde com o ID da preferência para o frontend
     return res.status(200).json({
-      preferenceId: preference.id,
-      init_point: preference.init_point, // Link de redirecionamento para o checkout
+      id: preference.body.id,
+      init_point: preference.body.init_point,
     });
 
   } catch (error) {
