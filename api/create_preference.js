@@ -1,8 +1,7 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
-// Configuração do Mercado Pago usando a classe MercadoPagoConfig
 const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN, // Certifique-se que está configurado corretamente no ambiente
+  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
 });
 
 export default async function handler(req, res) {
@@ -10,22 +9,22 @@ export default async function handler(req, res) {
     return res.status(405).send('Method not allowed');
   }
 
-  const { items } = req.body;
+  const { title, unit_price, quantity } = req.body;
 
-  // Validação simples para garantir que os parâmetros estão presentes e são um array
-  if (!Array.isArray(items) || items.length === 0) {
-    return res.status(400).json({ error: 'Missing or invalid items array' });
+  if (!title || !unit_price || !quantity) {
+    return res.status(400).json({ error: 'Missing required fields: title, unit_price, quantity' });
   }
 
   try {
-    // Criando a preferência no Mercado Pago
-    const preference = await client.preferences.create({
+    const preference = await new Preference(client).create({
       body: {
-        items: items.map(item => ({
-          title: item.title,
-          unit_price: parseFloat(item.unit_price),
-          quantity: parseInt(item.quantity, 10),
-        })),
+        items: [
+          {
+            title: title,
+            unit_price: parseFloat(unit_price),
+            quantity: parseInt(quantity, 10),
+          },
+        ],
         back_urls: {
           success: 'https://www.seusite.com/success',
           failure: 'https://www.seusite.com/failure',
@@ -36,10 +35,9 @@ export default async function handler(req, res) {
       },
     });
 
-    // Responde com o ID da preferência para o frontend
     return res.status(200).json({
-      id: preference.body.id,
-      init_point: preference.body.init_point,
+      preferenceId: preference.id,
+      init_point: preference.init_point,
     });
 
   } catch (error) {
