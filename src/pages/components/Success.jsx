@@ -9,7 +9,6 @@ function Success() {
 
   const paymentId = searchParams.get("payment_id");
 
-  const Success = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
     };
