@@ -86,7 +86,9 @@ function CartSidebar({ isOpen, onClose }) {
         {preferenceId && (
           <div className="mercado-pago-wallet">
             <h3 className='signal'>Completa tu compra con Mercado Pago</h3>
-            <h3 className='validate-signal'>Recorda de llenar los datos de envio para finalizar el pedido</h3>
+            <h3 className='validate-signal'>
+              Después de pagar, no te olvides de llenar los datos de envío para que podamos procesar tu pedido.
+            </h3>
             <div className="wallet-box">
               <Wallet initialization={{ preferenceId }} />
             </div>
