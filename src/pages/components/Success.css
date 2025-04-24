@@ -109,18 +109,47 @@
   
   @media (max-width: 768px) {
     .success-container {
-      align-items: flex-start;
-      padding: 2rem;
+      grid-template-columns: 1fr; /* Una sola columna */
+      padding: 1rem;
+      gap: 2rem; /* Espacio entre las secciones apiladas */
     }
   
     .success-content {
-      width: auto;
-      margin: 0 auto;
+      flex-direction: column;
+      width: 100%;
       border-radius: 12px;
+      padding: 1rem;
+    }
+  
+    .order-item {
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: auto;
+    }
+  
+    .order-img {
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      margin-bottom: 0.5rem;
+    }
+  
+    .order-details p {
+      margin: 0.2rem 0;
     }
   
     .success-form-box {
       width: 100%;
     }
-  }
   
+    .success-form-group input,
+    .success-form-group textarea {
+      padding: 0.8rem 0.6rem;
+      font-size: 16px;
+    }
+  
+    .success-form-box button {
+      font-size: 16px;
+      padding: 1rem;
+    }
+  }
