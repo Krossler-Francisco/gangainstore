@@ -9,6 +9,7 @@ function Success() {
   const [loading, setLoading] = useState(true);
   const { cart, clearCart } = useCart();
   const [confirmedOrder, setConfirmedOrder] = useState([]);
+  const [orderSaveError, setOrderSaveError] = useState(false);
 
   const paymentId = searchParams.get("payment_id");
 
@@ -20,6 +21,8 @@ function Success() {
   
     const productos = confirmedOrder;
     const total = productos.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    localStorage.setItem('backup_order', JSON.stringify({ cliente, productos, total }));
   
     try {
       const res = await fetch('/api/save_order', {
@@ -34,11 +37,12 @@ function Success() {
       if (res.ok) {
         alert('Datos enviados correctamente');
       } else {
+        setOrderSaveError(true);
         alert(`Error al guardar: ${data.error}`);
       }
     } catch (error) {
       console.error('Error al enviar datos:', error);
-      alert('Hubo un error al enviar los datos.');
+      setOrderSaveError(true);
     }
   };
 
@@ -76,6 +80,12 @@ function Success() {
 
     return (
       <div className="success-container-landing">
+          {orderSaveError && (
+            <div className="error-box">
+              <p><strong>¡Atención!</strong> El pago fue recibido, pero hubo un problema al registrar tu pedido.</p>
+              <p>Por favor <a href="mailto:krosslerfrancisco@gmail.com">contáctanos</a> para confirmar los detalles de tu compra.</p>
+            </div>
+          )}
         <h2>¡Gracias por tu compra!</h2>
         <div className="success-container">
           <section className="success-content">
