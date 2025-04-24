@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom"; // o "next/navigation" si usás Next.js
+import { useSearchParams } from "react-router-dom";
 
 function Success() {
   const [searchParams] = useSearchParams();
@@ -7,23 +7,34 @@ function Success() {
   const [loading, setLoading] = useState(true);
 
   const paymentId = searchParams.get("payment_id");
-  const status = searchParams.get("status");
-  const externalReference = searchParams.get("external_reference");
 
   useEffect(() => {
-    // Simulamos validación básica
-    if (status === "approved" && paymentId && externalReference) {
-      // Aquí podrías hacer una verificación real con tu backend
-      setIsPaymentApproved(true);
+    async function validatePayment() {
+      try {
+        const response = await fetch(`/api/validate_payment?payment_id=${paymentId}`);
+        const data = await response.json();
+
+        if (data.valid) {
+          setIsPaymentApproved(true);
+        }
+      } catch (err) {
+        console.error("Error validando pago:", err);
+      } finally {
+        setLoading(false);
+      }
     }
 
-    setLoading(false);
-  }, [status, paymentId, externalReference]);
+    if (paymentId) {
+      validatePayment();
+    } else {
+      setLoading(false);
+    }
+  }, [paymentId]);
 
   if (loading) return <div>Cargando...</div>;
 
   if (!isPaymentApproved) {
-    return <div>El pago no fue aprobado o faltan datos. Por favor intenta nuevamente.</div>;
+    return <div>El pago no fue validado. Por favor intenta nuevamente o contáctanos.</div>;
   }
 
   return (
