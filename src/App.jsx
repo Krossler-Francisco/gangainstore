@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<Store searchTerm={searchTerm} />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path='/login' element={<Login />} />
-            <Route path="/checkout" element={<Success />} />
+            <Route path="/success" element={<Success />} />
           </Routes>
           <Toaster />
         </CartProvider>
