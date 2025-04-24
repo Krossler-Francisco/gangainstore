@@ -208,7 +208,7 @@
     color: #9900ff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1278px) {
 
     .search-bar {
       display: none;
