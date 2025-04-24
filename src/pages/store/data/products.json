@@ -14,7 +14,7 @@
     "price": 5500,
     "sinImpuesto": 5200,
     "stock": 100,
-    "desconto": 5300,
+    "desconto": 50,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
