@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useCart } from "../../hooks/useCart";
 import "./Success.css";
 
@@ -10,14 +9,38 @@ function Success() {
   const [loading, setLoading] = useState(true);
   const { cart, clearCart } = useCart();
   const [confirmedOrder, setConfirmedOrder] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const toggleResumen = () => setIsOpen(!isOpen);
 
   const paymentId = searchParams.get("payment_id");
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData(e.target);
+    const cliente = Object.fromEntries(formData.entries());
+  
+    const productos = confirmedOrder;
+    const total = productos.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  
+    try {
+      const res = await fetch('/api/save_order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cliente, productos, total })
+      });
+  
+      const data = await res.json();
+      if (res.ok) {
+        alert('Datos enviados correctamente');
+      } else {
+        alert(`Error al guardar: ${data.error}`);
+      }
+    } catch (error) {
+      console.error('Error al enviar datos:', error);
+      alert('Hubo un error al enviar los datos.');
+    }
+  };
 
   useEffect(() => {
     async function validatePayment() {
