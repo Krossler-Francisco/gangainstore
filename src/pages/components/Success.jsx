@@ -95,42 +95,27 @@ function Success() {
                 </form>
               </div>
           </section>
-          <section className="success-content resumen-responsive">
-      <div className="success-form-box">
-        <button
-          className="toggle-resumen-btn"
-          onClick={toggleResumen}
-        >
-          Resumen del pedido{" "}
-          {isOpen ? <FaChevronUp /> : <FaChevronDown />}
-        </button>
-
-        {isOpen && (
-          <>
-            <ul className="order-summary">
+          <section className="success-content">
+          <div className="success-form-box">
+              <p>Resumen del pedido:</p>
+              <ul className="order-summary">
               {confirmedOrder.map((item) => (
-                <li key={item.id} className="order-item">
-                  <img
-                    src={item.img}
-                    alt={item.name}
-                    className="order-img"
-                  />
+                  <li key={item.id} className="order-item">
+                  <img src={item.img} alt={item.name} className="order-img" />
                   <div className="order-details">
-                    <p><strong>{item.name}</strong></p>
-                    <p>Cantidad: {item.quantity}</p>
-                    <p>Precio unitario: ${Number(item.price).toFixed(2)}</p>
-                    <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
+                      <p><strong>{item.name}</strong></p>
+                      <p>Cantidad: {item.quantity}</p>
+                      <p>Precio unitario: ${Number(item.price).toFixed(2)}</p>
+                      <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
                   </div>
-                </li>
+                  </li>
               ))}
-            </ul>
-            <div className="total-price">
-              <strong>Total: ${total.toFixed(2)}</strong>
-            </div>
-          </>
-        )}
-      </div>
-    </section>
+              </ul>
+              <div className="total-price">
+              <strong>Total: ${confirmedOrder.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</strong>
+              </div>
+          </div>
+        </section>
           </div>
       </div>
     );
