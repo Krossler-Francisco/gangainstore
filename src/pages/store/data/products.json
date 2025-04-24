@@ -31,7 +31,7 @@
       "ancho": "25",
       "anchoCerrada": "3"
     },
-    "price": 5900,
+    "price": 80,
     "sinImpuesto": 5500,
     "stock": 95,
     "desconto": 5700,
@@ -51,7 +51,7 @@
       "ancho": "30",
       "anchoCerrada": "3"
     },
-    "price": 6100,
+    "price": 120,
     "sinImpuesto": 5700,
     "stock": 90,
     "desconto": 5900,
