@@ -8,6 +8,7 @@ import Login from './pages/components/Login';
 import { Toaster } from 'react-hot-toast';
 import { CartProvider } from './hooks/useCart';
 import { MercadoPagoProvider } from './context/MercadoPagoContext';
+import CheckoutPage from './pages/components/CheckourPage';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Store searchTerm={searchTerm} />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path='/login' element={<Login />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
           </Routes>
           <Toaster />
         </CartProvider>

@@ -1,11 +1,13 @@
+import data from '../store/data/products.json';
+
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import data from '../store/data/products.json';
 import { FaTruck } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../hooks/useCart';
-import './ProductDetail.css';
 import { toast } from 'react-hot-toast';
+
+import './ProductDetail.css';
 
 function ProductDetail() {
   const { id } = useParams();
@@ -27,6 +29,7 @@ function ProductDetail() {
       img: product.img1,
       quantity: 1,
     };
+
   
     addToCart(productToAdd);
     
@@ -72,9 +75,9 @@ function ProductDetail() {
       <div className="product-info">
         <h2>{product.name}</h2>
             <p className="sku">STOCK: {product.stock}</p>
-        <p className="price">${product.price}</p>
+        <p className="price">${product.price.toLocaleString('es-AR')}</p>
           <p className="price-transfer">
-            ${product.desconto} <span>con transferencia</span>
+            ${product.desconto.toLocaleString('es-AR')} <span>con transferencia</span>
           </p>
         <div className="price-transfer-line">
         <p className='price-sin-impuesto'>

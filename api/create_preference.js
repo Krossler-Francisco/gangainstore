@@ -27,9 +27,9 @@ export default async function handler(req, res) {
           },
         ],
         back_urls: {
-          success: 'gangain.com.ar/success',
-          failure: 'gangain.com.ar/failure',
-          pending: 'gangain.com.ar/pending',
+          success: 'www.gangain.com.ar/success',
+          failure: 'www.gangain.com.ar/failure',
+          pending: 'www.gangain.com.ar/pending',
         },
         auto_return: 'approved',
         external_reference: `pedido_${Date.now()}`,

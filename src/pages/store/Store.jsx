@@ -18,7 +18,7 @@ function Store({ searchTerm }) {
         <div className="store-header-content">
           <h1>Nuevo Ingreso!</h1>
           <h2>Lampara de papel China 75cm</h2>
-          <Link className="store-header-button" to="">Comprar</Link>
+          <Link className="store-header-button" to="/product/4">Comprar</Link>
         </div>
       </header>
 
