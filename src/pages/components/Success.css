@@ -106,11 +106,37 @@
     font-weight: 600;
     font-size: 20px;
   }
+
+  .toggle-resumen-btn {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 0.8rem;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
   
   @media (max-width: 768px) {
+
+    .resumen-responsive {
+      order: -1; /* aparece primero en celular */
+      width: 100%;
+    }
+
+    .success-container-landing{
+      max-width: 1360px;
+      padding: 1rem;
+      margin: 0 auto;
+    }
+
     .success-container {
       grid-template-columns: 1fr; /* Una sola columna */
-      padding: 1rem;
       gap: 2rem; /* Espacio entre las secciones apiladas */
     }
   
@@ -118,7 +144,6 @@
       flex-direction: column;
       width: 100%;
       border-radius: 12px;
-      padding: 1rem;
     }
   
     .order-item {
