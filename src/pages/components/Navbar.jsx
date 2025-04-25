@@ -12,6 +12,7 @@ function Navbar({ setSearchTerm }) {
   const [showAccountComponent, setShowAccountComponent] = useState(false);
   const { showCart, setShowCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const isMobile = window.innerWidth <= 768;
 
   const toggleAccontComponent = () => {
     setShowAccountComponent(!showAccountComponent);
@@ -57,7 +58,12 @@ function Navbar({ setSearchTerm }) {
         <div className="user-actions">
           <div className="user-profile">
             {user ? (
-              <div onMouseEnter={toggleAccontComponent} onMouseLeave={toggleAccontComponent} className="login-button">
+              <div
+                onMouseEnter={!isMobile ? toggleAccontComponent : undefined}
+                onMouseLeave={!isMobile ? toggleAccontComponent : undefined}
+                onClick={isMobile ? toggleAccontComponent : undefined}
+                className="login-button"
+              >
                 <FiUser size={18} />
                 <p>Mi cuenta</p>
                 {showAccountComponent && (
