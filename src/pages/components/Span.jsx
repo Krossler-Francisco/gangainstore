@@ -30,7 +30,7 @@ function Span() {
       const data = await res.json();
 
       if (data.preferenceId) {
-        setPreferenceId(data.preferenceId); // Agora estamos usando "preferenceId"
+        setPreferenceId(data.preferenceId);
       } else {
         alert('No se pudo iniciar el pago');
       }
@@ -45,7 +45,6 @@ function Span() {
       <strong className="span_content">
         Envío gratis en compras superiores a $200.000
       </strong>
-      {/*<button onClick={handleBuyClick}>Comprar</button>*/}
 
       {preferenceId && (
         <div style={{ marginTop: '20px', width: '300px' }}>

@@ -42,7 +42,7 @@ function CartSidebar({ isOpen, onClose }) {
 
     const items = cart.map(item => ({
       title: item.name,
-      unit_price: Number(item.price),
+      unit_price: Number(item.desconto),
       quantity: item.quantity,
     }));
 
@@ -85,7 +85,7 @@ function CartSidebar({ isOpen, onClose }) {
                 <img src={item.img} alt={item.name} />
                 <div className="item-details">
                   <p>{item.name}</p>
-                  <p>${Number(item.price)}</p>
+                  <p>${Number(item.desconto)}</p>
                   <div className="quantity-control">
                     <button onClick={() => updateQuantity(item.id, -1)}>-</button>
                     <span>{item.quantity}</span>
@@ -103,7 +103,7 @@ function CartSidebar({ isOpen, onClose }) {
         <div className="cart-footer">
           <div className="total-row">
             <span>Total:</span>
-            <span>${cart.reduce((sum, item) => sum + (Number(item.price) * item.quantity), 0).toLocaleString('es-AR')}</span>
+            <span>${cart.reduce((sum, item) => sum + (Number(item.desconto) * item.quantity), 0).toLocaleString('es-AR')}</span>
           </div>
 
           {cart.length > 0 && (

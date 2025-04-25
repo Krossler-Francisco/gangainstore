@@ -1,5 +1,65 @@
 [
   {
+    "_id": "25",
+    "name": "Lámpara de Papel China 25cm",
+    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "details": {
+      "altura": "25",
+      "ancho": "25",
+      "anchoCerrada": "3"
+    },
+    "price": 4100,
+    "sinImpuesto": 2846,
+    "stock": 399,
+    "desconto": 3500,
+    "porcentagem": "",
+    "frete": true,
+    "vendas": 0
+  },
+  {
+    "_id": "30",
+    "name": "Lámpara de Papel China 30cm",
+    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "details": {
+      "altura": "30",
+      "ancho": "30",
+      "anchoCerrada": "3"
+    },
+    "price": 4900,
+    "sinImpuesto": 73442,
+    "stock": 402,
+    "desconto": 4200,
+    "porcentagem": "",
+    "frete": true,
+    "vendas": 0
+  },
+  {
+    "_id": "35",
+    "name": "Lámpara de Papel China 35cm",
+    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "details": {
+      "altura": "35",
+      "ancho": "35",
+      "anchoCerrada": "3"
+    },
+    "price": 5400,
+    "sinImpuesto": 3414,
+    "stock": 318,
+    "desconto": 4200,
+    "porcentagem": "",
+    "frete": true,
+    "vendas": 0
+  },
+  {
     "_id": "40",
     "name": "Lámpara de Papel China 40cm",
     "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
@@ -31,10 +91,10 @@
       "ancho": "45",
       "anchoCerrada": "3"
     },
-    "price": 19800,
-    "sinImpuesto": 12873,
-    "stock": 351,
-    "desconto": 15600,
+    "price": 12900,
+    "sinImpuesto": 7996,
+    "stock": 380,
+    "desconto": 9700,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
@@ -60,6 +120,26 @@
     "vendas": 0
   },
   {
+    "_id": "55",
+    "name": "Lámpara de Papel China 55cm",
+    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "details": {
+      "altura": "55",
+      "ancho": "55",
+      "anchoCerrada": "3"
+    },
+    "price": 20800,
+    "sinImpuesto": 12810,
+    "stock": 290,
+    "desconto": 15500,
+    "porcentagem": "",
+    "frete": true,
+    "vendas": 0
+  },
+  {
     "_id": "60",
     "name": "Lámpara de Papel China 60cm",
     "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
@@ -75,6 +155,26 @@
     "sinImpuesto": 27372,
     "stock": 402,
     "desconto": 33200,
+    "porcentagem": "",
+    "frete": true,
+    "vendas": 0
+  },
+  {
+    "_id": "65",
+    "name": "Lámpara de Papel China 65cm",
+    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
+    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
+    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
+    "details": {
+      "altura": "65",
+      "ancho": "65",
+      "anchoCerrada": "3"
+    },
+    "price": 42800,
+    "sinImpuesto": 27236,
+    "stock": 378,
+    "desconto": 33000,
     "porcentagem": "",
     "frete": true,
     "vendas": 0
@@ -101,26 +201,6 @@
   },
   {
     "_id": "75",
-    "name": "Lámpara de Papel China 75cm",
-    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
-    "details": {
-      "altura": "75",
-      "ancho": "75",
-      "anchoCerrada": "3"
-    },
-    "price": 59800,
-    "sinImpuesto": 34995,
-    "stock": 304,
-    "desconto": 42400,
-    "porcentagem": "",
-    "frete": true,
-    "vendas": 0
-  },
-  {
-    "_id": "?",
     "name": "Lámpara de Papel China 75cm",
     "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
     "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
