@@ -18,10 +18,11 @@ function App() {
     <Router>
       <MercadoPagoProvider>
         <CartProvider>
-          <Span />
-          <Navbar setSearchTerm={setSearchTerm} />
+          {/*<Span />
+          <Navbar setSearchTerm={setSearchTerm} />*/}
           <Routes>
-            <Route path="/" element={<Store searchTerm={searchTerm} />} />
+            {/*<Route path="/" element={<Store searchTerm={searchTerm} />} />*/}
+            <Route path="/" element={<Proximamente />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path='/login' element={<Login />} />
             <Route path="/success" element={<Success />} />

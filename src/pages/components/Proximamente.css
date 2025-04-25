@@ -1,7 +1,11 @@
 .proximamente-container{
     margin: 0 auto;
-    max-width: 1360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    max-width: 1360px;
+    height: 50vh;
 }
 
 .box {
@@ -16,7 +20,6 @@
     font-size: 2rem;
     color: #1f2937;
   }
-
   .box p {
     margin: 1rem 0;
     color: #4b5563;
