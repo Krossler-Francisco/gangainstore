@@ -9,6 +9,21 @@
     z-index: 1000;
     transition: 0.5s ease;
   }
+
+  .confirmation-box {
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    background-color: #fff8dc;
+    padding: 10px;
+    border: 1px solid #f0c36d;
+    border-radius: 5px;
+  }
+  .confirmation-box input[type="checkbox"] {
+    margin-top: 2px;
+  }
   
 
   .cart-sidebar.open {

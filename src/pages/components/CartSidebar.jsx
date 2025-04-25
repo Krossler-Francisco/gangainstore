@@ -9,25 +9,22 @@ initMercadoPago('APP_USR-4f89bd10-10f6-4b81-a3e9-abaed15c4452'); // Reemplaza co
 function CartSidebar({ isOpen, onClose }) {
   const { cart, updateQuantity, removeFromCart } = useCart();
   const [preferenceId, setPreferenceId] = useState(null);
+  const [hasConfirmedRedirection, setHasConfirmedRedirection] = useState(false);
   const sidebarRef = useRef(null);
 
-  // 💡 Detectar clics fuera del carrito
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        sidebarRef.current &&
-        !sidebarRef.current.contains(event.target)
-      ) {
-        onClose(); // 👉 cerrar el carrito
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        onClose();
       }
     };
-  
+
     const isMobile = window.innerWidth <= 768;
-  
+
     if (isOpen && isMobile) {
       document.addEventListener('mousedown', handleClickOutside);
     }
-  
+
     return () => {
       if (isMobile) {
         document.removeEventListener('mousedown', handleClickOutside);
@@ -111,11 +108,39 @@ function CartSidebar({ isOpen, onClose }) {
           {preferenceId && (
             <div className="mercado-pago-wallet">
               <h3 className='signal'>Completa tu compra con Mercado Pago</h3>
-              <h3 className='validate-signal'>
-                Después de pagar, no te olvides de llenar los datos de envío para que podamos procesar tu pedido.
-              </h3>
+
+              <div className="confirmation-box">
+                <input
+                  type="checkbox"
+                  id="confirm-redirect"
+                  checked={hasConfirmedRedirection}
+                  onChange={(e) => setHasConfirmedRedirection(e.target.checked)}
+                />
+                <label htmlFor="confirm-redirect">
+                  Entiendo que debo esperar a ser redirigido al finalizar el pago para completar mi pedido.
+                </label>
+              </div>
+
               <div className="wallet-box">
-                <Wallet initialization={{ preferenceId }} />
+                <Wallet
+                  initialization={{ preferenceId }}
+                  customization={{
+                    visual: {
+                      buttonBackground: '#3483fa',
+                      borderRadius: '6px'
+                    }
+                  }}
+                  onReady={() => {
+                    setHasConfirmedRedirection(false);
+                  }}
+                  onSubmit={() => {
+                    if (!hasConfirmedRedirection) {
+                      alert("Por favor, confirma que entendés que debés esperar la redirección.");
+                      return false; // 🛑 evitar continuar si no está confirmado
+                    }
+                    return true; // ✅ continuar
+                  }}
+                />
               </div>
             </div>
           )}
