@@ -18,8 +18,8 @@ function App() {
     <Router>
       <MercadoPagoProvider>
         <CartProvider>
-          *<Span />
-          <Navbar setSearchTerm={setSearchTerm} />*
+          <Span />
+          <Navbar setSearchTerm={setSearchTerm} />
           <Routes>
             <Route path="/" element={<Store searchTerm={searchTerm} />} />
             {/*
