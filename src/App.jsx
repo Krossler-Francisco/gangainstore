@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast';
 import { CartProvider } from './hooks/useCart';
 import { MercadoPagoProvider } from './context/MercadoPagoContext';
 import Success from './pages/components/Success';
-import TestComponent from './pages/components/TestComponent';
+import Proximamente from './pages/components/Proximamente';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +25,8 @@ function App() {
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path='/login' element={<Login />} />
             <Route path="/success" element={<Success />} />
-            <Route path="/test-component" element={<TestComponent />} />
+            <Route path="*" element={<Store searchTerm={searchTerm} />} />
+            <Route path="/proximamente" element={<Proximamente />} />
           </Routes>
           <Toaster />
         </CartProvider>

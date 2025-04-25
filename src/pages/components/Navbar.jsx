@@ -34,11 +34,11 @@ function Navbar({ setSearchTerm }) {
 
         <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
           <Link className="nav-link" to="/" onClick={() => setMenuOpen(false)}>Inicio</Link>
-          <Link className="nav-link" to="/about" onClick={() => setMenuOpen(false)}>Nosotros</Link>
-          <Link className="nav-link" to="/contact" onClick={() => setMenuOpen(false)}>Medios de Pago</Link>
-          <Link className="nav-link" to="/terms" onClick={() => setMenuOpen(false)}>Mayoristas</Link>
-          <Link className="nav-link" to="/shipping" onClick={() => setMenuOpen(false)}>Envios</Link>
-          <Link className="nav-link" to="/returns" onClick={() => setMenuOpen(false)}>Devoluciones</Link>
+          <Link className="nav-link" to="/proximamente" onClick={() => setMenuOpen(false)}>Nosotros</Link>
+          <Link className="nav-link" to="/proximamente" onClick={() => setMenuOpen(false)}>Medios de Pago</Link>
+          <Link className="nav-link" to="/proximamente" onClick={() => setMenuOpen(false)}>Mayoristas</Link>
+          <Link className="nav-link" to="/proximamente" onClick={() => setMenuOpen(false)}>Envios</Link>
+          <Link className="nav-link" to="/proximamente" onClick={() => setMenuOpen(false)}>Devoluciones</Link>
         </ul>
       </nav>
 

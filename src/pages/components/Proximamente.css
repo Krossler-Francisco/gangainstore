@@ -1,0 +1,30 @@
+.proximamente-container{
+    margin: 0 auto;
+    max-width: 1360px;
+    text-align: center;
+}
+
+.box {
+    text-align: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+  
+  .box h1 {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+    color: #1f2937;
+  }
+
+  .box p {
+    margin: 1rem 0;
+    color: #4b5563;
+  }
+  
+  .timer {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: black;
+    margin-top: 1rem;
+  }
