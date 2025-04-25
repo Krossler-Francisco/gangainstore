@@ -35,6 +35,11 @@ function CartSidebar({ isOpen, onClose }) {
   const handleCheckout = async () => {
     if (cart.length === 0) return;
 
+    if (!hasConfirmedRedirection) {
+      alert("Por favor, confirmá que vas a esperar a ser redirigido luego del pago para completar tu pedido.");
+      return;
+    }
+
     const items = cart.map(item => ({
       title: item.name,
       unit_price: Number(item.price),
@@ -101,26 +106,29 @@ function CartSidebar({ isOpen, onClose }) {
             <span>${cart.reduce((sum, item) => sum + (Number(item.price) * item.quantity), 0).toLocaleString('es-AR')}</span>
           </div>
 
-          <button className="checkout-btn" onClick={handleCheckout}>
-            FINALIZAR PEDIDO
+          {cart.length > 0 && (
+            <div className="confirmation-box">
+              <input
+                type="checkbox"
+                id="confirm-redirect"
+                checked={hasConfirmedRedirection}
+                onChange={(e) => setHasConfirmedRedirection(e.target.checked)}
+              />
+              <label htmlFor="confirm-redirect">
+                Entiendo que debo <span className='black-signal'>esperar a ser redirigido</span> al finalizar el pago para completar mi compra.
+              </label>
+            </div>
+          )}
+          <button
+            className={`checkout-btn ${!hasConfirmedRedirection ? 'disabled-btn' : ''}`}
+            onClick={handleCheckout}
+            disabled={!hasConfirmedRedirection}
+          >
+            FINALIZAR COMPRA
           </button>
-
           {preferenceId && (
             <div className="mercado-pago-wallet">
               <h3 className='signal'>Completa tu compra con Mercado Pago</h3>
-
-              <div className="confirmation-box">
-                <input
-                  type="checkbox"
-                  id="confirm-redirect"
-                  checked={hasConfirmedRedirection}
-                  onChange={(e) => setHasConfirmedRedirection(e.target.checked)}
-                />
-                <label htmlFor="confirm-redirect">
-                  Entiendo que debo esperar a ser redirigido al finalizar el pago para completar mi pedido.
-                </label>
-              </div>
-
               <div className="wallet-box">
                 <Wallet
                   initialization={{ preferenceId }}
@@ -129,16 +137,6 @@ function CartSidebar({ isOpen, onClose }) {
                       buttonBackground: '#3483fa',
                       borderRadius: '6px'
                     }
-                  }}
-                  onReady={() => {
-                    setHasConfirmedRedirection(false);
-                  }}
-                  onSubmit={() => {
-                    if (!hasConfirmedRedirection) {
-                      alert("Por favor, confirma que entendés que debés esperar la redirección.");
-                      return false; // 🛑 evitar continuar si no está confirmado
-                    }
-                    return true; // ✅ continuar
                   }}
                 />
               </div>

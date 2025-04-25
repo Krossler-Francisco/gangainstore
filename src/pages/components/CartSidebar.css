@@ -11,21 +11,26 @@
   }
 
   .confirmation-box {
-    margin-top: 15px;
+    border: 1px solid #dfdfdf;
+    box-shadow: 2px 3px 10px rgb(208, 208, 208);
+    margin: .1rem 2.1rem 1rem 2.1rem;
     display: flex;
-    align-items: flex-start;
-    gap: 8px;
+    gap: 1px;
+    padding: .3rem .2rem;
+    transition: .3s ease;
     font-size: 14px;
-    background-color: #fff8dc;
-    padding: 10px;
-    border: 1px solid #f0c36d;
-    border-radius: 5px;
+    align-items: flex-start;
   }
+
+  .confirmation-box:hover{
+    box-shadow: 2px 3px 14px rgb(177, 177, 177);
+  }
+
   .confirmation-box input[type="checkbox"] {
-    margin-top: 2px;
+    margin-top: 4px;
+    cursor: pointer;
   }
   
-
   .cart-sidebar.open {
     right: 0px;
   }
@@ -116,7 +121,7 @@
   
   .total-row {
     display: flex;
-    padding: 1.2rem 2rem;
+    padding: 1.8rem 2.1rem 1rem 2.1rem;
     justify-content: space-between;
     font-size: 1.2rem;
     font-weight: bold;
@@ -142,6 +147,12 @@
   
   .checkout-btn:hover {
     background-color: #333;
+  }
+
+  .checkout-btn.disabled-btn {
+    background-color: #464646;
+    cursor: initial;
+    color: #a8a8a8;
   }
 
   .mercado-pago-wallet {
