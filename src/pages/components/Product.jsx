@@ -68,7 +68,7 @@ function ProductCard({ project }) {
       <div className='product-info'>
         <p className='info product-name'>{project.name}</p>
         <p className='info product-price'>${project.price}</p>
-        <p className='info product-desconto'>${project.desconto}</p>
+        <p className='info product-desconto'>${project.desconto} <span className='transferencia'></span></p>
         <p className='info product-disponible'><span className='span-disponible'>Disponibles: </span>{project.stock}</p>
       </div>
     </Link>

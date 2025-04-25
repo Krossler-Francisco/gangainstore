@@ -2,7 +2,8 @@
     display: flex;
     gap: 2rem;
     max-width: 1360px;
-    margin: 0 auto;
+    margin: 0rem auto 0rem auto;
+    padding-block: 1.5rem;
     font-family: 'Arial', sans-serif;
   }
   

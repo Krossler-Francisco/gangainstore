@@ -77,7 +77,7 @@ function ProductDetail() {
             <p className="sku">STOCK: {product.stock}</p>
         <p className="price">${product.price.toLocaleString('es-AR')}</p>
           <p className="price-transfer">
-            ${product.desconto.toLocaleString('es-AR')} <span>con transferencia</span>
+            ${product.desconto.toLocaleString('es-AR')} <span>con descuento</span>
           </p>
         <div className="price-transfer-line">
         <p className='price-sin-impuesto'>
