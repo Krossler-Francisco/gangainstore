@@ -13,7 +13,7 @@ function ProductDetail() {
   const { id } = useParams();
   const product = data.find(item => item._id === id);
   const [selectedImage, setSelectedImage] = useState(product?.img1 || '');
-  const { addToCart } = useCart();
+  const { addToCart, setShowCart  } = useCart();
 
   const handleImageClick = (img) => {
     setSelectedImage(img);
@@ -85,7 +85,13 @@ function ProductDetail() {
         </p>
         </div>
 
-        <button className="add-to-cart" onClick={handleAddToCart}>
+        <button
+          className="add-to-cart"
+          onClick={() => {
+            handleAddToCart();
+            setShowCart(true);
+          }}
+        >
           Agregar al carrito
         </button>
 

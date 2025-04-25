@@ -4,12 +4,13 @@ import "./Navbar.css";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import CartSidebar from "./CartSidebar";
+import { useCart } from "../../hooks/useCart";
 
 function Navbar({ setSearchTerm }) {
   const [input, setInput] = useState("");
   const { user, logout } = useAuth();
   const [showAccountComponent, setShowAccountComponent] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+  const { showCart, setShowCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleAccontComponent = () => {

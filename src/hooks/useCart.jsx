@@ -8,6 +8,8 @@ export function CartProvider({ children }) {
     return JSON.parse(localStorage.getItem('cart')) || [];
   });
 
+  const [showCart, setShowCart] = useState(false); // NUEVO
+
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
@@ -21,8 +23,8 @@ export function CartProvider({ children }) {
     } else {
       setCart([...cart, { ...product, quantity: product.quantity || 1 }]);
     }
+    setShowCart(true); // 👉 Abrir el carrito automáticamente
   };
-
 
   const updateQuantity = (id, amount) => {
     const updated = cart.map(item =>
@@ -39,11 +41,22 @@ export function CartProvider({ children }) {
 
   const clearCart = () => setCart([]);
 
-return (
-  <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart, clearCart, setCart }}>
-    {children}
-  </CartContext.Provider>
-);
-
+  return (
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        updateQuantity,
+        removeFromCart,
+        clearCart,
+        setCart,
+        showCart,
+        setShowCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 }
+
 export const useCart = () => useContext(CartContext);
