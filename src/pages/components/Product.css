@@ -52,12 +52,12 @@
     width: 310px;
     height: 450px;
     object-fit: cover;
-    transition: opacity 0.2s ease-in-out;
+    transition: 0.3s ease;
     opacity: 1;
   }
   
   .img2 {
-    opacity: 0;
+    opacity: .0;
   }
   
   .product:hover .img2 {

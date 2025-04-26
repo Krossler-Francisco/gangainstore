@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import { Toaster } from 'react-hot-toast';
+import { CartProvider } from './hooks/useCart';
+import { MercadoPagoProvider } from './context/MercadoPagoContext';
+import { Analytics } from "@vercel/analytics/react"
 import Navbar from './pages/components/Navbar';
 import Store from './pages/store/Store';
 import Span from './pages/components/Span';
 import ProductDetail from './pages/components/ProductDetail';
 import Login from './pages/components/Login';
-import { Toaster } from 'react-hot-toast';
-import { CartProvider } from './hooks/useCart';
-import { MercadoPagoProvider } from './context/MercadoPagoContext';
 import Success from './pages/components/Success';
 import Proximamente from './pages/components/Proximamente';
-import { Analytics } from "@vercel/analytics/react"
 import Dashboard from './pages/components/Dashboard';
 
 function App() {
