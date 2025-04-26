@@ -12,6 +12,7 @@ import Login from './pages/components/Login';
 import Success from './pages/components/Success';
 import Proximamente from './pages/components/Proximamente';
 import Dashboard from './pages/components/Dashboard';
+import Footer from './pages/components/Footer';
 
 function App() {
   const [filters, setFilters] = useState({
@@ -39,6 +40,7 @@ function App() {
               <Route path="/proximamente" element={<Proximamente />} />
               <Route path="/my-account/*" element={<Dashboard/>} />
             </Routes>
+            <Footer/>
             <Toaster />
           </CartProvider>
         </MercadoPagoProvider>
