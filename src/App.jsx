@@ -39,7 +39,7 @@ function App() {
               <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
               <Route path="/proximamente" element={<Proximamente />} />
 
-              <Route path="/my-account" element={<Dashboard/>} />
+              <Route path="/my-account/*" element={<Dashboard/>} />
             </Routes>
             <Toaster />
           </CartProvider>

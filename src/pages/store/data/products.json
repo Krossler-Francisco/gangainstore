@@ -25,7 +25,7 @@
     "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633272/91s_3R0ebiL._AC_SX679__flkelq.webp",
     "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633246/71RKHh-70mL._AC_SL1500__mb0lox.webp",
     "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633206/71HWOgX0cgL._AC_SX679__aflfpc.webp",
-    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745693327/bb51eb95b76934835933f5fac413b4e8-de41e33c0c7274dd9e16649066491773-1024-1024_rykjnx.webp",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745695583/Medallion_and_lanterns_tdl1y1.jpg",
     "details": {
       "altura": "30",
       "ancho": "30",
@@ -44,8 +44,8 @@
     "name": "Lámpara de Papel China 35cm",
     "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633889/81FLyvgT_DL._AC_SL1500__denmym.webp",
     "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745693197/WhatsApp_Image_2025-04-26_at_14.31.00_p9lajl.webp",
-    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745696293/Eco-Luxe_Illumination__Energy-Efficient_Lighting_for_Stylish_Sustainable_Decor_nnvsum.jpg",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745695103/download_2_tchfec.webp",
     "details": {
       "altura": "35",
       "ancho": "35",
@@ -62,10 +62,10 @@
   {
     "_id": "40",
     "name": "Lámpara de Papel China 40cm",
-    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745621337/D_NQ_NP_2X_981841-MLA82629957155_022025-F_vbmf8i.webp",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745696687/NYRA_Paper_Balloon_Pendant_Lights___Nyralondon_-_NYRALONDON_en3czr.jpg",
+    "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745621337/D_NQ_NP_2X_981841-MLA82629957155_022025-F_vbmf8i.webp",
+    "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745697426/download_5_ffwpx5.jpg",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745695251/download_3_pxgxrd.webp",
     "details": {
       "altura": "40",
       "ancho": "40",
@@ -82,10 +82,10 @@
   {
     "_id": "45",
     "name": "Lámpara de Papel China 45cm",
-    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745698156/download_8_fswf0m.jpg",
+    "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745698076/mmirimw_on_instagram_kpjiwz.jpg",
     "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745695481/download_4_d5v6pa.webp",
     "details": {
       "altura": "45",
       "ancho": "45",
@@ -143,7 +143,7 @@
     "_id": "60",
     "name": "Lámpara de Papel China 60cm",
     "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745697651/download_6_a52sxb.jpg",
     "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
     "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
     "details": {
@@ -204,7 +204,7 @@
     "name": "Lámpara de Papel China 75cm",
     "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
     "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
+    "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745697745/download_7_vu4d1t.jpg",
     "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
     "details": {
       "altura": "75",
