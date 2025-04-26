@@ -83,3 +83,43 @@
     display: flex;
     flex-direction: column;
 }
+
+@media (max-width: 768px) {
+    .dashboard-content {
+      grid-template-columns: 1fr; /* Navbar arriba, contenido abajo */
+      padding-inline: 1rem; /* Un poco de margen lateral */
+    }
+  
+    .dashboard-navbar {
+      border-right: none;
+      border-bottom: 1px solid #eeeeee;
+      margin-bottom: 1rem;
+    }
+  
+    .dashboard-navbar ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+  
+    .dashboard-navbar ul .a {
+      padding: 0.5rem 1rem;
+      border-right: none;
+      border-bottom: 2px solid transparent;
+    }
+  
+    .dashboard-navbar ul .a:hover,
+    .dashboard-navbar ul .select {
+      border-bottom: 2px solid purple;
+      border-right: none;
+    }
+  
+    .dashboard-components-container {
+      padding: 1rem 0;
+    }
+  
+    .dashboard-title {
+      padding-inline: 1rem;
+    }
+  }
