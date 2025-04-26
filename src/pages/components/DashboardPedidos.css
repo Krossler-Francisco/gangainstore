@@ -16,15 +16,16 @@
   }
   
   .ver-detalles-btn {
-    color: rgb(94, 0, 148);
+    color: rgb(32, 64, 177);
     border: none;
+    background: transparent;
     border-radius: 4px;
     cursor: pointer;
     transition: 0.3s ease;
   }
   
   .ver-detalles-btn:hover {
-    color: blue;
+    color: rgb(69, 69, 185);
   }
   
   /* Responsive: tabla se transforma en lista en móviles */
