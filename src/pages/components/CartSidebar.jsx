@@ -47,7 +47,7 @@ function CartSidebar({ isOpen, onClose }) {
     }));
 
     try {
-      const res = await fetch('/api/create_preference', {
+      const res = await fetch('/api/data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

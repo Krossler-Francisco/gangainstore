@@ -13,9 +13,9 @@
     },
     "price": 4100,
     "sinImpuesto": 2846,
-    "stock": 399,
+    "stock": 345,
     "desconto": 3500,
-    "porcentagem": "",
+    "porcentagem": true,
     "frete": true,
     "vendas": 0
   },

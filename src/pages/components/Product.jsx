@@ -81,8 +81,8 @@ function ProductCard({ project }) {
       className={`product ${isVisible ? "visible" : ""}`}
     >
       <div className="image-wrapper">
-        {project.porcentagem > 0 && (
-          <p className='product-porcentagem'>{project.porcentagem}%</p>
+        {project.frete === true && (
+          <p className='product-porcentagem'>frete gratis</p>
         )}
         {project.stock == 0 && (
           <p className='product-stock'>AGOTADO</p>
