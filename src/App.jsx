@@ -10,31 +10,32 @@ import { CartProvider } from './hooks/useCart';
 import { MercadoPagoProvider } from './context/MercadoPagoContext';
 import Success from './pages/components/Success';
 import Proximamente from './pages/components/Proximamente';
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
-    <Router>
-      <MercadoPagoProvider>
-        <CartProvider>
-          <Span />
-          <Navbar setSearchTerm={setSearchTerm} />
-          <Routes>
-            <Route path="/" element={<Store searchTerm={searchTerm} />} />
-            {/*
-            <Route path="/" element={<Proximamente />} />
-            */}
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path='/login' element={<Login />} />
-            <Route path="/success" element={<Success />} />
-            <Route path="*" element={<Store searchTerm={searchTerm} />} />
-            <Route path="/proximamente" element={<Proximamente />} />
-          </Routes>
-          <Toaster />
-        </CartProvider>
-      </MercadoPagoProvider>
-      </Router>
+    <>
+    <Analytics />
+      <Router>
+        <MercadoPagoProvider>
+          <CartProvider>
+            <Span />
+            <Navbar setSearchTerm={setSearchTerm} />
+            <Routes>
+              <Route path="/" element={<Store searchTerm={searchTerm} />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path='/login' element={<Login />} />
+              <Route path="/success" element={<Success />} />
+              <Route path="*" element={<Store searchTerm={searchTerm} />} />
+              <Route path="/proximamente" element={<Proximamente />} />
+            </Routes>
+            <Toaster />
+          </CartProvider>
+        </MercadoPagoProvider>
+        </Router>
+      </>
   );
 }
 
