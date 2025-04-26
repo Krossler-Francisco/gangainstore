@@ -11,7 +11,8 @@
 .modal {
     position: fixed;
     top: 50%;
-    transform: translate(-50%, 0);
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 2rem;
     border: none;
     border-radius: 14px;
