@@ -6,14 +6,14 @@ const client = new MercadoPagoConfig({
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).send('Method not allowed');
+    return res.status(405).send('not allowed');
   }
 
     const { items } = req.body;
     const { title, unit_price, quantity } = items[0] || {};
 
   if (!title || !unit_price || !quantity) {
-    return res.status(400).json({ error: 'Missing required fields: title, unit_price, quantity' });
+    return res.status(400).json({ error: 'Missing required fields:' });
   }
 
   try {
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Erro ao criar preferência:', error);
-    return res.status(500).json({ error: 'Erro ao criar preferência' });
+    console.error('Erro:', error);
+    return res.status(500).json({ error: 'Erro' });
   }
 }

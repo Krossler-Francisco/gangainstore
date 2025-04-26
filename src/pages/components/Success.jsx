@@ -25,7 +25,7 @@ function Success() {
     localStorage.setItem('backup_order', JSON.stringify({ cliente, productos, total }));
   
     try {
-      const res = await fetch('/api/save_order', {
+      const res = await fetch('/api/save', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
