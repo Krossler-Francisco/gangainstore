@@ -64,7 +64,7 @@ function Success() {
           <h2>¿Te gustaría crear una cuenta?</h2>
           <p>Así podrás hacer un mejor seguimiento de tus pedidos y disfrutar de beneficios exclusivos.</p>
           <Link to="/login" className="modal-link">
-            Crear cuenta
+            ingresar | crear cuenta
           </Link>
         </div>
       </dialog>

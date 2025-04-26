@@ -32,9 +32,10 @@
   
   .modal-link {
     display: inline-block;
-    background-color: #cbcbcb;
+    background-color: #e6e6e6;
     color: rgb(0, 0, 0);
     padding: 0.75rem 1.5rem;
+    text-transform: uppercase;
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
@@ -42,6 +43,6 @@
   }
   
   .modal-link:hover {
-    background-color: #4338ca;
+    background-color: #f0f0f0;
   }
   
