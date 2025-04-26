@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaInstagram, FaWhatsapp, FaStore } from 'react-icons/fa';
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import './Span.css';
 
 function Span() {
