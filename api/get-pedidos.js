@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     await connectToDatabase();
 
     const SaleSchema = new mongoose.Schema({}, { strict: false });
-    const Sale = mongoose.models.Sale || mongoose.model('Sale', SaleSchema, 'Ventas'); // <- corregido
+    const Sale = mongoose.models.Sale || mongoose.model('Sale', SaleSchema, 'ventas');
 
     const sales = await Sale.find({});
 
