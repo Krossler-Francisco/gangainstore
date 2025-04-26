@@ -4,7 +4,6 @@ import "./FilterSidebar.css";
 export default function FilterSidebar({ isOpen, onClose, filters, setFilters }) {
   const [localFilters, setLocalFilters] = useState(filters);
 
-  // Mantener sincronizado localFilters cuando se abren los filtros
   useEffect(() => {
     if (isOpen) {
       setLocalFilters(filters);
