@@ -1,0 +1,25 @@
+.tabla-pedidos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .tabla-pedidos th,
+  .tabla-pedidos td {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .tabla-pedidos th {
+    background-color: #f4f4f4;
+  }
+  
+  .ver-detalles-btn {
+    background-color: #c7c7c7;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }

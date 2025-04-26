@@ -29,26 +29,31 @@ function DashboardPedidos() {
   return (
     <div className="dashboard-pedidos">
       <h2>Mis Pedidos</h2>
-
       {userSales.length > 0 ? (
-        userSales.map((sale) => (
-          <div key={sale._id} className="pedido">
-            <h3>Pedido ID: {sale._id}</h3>
-            <p>Estado: {sale.estado}</p>
-            <p>Fecha: {new Date(sale.fecha).toLocaleString()}</p>
-
-            <h4>Productos:</h4>
-            <ul>
-              {sale.productos.map((producto) => (
-                <li key={producto.id}>
-                  {producto.name} - Cantidad: {producto.quantity}
-                </li>
-              ))}
-            </ul>
-
-            <p>Total: ${sale.total}</p>
-          </div>
-        ))
+        <table className="tabla-pedidos">
+          <thead>
+            <tr>
+              <th>Pedido</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+              <th>Total</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userSales.map((sale) => (
+              <tr key={sale._id}>
+                <td>{sale._id.slice(-6).toUpperCase()}</td>
+                <td>{new Date(sale.fecha).toLocaleString()}</td>
+                <td>{sale.estado}</td>
+                <td>${sale.total}</td>
+                <td>
+                  <button className="btn-detalles">Ver detalles</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <p>No tienes pedidos aún.</p>
       )}
