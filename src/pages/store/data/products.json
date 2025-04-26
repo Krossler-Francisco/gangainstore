@@ -105,7 +105,7 @@
     "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745702455/Safe_Spaces_for_Newly_Single_Women__Healing_Through_Interior_Design_Living_Bright_Interiors_bfixzg.jpg",
     "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745702579/download_9_gwyftz.jpg",
     "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745702716/Wohnzimmer_Interior_u0jbdi.jpg",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745703167/download_11_mpnzpe.webp",
     "details": {
       "altura": "50",
       "ancho": "50",
@@ -122,10 +122,10 @@
   {
     "_id": "55",
     "name": "Lámpara de Papel China 55cm",
-    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745703449/download_14_yteiwb.jpg",
+    "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745703494/REVISTA_DE_FIM_DE_SEMANA_-_ESPECIAL_DIA_DAS_M%C3%83ES_xohlks.jpg",
+    "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745703612/download_15_iqhufa.webp",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745703711/Fato_sobre_mim___Sou_completamente_apaixonada_por_essas_lumin%C3%A1rias_de_bal%C3%A3o_japon%C3%AAs_xzwsyn.jpg",
     "details": {
       "altura": "55",
       "ancho": "55",
@@ -202,8 +202,8 @@
   {
     "_id": "75",
     "name": "Lámpara de Papel China 75cm",
-    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745703266/download_12_gfoysg.jpg",
+    "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745703321/download_13_f6zph2.jpg",
     "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745697745/download_7_vu4d1t.jpg",
     "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745469794/opa_xygbop.jpg",
     "details": {

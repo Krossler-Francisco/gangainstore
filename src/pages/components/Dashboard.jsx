@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { Navigate } from "react-router-dom";
 import "./Dashboard.css";
 
 import DashboardMain from "./DashboardMain";
@@ -24,7 +25,7 @@ function Dashboard() {
         if (location.pathname === "/my-account/orders") return <DashboardPedidos />;
         if (location.pathname === "/my-account/details") return <DashboardDetalles />;
         if (location.pathname === "/my-account/favorites") return <DashboardFavoritos />;
-        return null; // Si no coincide con ninguna, no muestra nada
+        return null;
     };
 
     return (
@@ -74,7 +75,11 @@ function Dashboard() {
                             </ul>
                         </nav>
                         <div className="dashboard-components-container">
-                            {renderComponent()}
+                            {user ? renderComponent() : (
+                                <div className="no-user">
+                                {!user && <Navigate to="/login" />}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
