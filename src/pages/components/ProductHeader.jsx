@@ -6,6 +6,14 @@ import './ProductHeader.css';
 export default function ProductHeader({ count, filters, setFilters }) {
   const [showSidebar, setShowSidebar] = useState(false);
 
+  const filtrosActivos = [];
+
+  if (filters.search) filtrosActivos.push(`Nombre: "${filters.search}"`);
+  if (filters.stock === "con-stock") filtrosActivos.push("Con stock");
+  if (filters.stock === "sin-stock") filtrosActivos.push("Sin stock");
+  if (filters.minPrice) filtrosActivos.push(`Precio minimo $${filters.minPrice}`);
+  if (filters.maxPrice) filtrosActivos.push(`Precio maximo $${filters.maxPrice}`);
+
   return (
     <>
       <section className='product-header-container'>
@@ -18,7 +26,13 @@ export default function ProductHeader({ count, filters, setFilters }) {
             </button>
           </div>
 
-          <span className="product-count">{count} artículos</span>
+          <div className='product-count-container'>
+            <span className="product-count">{count} artículos</span>
+            {filtrosActivos.length > 0 && (
+              <span className="active-filters">Filtros: {filtrosActivos.join(" | ")}</span>
+            )}
+          </div>
+
 
           <div className='aling-final product-select'>
             <select

@@ -25,7 +25,14 @@ export default function FilterSidebar({ isOpen, onClose, filters, setFilters }) 
   };
 
   const clearFilters = () => {
-    setFilters([]);
+    setFilters({
+      search: "",
+      sort: "mas-vendidos",
+      stock: "",
+      category: "",
+      minPrice: "",
+      maxPrice: ""
+    });
     onClose();
   };
 

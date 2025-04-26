@@ -48,3 +48,9 @@ ________________________________
 https://i.pinimg.com/736x/7c/40/c8/7c40c8984d425f6c230bb1e20b35672f.jpg
 
 https://vakkerlight.com/cdn/shop/files/Washi_Paper_45A_Pendant_Lamp__02.jpg?v=1704614097
+
+https://www.amazon.com.mx/Lantern-Pendant-Assemble-Fixtures-Japanese/dp/B0D25Y4QVS
+https://www.amazon.com.mx/Lantern-Pendant-Assemble-Fixtures-Japanese/dp/B0D25Y4QVS
+
+
+https://m.media-amazon.com/images/I/81cfq+y8JxL._AC_SL1500_.jpg

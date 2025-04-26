@@ -16,8 +16,8 @@ function Store({setFilters, filters }) {
     <div className="store-container">
       <header className={`store-header ${hideHeader ? "hide-header" : ""}`}>
         <div className="store-header-content">
-          <h1>Nuevo Ingreso!</h1>
-          <h2>Lampara de papel China 75cm</h2>
+          <h1>gangain</h1>
+          <h2>Lámpara de papel China 75cm</h2>
           <Link className="store-header-button" to="/product/75">Comprar</Link>
         </div>
       </header>

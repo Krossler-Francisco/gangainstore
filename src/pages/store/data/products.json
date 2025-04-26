@@ -5,7 +5,7 @@
     "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745627568/7c40c8984d425f6c230bb1e20b35672f_yuidvr.webp",
     "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745627819/Japandi_Sofa__Combining_Comfort_and_Minimalist_Design_-_Quiet_Minimal_uxhhmb.webp",
     "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745630585/download_1_f0khmh.webp",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745632635/Washi_Paper_45A_Pendant_Lamp__02_a1lhu3.webp",
     "details": {
       "altura": "25",
       "ancho": "25",
@@ -22,10 +22,10 @@
   {
     "_id": "30",
     "name": "Lámpara de Papel China 30cm",
-    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633272/91s_3R0ebiL._AC_SX679__flkelq.webp",
+    "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633246/71RKHh-70mL._AC_SL1500__mb0lox.webp",
+    "img3": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633206/71HWOgX0cgL._AC_SX679__aflfpc.webp",
+    "img4": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633649/61TiZNT0VLL_wmvxq1.webp",
     "details": {
       "altura": "30",
       "ancho": "30",
@@ -42,8 +42,8 @@
   {
     "_id": "35",
     "name": "Lámpara de Papel China 35cm",
-    "img1": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
-    "img2": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
+    "img1": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633889/81FLyvgT_DL._AC_SL1500__denmym.webp",
+    "img2": "https://res.cloudinary.com/dxvq4cegr/image/upload/v1745633941/81deBjyT2FL._AC_SX679__qdlle6.webp",
     "img3": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
     "img4": "https://res.cloudinary.com/dwnf4oghd/image/upload/v1745434546/cld-sample-3.jpg",
     "details": {
