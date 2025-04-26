@@ -11,6 +11,7 @@ import { MercadoPagoProvider } from './context/MercadoPagoContext';
 import Success from './pages/components/Success';
 import Proximamente from './pages/components/Proximamente';
 import { Analytics } from "@vercel/analytics/react"
+import Dashboard from './pages/components/Dashboard';
 
 function App() {
   const [filters, setFilters] = useState({
@@ -37,6 +38,8 @@ function App() {
               <Route path="/success" element={<Success />} />
               <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
               <Route path="/proximamente" element={<Proximamente />} />
+
+              <Route path="/my-account" element={<Dashboard/>} />
             </Routes>
             <Toaster />
           </CartProvider>

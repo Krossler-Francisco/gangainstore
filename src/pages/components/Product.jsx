@@ -82,7 +82,7 @@ function ProductCard({ project }) {
     >
       <div className="image-wrapper">
         {project.frete === true && (
-          <p className='product-porcentagem-delete'>frete gratis</p>
+          <p className='product-porcentagem-delete'></p>
         )}
         {project.stock == 0 && (
           <p className='product-stock'>AGOTADO</p>
