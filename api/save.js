@@ -1,28 +1,25 @@
-// /pages/api/validate-payment.js o /api/validate-payment.ts
-
-import { MercadoPagoConfig, Payment } from 'mercadopago';
-
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
-});
+import connectToDatabase from './db.js';
+import Venta from './models/Venta.js';
 
 export default async function handler(req, res) {
-  const { payment_id } = req.query;
+  if (req.method !== 'POST') return res.status(405).end();
 
-  if (!payment_id) {
-    return res.status(400).json({ valid: false, error: 'Missing payment_id' });
-  }
+  await connectToDatabase();
+
+  const { cliente, productos, total } = req.body;
 
   try {
-    const payment = await new Payment(client).get({ id: payment_id });
+    const nuevaVenta = new Venta({
+      cliente,
+      productos,
+      total,
+      estado: 'pendiente'
+    });
 
-    if (payment.status === 'approved') {
-      return res.status(200).json({ valid: true });
-    } else {
-      return res.status(200).json({ valid: false });
-    }
+    await nuevaVenta.save();
+    res.status(200).json({ message: 'Venta registrada correctamente' });
   } catch (error) {
-    console.error('Error al verificar pago:', error);
-    return res.status(500).json({ valid: false });
+    console.error('Error guardando venta:', error);
+    res.status(500).json({ error: 'No se pudo guardar la venta' });
   }
 }

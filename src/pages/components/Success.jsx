@@ -49,7 +49,7 @@ function Success() {
   useEffect(() => {
     async function validatePayment() {
       try {
-        const response = await fetch(`/api/validate_payment?payment_id=${paymentId}`);
+        const response = await fetch(`/api/validate?payment_id=${paymentId}`);
         const data = await response.json();
 
         if (data.valid) {
