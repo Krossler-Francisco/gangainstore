@@ -32,14 +32,11 @@ function App() {
             <Span />
             <Navbar setSearchTerm={(term) => setFilters({ ...filters, search: term })} />
             <Routes>
-            <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
+              <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path='/login' element={<Login />} />
               <Route path="/success" element={<Success />} />
-              <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
               <Route path="/proximamente" element={<Proximamente />} />
-
-              <Route path="/my-account" element={<Dashboard/>} />
               <Route path="/my-account/*" element={<Dashboard/>} />
             </Routes>
             <Toaster />
