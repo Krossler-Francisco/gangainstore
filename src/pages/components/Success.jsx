@@ -57,6 +57,8 @@ function Success() {
 
   const Modal = () => {
     return (
+      <div className="modal-container">
+
       <dialog className="modal" open={showModal}>
         <div className="modal-content">
           <h2>¿Te gustaría crear una cuenta?</h2>
@@ -66,6 +68,7 @@ function Success() {
           </Link>
         </div>
       </dialog>
+      </div>
     );
   };
 
