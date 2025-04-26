@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
+import { useAuth } from "../../context/AuthContext";
 import "./Success.css";
 import "./SuccessModal.css"
 
@@ -14,14 +15,7 @@ function Success() {
   const navigate = useNavigate();
   const paymentId = searchParams.get("payment_id");
   const [showModal, setShowModal] = useState(false);
-
-  const toggleModalHandler = () => {
-    setShowModal(!showModal);
-  };
-
-  const handleBackToHome = () => {
-    navigate("/");
-  };
+  const { user } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +39,12 @@ function Success() {
   
       const data = await res.json();
       if (res.ok) {
-        setShowModal(true);;
+        if (user) {
+          navigate('/my-account/orders');
+        } else {
+          setShowModal(true);
+        }
+        setOrderSaveError(false);
       } else {
         setOrderSaveError(true);
         alert(`Error al guardar: ${data.error}`);
