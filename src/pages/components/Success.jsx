@@ -161,14 +161,14 @@ function Success() {
                   <div className="order-details">
                       <p><strong>{item.name}</strong></p>
                       <p>Cantidad: {item.quantity}</p>
-                      <p>Precio unitario: ${Number(item.price).toFixed(2)}</p>
-                      <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
+                      <p>Precio unitario: ${Number(item.desconto).toFixed(2)}</p>
+                      <p>Total: ${(item.desconto * item.quantity).toFixed(2)}</p>
                   </div>
                   </li>
               ))}
               </ul>
               <div className="total-price">
-              <strong>Total: ${confirmedOrder.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}</strong>
+              <strong>Total: ${confirmedOrder.reduce((total, item) => total + (item.desconto * item.quantity), 0).toFixed(2)}</strong>
               </div>
           </div>
         </section>
