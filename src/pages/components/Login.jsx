@@ -74,7 +74,7 @@ function Login() {
             <div className="form-group">
               <label htmlFor="username">Nombre de usuario *</label>
               <input type="text" required
-                onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
+                onChange={(e) => setRegisterData({ ...registerData, username: e.target.value.toLowerCase() })}
               />
             </div>
             <div className="form-group">
