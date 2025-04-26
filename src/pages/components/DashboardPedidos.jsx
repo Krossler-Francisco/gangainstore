@@ -43,12 +43,12 @@ function DashboardPedidos() {
           <tbody>
             {userSales.map((sale) => (
               <tr key={sale._id}>
-                <td>{sale._id.slice(-6).toUpperCase()}</td>
-                <td>{new Date(sale.fecha).toLocaleString()}</td>
-                <td>{sale.estado}</td>
-                <td>${sale.total}</td>
-                <td>
-                  <button className="btn-detalles">Ver detalles</button>
+                <td data-label="Pedido">{sale._id.slice(-6).toUpperCase()}</td>
+                <td data-label="Fecha">{new Date(sale.fecha).toLocaleString()}</td>
+                <td data-label="Estado">{sale.estado}</td>
+                <td data-label="Total">${sale.total}</td>
+                <td data-label="Acciones">
+                  <button className="ver-detalles-btn">Ver detalles</button>
                 </td>
               </tr>
             ))}
