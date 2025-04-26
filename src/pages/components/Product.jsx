@@ -3,16 +3,41 @@ import data from '../store/data/products.json';
 import "./Product.css";
 import { Link } from 'react-router-dom';
 
-function Product({ searchTerm, onCountChange }) {
+function Product({ filters, onCountChange }) {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     setProjects(data);
   }, []);
 
-  const filteredProjects = projects.filter(project =>
-    project.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredProjects = projects
+  .filter(project => {
+    // Filtro por nombre
+    if (filters.search && !project.name.toLowerCase().includes(filters.search.toLowerCase())) {
+      return false;
+    }
+    // Filtro por stock
+    if (filters.stock === "con-stock" && project.stock === 0) return false;
+    if (filters.stock === "sin-stock" && project.stock > 0) return false;
+
+    // Filtro por precio mínimo
+    if (filters.minPrice && parseFloat(project.price) < parseFloat(filters.minPrice)) return false;
+
+    // Filtro por precio máximo
+    if (filters.maxPrice && parseFloat(project.price) > parseFloat(filters.maxPrice)) return false;
+
+    return true;
+  })
+  .sort((a, b) => {
+    // Ordenamiento
+    if (filters.sort === "precio-mayor") return b.price - a.price;
+    if (filters.sort === "precio-menor") return a.price - b.price;
+    if (filters.sort === "mas-vendidos") return b.vendas - a.vendas;
+    if (filters.sort === "nombre") return a.name.localeCompare(b.name);
+    if (filters.sort === "descuento") return (b.desconto ?? 0) - (a.desconto ?? 0);
+    return 0; // sin orden
+  });
+
 
   useEffect(() => {
     onCountChange && onCountChange(filteredProjects.length);

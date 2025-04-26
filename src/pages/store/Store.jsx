@@ -4,13 +4,13 @@ import "./Store.css";
 import { Link } from "react-router-dom";
 import ProductHeader from "../components/ProductHeader";
 
-function Store({ searchTerm }) {
+function Store({setFilters, filters }) {
   const [hideHeader, setHideHeader] = useState(false);
   const [productCount, setProductCount] = useState(0);
 
   useEffect(() => {
-    setHideHeader(Boolean(searchTerm));
-  }, [searchTerm]);
+    setHideHeader(Boolean(filters.search));
+  }, [filters.search]);
 
   return (
     <div className="store-container">
@@ -22,11 +22,11 @@ function Store({ searchTerm }) {
         </div>
       </header>
 
-      <ProductHeader count={productCount} />
+      <ProductHeader filters={filters} setFilters={setFilters} count={productCount} />
       
       <main className="store-main">
         <section className="product-list">
-          <Product searchTerm={searchTerm} onCountChange={setProductCount} />
+          <Product filters={filters} onCountChange={setProductCount} />
         </section>
       </main>
 

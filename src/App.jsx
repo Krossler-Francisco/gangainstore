@@ -13,7 +13,14 @@ import Proximamente from './pages/components/Proximamente';
 import { Analytics } from "@vercel/analytics/react"
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [filters, setFilters] = useState({
+    search: "",
+    sort: "mas-vendidos",
+    stock: "",
+    category: "",
+    minPrice: "",
+    maxPrice: ""
+  });
 
   return (
     <>
@@ -22,13 +29,13 @@ function App() {
         <MercadoPagoProvider>
           <CartProvider>
             <Span />
-            <Navbar setSearchTerm={setSearchTerm} />
+            <Navbar setSearchTerm={(term) => setFilters({ ...filters, search: term })} />
             <Routes>
-              <Route path="/" element={<Store searchTerm={searchTerm} />} />
+            <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path='/login' element={<Login />} />
               <Route path="/success" element={<Success />} />
-              <Route path="*" element={<Store searchTerm={searchTerm} />} />
+              <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
               <Route path="/proximamente" element={<Proximamente />} />
             </Routes>
             <Toaster />
