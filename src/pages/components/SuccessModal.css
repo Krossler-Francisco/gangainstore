@@ -6,6 +6,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
+    z-index: 100001;
 }
 
 .modal {
