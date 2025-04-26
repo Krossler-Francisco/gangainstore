@@ -1,16 +1,15 @@
-import connectToDatabase from './db';
-import mongoose from 'mongoose';
+import connectToDatabase from './db.js';
+import Venta from './models/Venta.js';
 
 export default async function handler(req, res) {
+  if (req.method !== 'GET') return res.status(405).end();
+
   try {
     await connectToDatabase();
 
-    const SaleSchema = new mongoose.Schema({}, { strict: false });
-    const Sale = mongoose.models.Sale || mongoose.model('Sale', SaleSchema, 'ventas');
+    const ventas = await Venta.find({});
 
-    const sales = await Sale.find({});
-
-    res.status(200).json(sales);
+    res.status(200).json(ventas);
   } catch (error) {
     console.error('Error al buscar ventas:', error);
     res.status(500).json({ message: 'Error al buscar ventas', error: error.message });

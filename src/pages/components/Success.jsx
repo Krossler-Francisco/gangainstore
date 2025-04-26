@@ -24,7 +24,7 @@ function Success() {
     const cliente = Object.fromEntries(formData.entries());
   
     const productos = confirmedOrder;
-    const total = productos.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = productos.reduce((sum, item) => sum + item.desconto * item.quantity, 0);
 
     localStorage.setItem('backup_order', JSON.stringify({ cliente, productos, total }));
   
