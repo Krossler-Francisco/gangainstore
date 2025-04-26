@@ -16,17 +16,15 @@
   }
   
   .ver-detalles-btn {
-    background-color: #c7c7c7;
-    color: rgb(0, 0, 0);
+    color: rgb(94, 0, 148);
     border: none;
-    padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: 0.3s ease;
   }
   
   .ver-detalles-btn:hover {
-    background-color: #b0b0b0;
+    color: blue;
   }
   
   /* Responsive: tabla se transforma en lista en móviles */
@@ -50,6 +48,7 @@
     }
   
     .tabla-pedidos td {
+        width: auto;
       text-align: right;
       position: relative;
     }
@@ -66,8 +65,7 @@
     }
   
     .ver-detalles-btn {
-      width: 100%;
-      margin-top: 0.5rem;
+      width: auto;
     }
   }
   
