@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import CartSidebar from "./CartSidebar";
 import { useCart } from "../../hooks/useCart";
+import { useNavigate } from "react-router-dom";
 
 function Navbar({ setSearchTerm }) {
   const [input, setInput] = useState("");
@@ -13,6 +14,7 @@ function Navbar({ setSearchTerm }) {
   const { showCart, setShowCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const isMobile = window.innerWidth <= 768;
+  const navigate = useNavigate();
 
   const toggleAccontComponent = () => {
     setShowAccountComponent(!showAccountComponent);
@@ -21,6 +23,7 @@ function Navbar({ setSearchTerm }) {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchTerm(input);
+    navigate('/');
   };
 
   return (
