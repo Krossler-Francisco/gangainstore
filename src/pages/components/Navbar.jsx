@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiShoppingCart, FiUser, FiSearch, FiMenu, FiX } from "react-icons/fi";
 import "./Navbar.css";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import CartSidebar from "./CartSidebar";
 import { useCart } from "../../hooks/useCart";
-import { useNavigate } from "react-router-dom";
 
 function Navbar({ setSearchTerm }) {
   const [input, setInput] = useState("");

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate, Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import "./Success.css";
+import "./SuccessModal.css"
 
 function Success() {
   const [searchParams] = useSearchParams();
@@ -10,8 +11,17 @@ function Success() {
   const { cart, clearCart } = useCart();
   const [confirmedOrder, setConfirmedOrder] = useState([]);
   const [orderSaveError, setOrderSaveError] = useState(false);
-
+  const navigate = useNavigate();
   const paymentId = searchParams.get("payment_id");
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModalHandler = () => {
+    setShowModal(!showModal);
+  };
+
+  const handleBackToHome = () => {
+    navigate("/");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +45,7 @@ function Success() {
   
       const data = await res.json();
       if (res.ok) {
-        alert('Datos enviados correctamente');
+        setShowModal(true);;
       } else {
         setOrderSaveError(true);
         alert(`Error al guardar: ${data.error}`);
@@ -44,6 +54,20 @@ function Success() {
       console.error('Error al enviar datos:', error);
       setOrderSaveError(true);
     }
+  };
+
+  const Modal = () => {
+    return (
+      <dialog className="modal" open={showModal}>
+        <div className="modal-content">
+          <h2>¿Te gustaría crear una cuenta?</h2>
+          <p>Así podrás hacer un mejor seguimiento de tus pedidos y disfrutar de beneficios exclusivos.</p>
+          <Link to="/login" className="modal-link">
+            Crear cuenta
+          </Link>
+        </div>
+      </dialog>
+    );
   };
 
   useEffect(() => {
@@ -150,6 +174,9 @@ function Success() {
           </div>
         </section>
           </div>
+          <div>{showModal && <Modal />}
+          </div>
+          
       </div>
     );
 }
