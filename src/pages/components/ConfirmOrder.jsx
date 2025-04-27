@@ -119,7 +119,7 @@ function ConfirmOrder() {
               {!preferenceId && (
                 <button type="submit" className="pay-button">Ir a pagar</button>
               )}
-              <div id="wallet_container" style={{ marginTop: '20px' }}></div>
+              <div id="wallet_container" className="pay-button"></div>
             </form>
           </div>
         </section>
