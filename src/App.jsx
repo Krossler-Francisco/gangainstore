@@ -13,6 +13,8 @@ import Success from './pages/components/Success';
 import Proximamente from './pages/components/Proximamente';
 import Dashboard from './pages/components/Dashboard';
 import Footer from './pages/components/Footer';
+import PrivacyPolicy from './pages/components/PrivacyPolicy';
+import TermsAndConditions from './pages/components/TermsAndConditions';
 
 function App() {
   const [filters, setFilters] = useState({
@@ -39,6 +41,8 @@ function App() {
               <Route path="/success" element={<Success />} />
               <Route path="/proximamente" element={<Proximamente />} />
               <Route path="/my-account/*" element={<Dashboard/>} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />\
+              <Route path="/terms" element={<TermsAndConditions />} />
             </Routes>
             <Footer/>
             <Toaster />

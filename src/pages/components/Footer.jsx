@@ -29,13 +29,9 @@ export default function Footer() {
           <a href="/mayoristas" className="footer-link">Mayoristas</a>
           <a href="/envios" className="footer-link">Envíos</a>
         </div>
-
-        {/* Segunda columna: Redes Sociales */}
-
-        {/* Tercera columna: Legales */}
         <div className="footer-column">
             <h3 className='footer-link'>Legales</h3>
-          <Link to="/privacy" className="footer-link">Política de Privacidad</Link>
+          <Link to="/privacy-policy" className="footer-link">Política de Privacidad</Link>
           <Link to="/terms" className="footer-link">Términos y Condiciones</Link>
           <Link target="_blank" to="/sitemap.xml" className="footer-link">Sitemap</Link>
         </div>

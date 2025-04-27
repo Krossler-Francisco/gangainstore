@@ -1,0 +1,43 @@
+.terms-conditions {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  .terms-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .terms-subtitle {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #555;
+  }
+  
+  .terms-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  .terms-list {
+    margin-left: 1.5rem;
+    list-style-type: disc;
+  }
+  
+  .terms-list li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .terms-update {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #777;
+  }
+  
