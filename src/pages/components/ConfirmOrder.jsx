@@ -184,7 +184,7 @@ function ConfirmOrder() {
                 <textarea name="details" rows="4" placeholder="Detalles adicionales (Departamento, piso, referencias...)" />
               </div>
               {!preferenceId && (
-                <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
+                <button type="submit" onClick={handleSubmit} className="pay-button">CONFIRMAR DATOS</button>
               )}
               <div id="wallet_container"></div>
             </form>
