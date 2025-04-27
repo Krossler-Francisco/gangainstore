@@ -81,7 +81,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    margin-top: 1.3rem;
+  }
+
+  .mercadopago-button{
+    font-size: 14px;
+    font-weight: 600;
     width: 100%;
   }
   
