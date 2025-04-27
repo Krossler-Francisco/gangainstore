@@ -36,7 +36,7 @@ function ConfirmOrder() {
       }
 
       // Ahora creamos la preferencia en MercadoPago
-      const checkoutRes = await fetch('/api/checkout', {
+      const checkoutRes = await fetch('/api/data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
