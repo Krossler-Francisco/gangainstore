@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import "./ConfirmOrder.css";
+import { FiShoppingCart, FiTruck, FiCreditCard } from "react-icons/fi";
 
 function ConfirmOrder() {
   const mp = window.MercadoPago && new window.MercadoPago('APP_USR-4f89bd10-10f6-4b81-a3e9-abaed15c4452');
@@ -9,11 +10,28 @@ function ConfirmOrder() {
   const [showModal, setShowModal] = useState(false);
   const [orderSaveError, setOrderSaveError] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const [preferenceId, setPreferenceId] = useState(null);
+  const [step, setStep] = useState(1); // <-- nuevo: step
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const paymentStatus = queryParams.get('status'); // viene de MercadoPago
+    const paymentId = queryParams.get('payment_id');
+    
+    if (paymentStatus && paymentId) {
+      if (paymentStatus === 'approved') {
+        setStep(4); // Listo!
+        clearCart(); // Limpiamos carrito porque ya compró
+      } else {
+        setStep(3); // Pago pendiente o rechazado
+      }
+    }
+  }, [location.search, clearCart]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setStep(2); // Cambiamos al paso Confirmar Datos
 
     const formData = new FormData(e.target);
     const cliente = Object.fromEntries(formData.entries());
@@ -21,8 +39,7 @@ function ConfirmOrder() {
     const total = productos.reduce((sum, item) => sum + item.desconto * item.quantity, 0);
 
     try {
-      // Primero guardamos la orden en nuestra DB
-      const res = await fetch('/api/save',{
+      const res = await fetch('/api/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cliente, productos, total, status: 'pendiente' }),
@@ -35,7 +52,6 @@ function ConfirmOrder() {
         return;
       }
 
-      // Ahora creamos la preferencia en MercadoPago
       const checkoutRes = await fetch('/api/data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -54,25 +70,25 @@ function ConfirmOrder() {
         return;
       }
 
-      setPreferenceId(checkoutData.preferenceId); // guardamos la preference para generar el botón
+      setPreferenceId(checkoutData.preferenceId);
+      setStep(3); // Ahora está en pago
     } catch (error) {
       console.error('Error en checkout:', error);
       setOrderSaveError(true);
     }
   };
 
-  // Este efecto se dispara cuando tenemos la preferenceId lista
   useEffect(() => {
     if (preferenceId && mp) {
       const walletContainer = document.getElementById('wallet_container');
-  
+
       if (walletContainer && walletContainer.children.length === 0) {
         mp.checkout({
           preference: {
             id: preferenceId,
           },
           render: {
-            container: '#wallet_container', // ID del div donde va el botón
+            container: '#wallet_container',
             label: 'PAGAR COM MERCADO PAGO',
           },
           customization: {
@@ -80,8 +96,8 @@ function ConfirmOrder() {
               buttonBackground: '#0e0e0e',
               buttonText: 'white',
               borderRadius: '6px',
-              verticalPadding: '1rem', // padding arriba/abajo
-              horizontalPadding: '1rem', // padding izquierda/derecha
+              verticalPadding: '1rem',
+              horizontalPadding: '1rem',
               marginTop: '1rem',
               fontSize: '14px',
             },
@@ -91,53 +107,67 @@ function ConfirmOrder() {
     }
   }, [preferenceId, mp]);
 
-
   return (
     <div className="success-container-landing">
+      <div className="steps-container">
+        <div className="step-item-container">
+          <div className={`step-item ${step >= 1 ? 'active' : ''}`}>
+            <FiShoppingCart className="step-cart" size={10} />
+          </div>
+          <p>Carrito</p>
+        </div>
+        <div className={`step-divider ${step >= 2 ? 'active' : ''}`} />
+        <div className="step-item-container">
+          <div className={`step-item ${step >= 2 ? 'active' : ''}`}>
+            <FiTruck className="step-cart" size={10} />  
+          </div>
+          <p>Entrega</p>
+        </div>
+        <div className="step-divider" />
+        <div className="step-item-container">
+          <div className={`step-item ${step >= 3 ? 'active' : ''}`}>
+            <FiCreditCard className="step-cart" size={10} />
+          </div>
+          <p>Pago</p>
+        </div>
+      </div>
+
       <h2>Completa tus datos para finalizar la compra</h2>
       <div className="success-container">
-        <section className="success-content">
-          <div className="success-form-box">
-            <form onSubmit={handleSubmit}>
-              <div className="success-form-group">
-                <label>Nombre y apellido *</label>
-                <input type="text" name="fullname" required />
-              </div>
-              <div className="success-form-group">
-                <label>Email *</label>
-                <input type="email" name="email" required />
-              </div>
-              <div className="success-form-group">
-                <label>Teléfono *</label>
-                <input type="tel" name="phone" required />
-              </div>
-              <div className="success-form-group">
-                <label>Calle *</label>
-                <input type="text" name="street" required />
-              </div>
-              <div className="success-form-group">
-                <label>Ciudad *</label>
-                <input type="text" name="city" required />
-              </div>
-              <div className="success-form-group">
-                <label>Provincia *</label>
-                <input type="text" name="province" required />
-              </div>
-              <div className="success-form-group">
-                <label>Código Postal *</label>
-                <input type="text" name="zipcode" required />
-              </div>
-              <div className="success-form-group">
-                <label>Detalles adicionales</label>
-                <textarea name="details" rows="4" placeholder="Departamento, piso, referencias..."></textarea>
-              </div>
-              {!preferenceId && (
-              <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
-              )}
-              <div id="wallet_container"></div>
-            </form>
-          </div>
-        </section>
+      <section className="success-content">
+  <div className="success-form-box">
+    <form onSubmit={handleSubmit}>
+      <div className="success-form-group">
+        <input className="no-margin" type="text" name="fullname" required placeholder="Nombre y apellido *" />
+      </div>
+      <div className="success-form-group">
+        <input type="email" name="email" required placeholder="Email *" />
+      </div>
+      <div className="success-form-group">
+        <input type="tel" name="phone" required placeholder="Teléfono *" />
+      </div>
+      <div className="success-form-group">
+        <input type="text" name="street" required placeholder="Calle *" />
+      </div>
+      <div className="success-form-group">
+        <input type="text" name="city" required placeholder="Ciudad *" />
+      </div>
+      <div className="success-form-group">
+        <input type="text" name="province" required placeholder="Provincia *" />
+      </div>
+      <div className="success-form-group">
+        <input type="text" name="zipcode" required placeholder="Código Postal *" />
+      </div>
+      <div className="success-form-group">
+        <textarea name="details" rows="4" placeholder="Detalles adicionales (Departamento, piso, referencias...)"></textarea>
+      </div>
+      {!preferenceId && (
+        <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
+      )}
+      <div id="wallet_container"></div>
+    </form>
+  </div>
+</section>
 
         {/* RESUMEN DEL PEDIDO */}
         <section className="success-content">

@@ -27,7 +27,7 @@ export default async function handler(req, res) {
           },
         ],
         back_urls: {
-          success: 'https://www.gangain.com.ar/success',
+          success: 'https://www.gangain.com.ar/confirm-order',
           failure: 'https://www.gangain.com.ar/failure',
           pending: 'https://www.gangain.com.ar/pending',
         },
