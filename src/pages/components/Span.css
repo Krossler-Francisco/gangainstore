@@ -18,6 +18,8 @@
 
 .span_content .span_icon{
     color: black;
+    padding: 0;
+    width: 18px;
     translate: .3s ease;
 }
 
