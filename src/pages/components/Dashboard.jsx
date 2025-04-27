@@ -39,7 +39,7 @@ function Dashboard() {
                     <div className="dashboard-content">
                         <nav className="dashboard-navbar">
                             <ul>
-                                {user ? <h1>{user.username}</h1> : <h1>Admin</h1>}
+                                {user ? <h1>{user.username.charAt(0).toUpperCase() + user.username.slice(1)}</h1> : <h1>Admin</h1>}
                                 <NavLink 
                                     to="/my-account" 
                                     className={({ isActive }) => isActive ? "select a b" : "a b"}
