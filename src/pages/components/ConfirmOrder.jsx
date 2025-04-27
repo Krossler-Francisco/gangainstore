@@ -127,9 +127,10 @@ function ConfirmOrder() {
                 <label>Detalles adicionales</label>
                 <textarea name="details" rows="4" placeholder="Departamento, piso, referencias..."></textarea>
               </div>
-              {!preferenceId ? (
+              {!preferenceId && (
               <button type="submit" className="pay-button">IR A PAGAR</button>
-              ) : <div id="wallet_container"></div>}
+              )}
+              <div id="wallet_container"></div>
             </form>
           </div>
         </section>
