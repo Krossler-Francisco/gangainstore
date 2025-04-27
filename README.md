@@ -1,10 +1,10 @@
 ________________________________
 
 produtos ja escritos
-25 OK images - OK
-30 OK images - OK
-40 OK images - OK
-45 OK images - OK
+25 OK images - 
+30 OK images - 
+40 OK images - 
+45 OK images - 
 50 OK images -
 55 OK images -
 60 OK images -
