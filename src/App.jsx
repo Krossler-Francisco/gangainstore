@@ -9,12 +9,12 @@ import Store from './pages/store/Store';
 import Span from './pages/components/Span';
 import ProductDetail from './pages/components/ProductDetail';
 import Login from './pages/components/Login';
-import Success from './pages/components/Success';
 import Proximamente from './pages/components/Proximamente';
 import Dashboard from './pages/components/Dashboard';
 import Footer from './pages/components/Footer';
 import PrivacyPolicy from './pages/components/PrivacyPolicy';
 import TermsAndConditions from './pages/components/TermsAndConditions';
+import ConfirmOrder from './pages/components/ConfirmOrder';
 
 function App() {
   const [filters, setFilters] = useState({
@@ -38,7 +38,7 @@ function App() {
               <Route path="/" element={<Store setFilters={setFilters} filters={filters} />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path='/login' element={<Login />} />
-              <Route path="/success" element={<Success />} />
+              <Route path="/confirm-order" element={<ConfirmOrder />} />
               <Route path="/proximamente" element={<Proximamente />} />
               <Route path="/my-account/*" element={<Dashboard/>} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />\

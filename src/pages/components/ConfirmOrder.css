@@ -14,12 +14,14 @@
   
   .success-content {
     display: flex;
+    padding: 2rem;
     border-radius: 15px;
     background-color: #fefefe;
   }
   
   .success-form-box {
     display: flex;
+    flex: 1;
     flex-direction: column;
     gap: 1.2rem;
 }
@@ -129,12 +131,19 @@
     .success-container {
       grid-template-columns: 1fr; /* Una sola columna */
       gap: 2rem; /* Espacio entre las secciones apiladas */
+      
     }
   
     .success-content {
       flex-direction: column;
       width: 100%;
+      padding: 0rem;
       border-radius: 12px;
+    }
+
+    .success-container-landing h2{
+      font-size: 18px;
+      margin-block: 6px;
     }
   
     .order-item {
@@ -157,11 +166,16 @@
     .success-form-box {
       width: 100%;
     }
+
+    .success-form-group label {
+      font-size: 14px;
+      margin-top: 4px;
+    }
   
     .success-form-group input,
     .success-form-group textarea {
-      padding: 0.8rem 0.6rem;
-      font-size: 16px;
+      padding: 0.6rem 0.5rem;
+      font-size: 12px;
     }
   
     .success-form-box button {
