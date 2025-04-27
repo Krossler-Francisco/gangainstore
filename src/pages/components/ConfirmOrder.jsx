@@ -64,28 +64,32 @@ function ConfirmOrder() {
   // Este efecto se dispara cuando tenemos la preferenceId lista
   useEffect(() => {
     if (preferenceId && mp) {
-      mp.checkout({
-        preference: {
-          id: preferenceId,
-        },
-        render: {
-          container: '#wallet_container', // ID del div donde va el botón
-          label: 'PAGAR COM MERCADO PAGO',
-        },
-        customization: {
-          visual: {
-            buttonBackground: '#0e0e0e',
-            buttonText: 'white',
-            borderRadius: '6px',
-            verticalPadding: '1rem', // padding arriba/abajo
-            horizontalPadding: '1rem', // padding izquierda/derecha
-            marginTop: '1rem',
-            fontSize: '14px',
+      const walletContainer = document.getElementById('wallet_container');
+  
+      if (walletContainer && walletContainer.children.length === 0) {
+        mp.checkout({
+          preference: {
+            id: preferenceId,
           },
-        },
-      });
+          render: {
+            container: '#wallet_container', // ID del div donde va el botón
+            label: 'PAGAR COM MERCADO PAGO',
+          },
+          customization: {
+            visual: {
+              buttonBackground: '#0e0e0e',
+              buttonText: 'white',
+              borderRadius: '6px',
+              verticalPadding: '1rem', // padding arriba/abajo
+              horizontalPadding: '1rem', // padding izquierda/derecha
+              marginTop: '1rem',
+              fontSize: '14px',
+            },
+          },
+        });
+      }
     }
-  }, [preferenceId]);
+  }, [preferenceId, mp]);
 
 
   return (
