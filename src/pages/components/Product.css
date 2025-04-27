@@ -113,7 +113,8 @@ a{
 }
 
 .product-disponible{
-    color: rgb(92, 12, 146);
+    color: #444;
+    font-size: 14px;
     font-weight: 600;
 }
 
