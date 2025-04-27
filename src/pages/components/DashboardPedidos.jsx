@@ -45,7 +45,7 @@ function DashboardPedidos() {
               <tr key={sale._id}>
                 <td data-label="Pedido">#{sale._id.slice(-6).toUpperCase()}</td>
                 <td data-label="Fecha">{new Date(sale.fecha).toLocaleString()}</td>
-                <td data-label="Estado">{sale.estado}</td>
+                <td data-label="Estado">{sale.estado.charAt(0).toUpperCase() + sale.estado.slice(1)}</td>
                 <td data-label="Total">${sale.total}</td>
                 <td data-label="Acciones">
                   <button className="ver-detalles-btn">Ver detalles</button>
