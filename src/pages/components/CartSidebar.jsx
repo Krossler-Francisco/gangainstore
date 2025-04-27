@@ -13,6 +13,7 @@ function CartSidebar({ isOpen, onClose }) {
   const goToConfirmOrder = () => {
     if (cart.length === 0) return;
     navigate('/confirm-order');
+    onClose();
   };
 
   useEffect(() => {

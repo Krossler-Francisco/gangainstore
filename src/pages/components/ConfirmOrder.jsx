@@ -22,7 +22,7 @@ function ConfirmOrder() {
 
     try {
       // Primero guardamos la orden en nuestra DB
-      const res = await fetch('/api/save', {
+      const res = await fetch('/api/save',{
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ cliente, productos, total, status: 'pendiente' }),
@@ -116,8 +116,9 @@ function ConfirmOrder() {
                 <label>Detalles adicionales</label>
                 <textarea name="details" rows="4" placeholder="Departamento, piso, referencias..."></textarea>
               </div>
-
-              <button type="submit">Ir a pagar</button>
+              {!preferenceId && (
+                <button type="submit" className="pay-button">Ir a pagar</button>
+              )}
               <div id="wallet_container" style={{ marginTop: '20px' }}></div>
             </form>
           </div>
@@ -146,19 +147,6 @@ function ConfirmOrder() {
           </div>
         </section>
       </div>
-
-      {/* modal de login opcional, se puede dejar ou sacar */}
-      {showModal && (
-        <div className="modal-container">
-          <dialog className="modal" open={showModal}>
-            <div className="modal-content">
-              <h2>¿Te gustaría crear una cuenta?</h2>
-              <p>Así podrás hacer un mejor seguimiento de tus pedidos y disfrutar de beneficios exclusivos.</p>
-              <a href="/login" className="modal-link">Ingresar | Crear cuenta</a>
-            </div>
-          </dialog>
-        </div>
-      )}
     </div>
   );
 }
