@@ -39,7 +39,7 @@ function Dashboard() {
                     <div className="dashboard-content">
                         <nav className="dashboard-navbar">
                             <ul>
-                                <h1>Admin</h1>
+                                <h1>{user.name}</h1>
                                 <NavLink 
                                     to="/my-account" 
                                     className={({ isActive }) => isActive ? "select a b" : "a b"}
@@ -75,7 +75,7 @@ function Dashboard() {
                             </ul>
                         </nav>
                         <div className="dashboard-components-container">
-                            {user ? renderComponent() : (
+                            {user ? renderComponent(user) : (
                                 <div className="no-user">
                                 {!user && <Navigate to="/login" />}
                                 </div>
