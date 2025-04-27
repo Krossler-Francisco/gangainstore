@@ -70,7 +70,7 @@ function ConfirmOrder() {
         },
         render: {
           container: '#wallet_container', // ID del div donde va el botón
-          label: 'Pagar ahora',
+          label: 'PAGAR COM MERCADO PAGO',
         },
         customization: {
           visual: {
@@ -127,10 +127,9 @@ function ConfirmOrder() {
                 <label>Detalles adicionales</label>
                 <textarea name="details" rows="4" placeholder="Departamento, piso, referencias..."></textarea>
               </div>
-              {!preferenceId && (
+              {!preferenceId ? (
               <button type="submit" className="pay-button">IR A PAGAR</button>
-              )}
-              <div id="wallet_container" className="pay-button"></div>
+              ) : <div id="wallet_container" className="paybutton"></div>}
             </form>
           </div>
         </section>
