@@ -67,7 +67,7 @@ function Navbar({ setSearchTerm }) {
                 className="login-button"
               >
                 <FiUser size={18} />
-                <p>Mi cuenta</p>
+                <Link className="login-text" to={"/my-account"}>Mi cuenta</Link>
                 {showAccountComponent && (
                   <div className="account-component">
                     <Link to={"/my-account"} className="account-option" >Escritorio</Link>
