@@ -21,7 +21,7 @@ function Dashboard() {
     };
 
     const renderComponent = () => {
-        if (location.pathname === "/my-account") return <DashboardMain />;
+        if (location.pathname === "/my-account") return <DashboardMain user={user} />;
         if (location.pathname === "/my-account/orders") return <DashboardPedidos />;
         if (location.pathname === "/my-account/details") return <DashboardDetalles />;
         if (location.pathname === "/my-account/favorites") return <DashboardFavoritos />;
@@ -75,7 +75,7 @@ function Dashboard() {
                             </ul>
                         </nav>
                         <div className="dashboard-components-container">
-                            {user ? renderComponent(user) : (
+                            {user ? renderComponent() : (
                                 <div className="no-user">
                                 {!user && <Navigate to="/login" />}
                                 </div>
