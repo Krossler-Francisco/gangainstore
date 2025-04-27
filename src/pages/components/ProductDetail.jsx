@@ -96,7 +96,7 @@ function ProductDetail() {
         </button>
 
         {product.frete && (
-          <p className="frete"><FaTruck /> Envío a todo el país</p>
+          <p className="frete"><FaTruck /> Envíos a Capital Federal y Gran Buenos Aires</p>
         )}
 
 
