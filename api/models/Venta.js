@@ -5,10 +5,11 @@ const VentaSchema = new mongoose.Schema({
     fullname: String,
     email: String,
     phone: String,
+    dni: String,
     street: String,
     city: String,
     province: String,
-    zipcode: String,
+    zipcode: Number,
     details: String,
   },
   productos: [

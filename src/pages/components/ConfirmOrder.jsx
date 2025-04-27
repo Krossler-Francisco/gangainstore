@@ -1,42 +1,43 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import "./ConfirmOrder.css";
-import { FiShoppingCart, FiTruck, FiCreditCard } from "react-icons/fi";
+import { FiShoppingCart, FiTruck, FiCreditCard, FiMapPin } from "react-icons/fi";
+import { getShippingPriceByZipcode } from "../../utils/shipping";
 
 function ConfirmOrder() {
   const mp = window.MercadoPago && new window.MercadoPago('APP_USR-4f89bd10-10f6-4b81-a3e9-abaed15c4452');
   const { cart, clearCart } = useCart();
-  const [showModal, setShowModal] = useState(false);
   const [orderSaveError, setOrderSaveError] = useState(false);
-  const navigate = useNavigate();
+  const [shippingPrice, setShippingPrice] = useState(null);
   const location = useLocation();
   const [preferenceId, setPreferenceId] = useState(null);
-  const [step, setStep] = useState(1); // <-- nuevo: step
+  const [step, setStep] = useState(1);
+  const [zipcode, setZipcode] = useState("");
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
-    const paymentStatus = queryParams.get('status'); // viene de MercadoPago
+    const paymentStatus = queryParams.get('status');
     const paymentId = queryParams.get('payment_id');
-    
+
     if (paymentStatus && paymentId) {
       if (paymentStatus === 'approved') {
-        setStep(4); // Listo!
-        clearCart(); // Limpiamos carrito porque ya compró
+        setStep(4);
+        clearCart();
       } else {
-        setStep(3); // Pago pendiente o rechazado
+        setStep(3);
       }
     }
   }, [location.search, clearCart]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStep(2); // Cambiamos al paso Confirmar Datos
+    setStep(2);
 
     const formData = new FormData(e.target);
     const cliente = Object.fromEntries(formData.entries());
     const productos = cart;
-    const total = productos.reduce((sum, item) => sum + item.desconto * item.quantity, 0);
+    const total = productos.reduce((sum, item) => sum + item.desconto * item.quantity, 0) + (shippingPrice || 0);
 
     try {
       const res = await fetch('/api/save', {
@@ -61,6 +62,7 @@ function ConfirmOrder() {
             unit_price: Number(item.desconto),
             quantity: item.quantity,
           })),
+          shipping_cost: shippingPrice || 0,
         }),
       });
 
@@ -71,7 +73,7 @@ function ConfirmOrder() {
       }
 
       setPreferenceId(checkoutData.preferenceId);
-      setStep(3); // Ahora está en pago
+      setStep(3);
     } catch (error) {
       console.error('Error en checkout:', error);
       setOrderSaveError(true);
@@ -84,13 +86,8 @@ function ConfirmOrder() {
 
       if (walletContainer && walletContainer.children.length === 0) {
         mp.checkout({
-          preference: {
-            id: preferenceId,
-          },
-          render: {
-            container: '#wallet_container',
-            label: 'PAGAR COM MERCADO PAGO',
-          },
+          preference: { id: preferenceId },
+          render: { container: '#wallet_container', label: 'PAGAR CON MERCADO PAGO' },
           customization: {
             visual: {
               buttonBackground: '#0e0e0e',
@@ -107,23 +104,30 @@ function ConfirmOrder() {
     }
   }, [preferenceId, mp]);
 
+  const searchAddress = (e) => {
+    e.preventDefault();
+    const { price } = getShippingPriceByZipcode(zipcode); // saco solo el price
+    setShippingPrice(price); // ahora sí, solo número
+  };
+
   return (
     <div className="success-container-landing">
       <div className="steps-container">
+        {/* Steps visuales */}
         <div className="step-item-container">
           <div className={`step-item ${step >= 1 ? 'active' : ''}`}>
             <FiShoppingCart className="step-cart" size={10} />
           </div>
           <p>Carrito</p>
         </div>
-        <div className={`step-divider ${step >= 2 ? 'active' : ''}`} />
+        <div className={`step-divider ${step >= 1 ? 'active' : ''}`} />
         <div className="step-item-container">
           <div className={`step-item ${step >= 2 ? 'active' : ''}`}>
-            <FiTruck className="step-cart" size={10} />  
+            <FiTruck className="step-cart" size={10} />
           </div>
           <p>Entrega</p>
         </div>
-        <div className="step-divider" />
+        <div className={`step-divider ${step >= 2 ? 'active' : ''}`} />
         <div className="step-item-container">
           <div className={`step-item ${step >= 3 ? 'active' : ''}`}>
             <FiCreditCard className="step-cart" size={10} />
@@ -134,40 +138,58 @@ function ConfirmOrder() {
 
       <h2>Completa tus datos para finalizar la compra</h2>
       <div className="success-container">
-      <section className="success-content">
-  <div className="success-form-box">
-    <form onSubmit={handleSubmit}>
-      <div className="success-form-group">
-        <input className="no-margin" type="text" name="fullname" required placeholder="Nombre y apellido *" />
-      </div>
-      <div className="success-form-group">
-        <input type="email" name="email" required placeholder="Email *" />
-      </div>
-      <div className="success-form-group">
-        <input type="tel" name="phone" required placeholder="Teléfono *" />
-      </div>
-      <div className="success-form-group">
-        <input type="text" name="street" required placeholder="Calle *" />
-      </div>
-      <div className="success-form-group">
-        <input type="text" name="city" required placeholder="Ciudad *" />
-      </div>
-      <div className="success-form-group">
-        <input type="text" name="province" required placeholder="Provincia *" />
-      </div>
-      <div className="success-form-group">
-        <input type="text" name="zipcode" required placeholder="Código Postal *" />
-      </div>
-      <div className="success-form-group">
-        <textarea name="details" rows="4" placeholder="Detalles adicionales (Departamento, piso, referencias...)"></textarea>
-      </div>
-      {!preferenceId && (
-        <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
-      )}
-      <div id="wallet_container"></div>
-    </form>
-  </div>
-</section>
+        <section className="success-content">
+          <div className="success-form-box">
+            <form onSubmit={handleSubmit}>
+              <div className="success-form-group">
+                <input className="no-margin" type="text" name="fullname" required placeholder="Nombre y apellido *" />
+              </div>
+              <div className="success-form-group">
+                <input type="email" name="email" required placeholder="Email *" />
+              </div>
+              <div className="success-form-group">
+                <input type="tel" name="phone" required placeholder="Teléfono *" />
+              </div>
+              <div className="success-form-group">
+                <input type="text" name="dni" required placeholder="DNI *" />
+              </div>
+              <div className="success-form-group">
+                <input type="text" name="street" required placeholder="Calle *" />
+              </div>
+              <div className="success-form-group">
+                <input type="text" name="city" required placeholder="Ciudad *" />
+              </div>
+              <div className="success-form-group">
+                <input type="text" name="province" required placeholder="Provincia *" />
+              </div>
+              <div className="success-form-group">
+                <div className="zip-container">
+                  <input
+                    type="text"
+                    name="zipcode"
+                    required
+                    placeholder="Código Postal *"
+                    value={zipcode}
+                    onChange={(e) => setZipcode(e.target.value)}
+                  />
+                  <button className="zip-search" onClick={searchAddress}>
+                    <p className="shipping-price">
+                      {typeof shippingPrice === "number" ? `$${shippingPrice.toFixed(2)}` : "Consultar"}
+                    </p>
+                    <FiMapPin color="#666" size={14} />
+                  </button>                  
+                </div>
+              </div>
+              <div className="success-form-group">
+                <textarea name="details" rows="4" placeholder="Detalles adicionales (Departamento, piso, referencias...)" />
+              </div>
+              {!preferenceId && (
+                <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
+              )}
+              <div id="wallet_container"></div>
+            </form>
+          </div>
+        </section>
 
         {/* RESUMEN DEL PEDIDO */}
         <section className="success-content">
@@ -180,14 +202,21 @@ function ConfirmOrder() {
                   <div className="order-details">
                     <p><strong>{item.name}</strong></p>
                     <p>Cantidad: {item.quantity}</p>
-                    <p>Precio unitario: ${Number(item.desconto).toFixed(2)}</p>
+                    <p>Precio: ${Number(item.desconto).toFixed(2)}</p>
                     <p>Total: ${(item.desconto * item.quantity).toFixed(2)}</p>
+                    <p className="shipping-price">Envio: $
+                      {typeof shippingPrice === "number" ? `${shippingPrice.toFixed(2)}` : "Consultar"}
+                    </p>
                   </div>
                 </li>
               ))}
             </ul>
             <div className="total-price">
-              <strong>Total: ${cart.reduce((total, item) => total + (item.desconto * item.quantity), 0).toFixed(2)}</strong>
+              <strong>
+                Total: ${(
+                  cart.reduce((total, item) => total + (item.desconto * item.quantity), 0) + (shippingPrice || 0)
+                ).toFixed(2)}
+              </strong>
             </div>
           </div>
         </section>
