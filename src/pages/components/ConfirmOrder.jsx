@@ -4,10 +4,13 @@ import { useCart } from "../../hooks/useCart";
 import "./ConfirmOrder.css";
 
 function ConfirmOrder() {
+  const mp = window.MercadoPago && new window.MercadoPago('APP_USR-4f89bd10-10f6-4b81-a3e9-abaed15c4452');
   const { cart, clearCart } = useCart();
   const [showModal, setShowModal] = useState(false);
   const [orderSaveError, setOrderSaveError] = useState(false);
   const navigate = useNavigate();
+  const [preferenceId, setPreferenceId] = useState(null);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +21,7 @@ function ConfirmOrder() {
     const total = productos.reduce((sum, item) => sum + item.desconto * item.quantity, 0);
 
     try {
+      // Primero guardamos la orden en nuestra DB
       const res = await fetch('/api/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25,18 +29,53 @@ function ConfirmOrder() {
       });
 
       const data = await res.json();
-      if (res.ok) {
-        clearCart();
-        navigate(`/checkout?order_id=${data.orderId}`);
-      } else {
+      if (!res.ok) {
         setOrderSaveError(true);
         alert(`Error al guardar: ${data.error}`);
+        return;
       }
+
+      // Ahora creamos la preferencia en MercadoPago
+      const checkoutRes = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: productos.map((item) => ({
+            title: item.name,
+            unit_price: Number(item.desconto),
+            quantity: item.quantity,
+          })),
+        }),
+      });
+
+      const checkoutData = await checkoutRes.json();
+      if (!checkoutRes.ok) {
+        alert(`Error al crear preferencia: ${checkoutData.error}`);
+        return;
+      }
+
+      setPreferenceId(checkoutData.preferenceId); // guardamos la preference para generar el botón
     } catch (error) {
-      console.error('Error al enviar datos:', error);
+      console.error('Error en checkout:', error);
       setOrderSaveError(true);
     }
   };
+
+  // Este efecto se dispara cuando tenemos la preferenceId lista
+  useEffect(() => {
+    if (preferenceId && mp) {
+      mp.checkout({
+        preference: {
+          id: preferenceId,
+        },
+        render: {
+          container: '#wallet_container', // ID del div donde va el botón
+          label: 'Pagar ahora',
+        },
+      });
+    }
+  }, [preferenceId]);
+
 
   return (
     <div className="success-container-landing">
@@ -79,6 +118,7 @@ function ConfirmOrder() {
               </div>
 
               <button type="submit">Ir a pagar</button>
+              <div id="wallet_container" style={{ marginTop: '20px' }}></div>
             </form>
           </div>
         </section>
