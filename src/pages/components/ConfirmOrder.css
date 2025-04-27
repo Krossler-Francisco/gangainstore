@@ -191,9 +191,16 @@
       font-size: 12px;
     }
   
-    .success-form-box button {
-      font-size: 16px;
-      padding: 1rem;
+    .success-form-box .pay-button {
+      font-size: 14px;
+      padding: 0.8rem 0.4rem;
       margin-top: 1rem;
     }
+
+    .mercadopago-button{
+      font-size: 14px;
+      font-weight: 600;
+      width: 100%;
+    }
+
   }
