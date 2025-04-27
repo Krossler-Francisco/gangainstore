@@ -129,7 +129,7 @@ function ConfirmOrder() {
               </div>
               {!preferenceId ? (
               <button type="submit" className="pay-button">IR A PAGAR</button>
-              ) : <div id="wallet_container" className="paybutton"></div>}
+              ) : <div id="wallet_container"></div>}
             </form>
           </div>
         </section>
