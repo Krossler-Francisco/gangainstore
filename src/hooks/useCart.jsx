@@ -8,7 +8,7 @@ export function CartProvider({ children }) {
     return JSON.parse(localStorage.getItem('cart')) || [];
   });
 
-  const [showCart, setShowCart] = useState(false); // NUEVO
+  const [showCart, setShowCart] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -23,7 +23,7 @@ export function CartProvider({ children }) {
     } else {
       setCart([...cart, { ...product, quantity: product.quantity || 1 }]);
     }
-    setShowCart(true); // 👉 Abrir el carrito automáticamente
+    setShowCart(true);
   };
 
   const updateQuantity = (id, amount) => {
