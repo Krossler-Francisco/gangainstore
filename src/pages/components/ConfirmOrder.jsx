@@ -51,7 +51,10 @@ function ConfirmOrder() {
         body: JSON.stringify({
           cliente,
           productos,
-          total,
+          total: {
+            shippingPrice: shippingPrice || 0,
+            couponDiscount: 0,
+          },
         }),
       });
 

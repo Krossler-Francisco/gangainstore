@@ -8,7 +8,7 @@ const client = new MercadoPagoConfig({
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).send('not allowed');
+    return res.status(405).send('Not allowed');
   }
 
   const { cliente, productos, total } = req.body;
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    await connectToDatabase(); // 🔵 Muy importante conectar a la base
+    await connectToDatabase(); // 🔵 Conectar a la base
 
     // 1. Crear la venta en MongoDB con estado pendiente
     const nuevaVenta = new Venta({
@@ -30,13 +30,33 @@ export default async function handler(req, res) {
 
     await nuevaVenta.save();
 
-    // 2. Crear la preferencia usando el _id como external_reference
+    // 2. Preparar los items para MercadoPago
     const items = productos.map(producto => ({
       title: producto.name,
-      unit_price: producto.price,
+      unit_price: producto.desconto, // usamos el precio con descuento
       quantity: producto.quantity,
-      currency_id: "ARS",
+      currency_id: 'ARS',
     }));
+
+    // ✅ Agregar costo de envio si existe
+    if (total.shippingPrice && total.shippingPrice > 0) {
+      items.push({
+        title: 'Costo de Envío',
+        unit_price: total.shippingPrice,
+        quantity: 1,
+        currency_id: 'ARS',
+      });
+    }
+
+    // ✅ Agregar descuento por cupon si existe
+    if (total.couponDiscount && total.couponDiscount > 0) {
+      items.push({
+        title: 'Descuento por Cupón',
+        unit_price: -total.couponDiscount,
+        quantity: 1,
+        currency_id: 'ARS',
+      });
+    }
 
     const preference = await new Preference(client).create({
       body: {
@@ -47,7 +67,7 @@ export default async function handler(req, res) {
           pending: 'https://www.gangain.com.ar/confirm-order',
         },
         auto_return: 'approved',
-        external_reference: nuevaVenta._id.toString(), // 🚀 usamos el ID real de la venta
+        external_reference: nuevaVenta._id.toString(),
       },
     });
 
@@ -58,7 +78,7 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Erro:', error);
-    return res.status(500).json({ error: 'Erro interno' });
+    console.error('Error en checkout:', error);
+    return res.status(500).json({ error: 'Error interno' });
   }
 }
