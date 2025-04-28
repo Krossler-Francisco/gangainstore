@@ -14,6 +14,7 @@ function ConfirmOrder() {
   const [preferenceId, setPreferenceId] = useState(null);
   const [step, setStep] = useState(1);
   const [zipcode, setZipcode] = useState("");
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -30,6 +31,11 @@ function ConfirmOrder() {
     }
   }, [location.search, clearCart]);
 
+  useEffect(() => {
+    const newTotal = cart.reduce((total, item) => total + (item.desconto * item.quantity), 0) + (shippingPrice || 0);
+    setTotal(newTotal);
+  }, [cart, shippingPrice]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStep(2);
@@ -37,10 +43,9 @@ function ConfirmOrder() {
     const formData = new FormData(e.target);
     const cliente = Object.fromEntries(formData.entries());
     const productos = cart;
-    const total = cart.reduce((total, item) => total + (item.desconto * item.quantity), 0) + (shippingPrice || 0);
 
     try {
-      const res = await fetch('/api/data', { // Solo llama a /api/data
+      const res = await fetch('/api/data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -199,9 +204,7 @@ function ConfirmOrder() {
             </ul>
             <div className="total-price">
               <strong>
-                Total: ${(
-                  cart.reduce((total, item) => total + (item.desconto * item.quantity), 0) + (shippingPrice || 0)
-                ).toFixed(2)}
+                Total: ${total.toFixed(2)}
               </strong>
             </div>
           </div>
