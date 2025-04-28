@@ -43,6 +43,8 @@ function ConfirmOrder() {
     const formData = new FormData(e.target);
     const cliente = Object.fromEntries(formData.entries());
     const productos = cart;
+    const safeShippingPrice = typeof shippingPrice === "number" ? shippingPrice : 0;
+
 
     try {
       const res = await fetch('/api/data', {
@@ -52,7 +54,7 @@ function ConfirmOrder() {
           cliente,
           productos,
           total: {
-            shippingPrice: shippingPrice || 0,
+            shippingPrice: safeShippingPrice || 0,
             couponDiscount: 0,
           },
         }),

@@ -18,13 +18,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    await connectToDatabase(); // 🔵 Conectar a la base
+    await connectToDatabase();
+
+    const montoProductos = productos.reduce((acc, p) => acc + (p.desconto * p.quantity), 0);
+    const shippingPrice = total.shippingPrice || 0;
+    const couponDiscount = total.couponDiscount || 0;
+
+    const totalFinal = montoProductos + shippingPrice - couponDiscount;
 
     // 1. Crear la venta en MongoDB con estado pendiente
     const nuevaVenta = new Venta({
       cliente,
       productos,
-      total,
+      total: totalFinal,
       estado: 'pendiente'
     });
 
