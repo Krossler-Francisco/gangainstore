@@ -1,6 +1,6 @@
 
 const shippingPrices = [
-  { from: 1000, to: 1499, zone: "CABA", price: "2120" },
+  { from: 1000, to: 1499, zone: "CABA", price: "20" },
   { from: 1500, to: 1899, zone: "GBA Norte", price: "3250" },
   { from: 1900, to: 1999, zone: "GBA Sur", price: "3240" },
   { from: 2000, to: 2999, zone: "Santa Fe y Entre Ríos", price: "4570" },
