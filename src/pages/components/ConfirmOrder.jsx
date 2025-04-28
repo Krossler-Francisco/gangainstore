@@ -37,42 +37,26 @@ function ConfirmOrder() {
     const formData = new FormData(e.target);
     const cliente = Object.fromEntries(formData.entries());
     const productos = cart;
-    const total = productos.reduce((sum, item) => sum + item.desconto * item.quantity, 0) + (shippingPrice || 0);
 
     try {
-      const res = await fetch('/api/save', {
+      const res = await fetch('/api/data', { // Solo llama a /api/data
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cliente, productos, total, status: 'pendiente' }),
+        body: JSON.stringify({
+          cliente,
+          productos,
+          shipping_cost: shippingPrice || 0, // Agrega shipping_cost
+        }),
       });
 
       const data = await res.json();
       if (!res.ok) {
         setOrderSaveError(true);
-        alert(`Error al guardar: ${data.error}`);
+        alert(`Error en checkout: ${data.error}`);
         return;
       }
 
-      const checkoutRes = await fetch('/api/data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: productos.map((item) => ({
-            title: item.name,
-            unit_price: Number(item.desconto),
-            quantity: item.quantity,
-          })),
-          shipping_cost: shippingPrice || 0,
-        }),
-      });
-
-      const checkoutData = await checkoutRes.json();
-      if (!checkoutRes.ok) {
-        alert(`Error al crear preferencia: ${checkoutData.error}`);
-        return;
-      }
-
-      setPreferenceId(checkoutData.preferenceId);
+      setPreferenceId(data.preferenceId);
       setStep(3);
     } catch (error) {
       console.error('Error en checkout:', error);
@@ -106,8 +90,8 @@ function ConfirmOrder() {
 
   const searchAddress = (e) => {
     e.preventDefault();
-    const { price } = getShippingPriceByZipcode(zipcode); // saco solo el price
-    setShippingPrice(price); // ahora sí, solo número
+    const { price } = getShippingPriceByZipcode(zipcode);
+    setShippingPrice(price);
   };
 
   return (
@@ -141,6 +125,7 @@ function ConfirmOrder() {
         <section className="success-content">
           <div className="success-form-box">
             <form onSubmit={handleSubmit}>
+              {/* Formulario */}
               <div className="success-form-group">
                 <input className="no-margin" type="text" name="fullname" required placeholder="Nombre y apellido *" />
               </div>
@@ -184,7 +169,7 @@ function ConfirmOrder() {
                 <textarea name="details" rows="4" placeholder="Detalles adicionales (Departamento, piso, referencias...)" />
               </div>
               {!preferenceId && (
-                <button type="submit" onClick={handleSubmit} className="pay-button">CONFIRMAR DATOS</button>
+                <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
               )}
               <div id="wallet_container"></div>
             </form>
@@ -204,7 +189,7 @@ function ConfirmOrder() {
                     <p>Cantidad: {item.quantity}</p>
                     <p>Precio: ${Number(item.desconto).toFixed(2)}</p>
                     <p>Total: ${(item.desconto * item.quantity).toFixed(2)}</p>
-                    <p className="shipping-price">Envio: $
+                    <p className="shipping-price">Envío: $
                       {typeof shippingPrice === "number" ? `${shippingPrice.toFixed(2)}` : "Consultar"}
                     </p>
                   </div>
