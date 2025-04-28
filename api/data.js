@@ -1,6 +1,6 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
-import connectToDatabase from './db.js';   // 🔵 Asegurate de tener esta función conectando a MongoDB
-import Venta from './models/Venta.js';     // 🔵 Tu schema de venta
+import connectToDatabase from './db.js';
+import Venta from './models/Venta.js';
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
