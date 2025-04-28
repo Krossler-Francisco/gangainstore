@@ -37,8 +37,7 @@ function ConfirmOrder() {
     const formData = new FormData(e.target);
     const cliente = Object.fromEntries(formData.entries());
     const productos = cart;
-    const total = (
-      cart.reduce((total) => total));
+    const total = cart.reduce((total, item) => total + (item.desconto * item.quantity), 0) + (shippingPrice || 0);
 
     try {
       const res = await fetch('/api/data', { // Solo llama a /api/data
