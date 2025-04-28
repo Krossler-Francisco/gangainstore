@@ -45,7 +45,7 @@ function ConfirmOrder() {
         body: JSON.stringify({
           cliente,
           productos,
-          shipping_cost: shippingPrice || 0, // Agrega shipping_cost
+          total,
         }),
       });
 
