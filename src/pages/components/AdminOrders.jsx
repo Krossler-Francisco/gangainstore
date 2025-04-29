@@ -24,6 +24,13 @@ function AdminOrders() {
     fetchSales();
   }, []);
 
+  const getMongoId = (_id) => (typeof _id === "object" ? _id?.$oid : _id);
+
+  const getShortId = (_id) => {
+    const idString = getMongoId(_id);
+    return idString?.slice(-6) || "------";
+  };
+
   const renderEstado = (estado) => {
     if (typeof estado !== "string") {
       console.warn("Estado inválido detectado:", estado);
@@ -53,24 +60,22 @@ function AdminOrders() {
     return <span className="estado">{estadoFormatted}</span>;
   };
 
-  const allSelected = orders.length > 0 && orders.every(order => selectedOrders[order._id?.$oid]);
+  const allSelected =
+    orders.length > 0 && orders.every(order => selectedOrders[getMongoId(order._id)]);
+
   const toggleSelectAll = () => {
     const newSelection = {};
     if (!allSelected) {
       orders.forEach(order => {
-        if (order._id?.$oid) newSelection[order._id.$oid] = true;
+        const id = getMongoId(order._id);
+        if (id) newSelection[id] = true;
       });
     }
     setSelectedOrders(newSelection);
   };
 
-  const getShortId = (_id) => {
-    const idString = typeof _id === "object" && _id?.$oid ? _id.$oid : _id;
-    return idString?.slice(-6) || "------";
-  };
-
   const toggleSelect = (id) => {
-    const idString = typeof id === "object" && id?.$oid ? id.$oid : id;
+    const idString = getMongoId(id);
     setSelectedOrders((prev) => ({
       ...prev,
       [idString]: !prev[idString],
@@ -159,7 +164,7 @@ function AdminOrders() {
             </thead>
             <tbody>
               {filteredOrders.map((order) => {
-                const id = order._id?.$oid;
+                const id = getMongoId(order._id);
                 if (!id) return null;
                 const isSelected = selectedOrders[id];
 
@@ -178,7 +183,7 @@ function AdminOrders() {
                     </td>
                     <td>{order.cliente?.fullname || "Sin nombre"}</td>
                     <td>{renderEstado(order.estado)}</td>
-                    <td>${order.total?.$numberInt || "0"}</td>
+                    <td>${parseInt(order.total?.$numberInt || "0", 10)}</td>
                     <td className="last-children">
                       <BsThreeDots style={{ cursor: "pointer" }} />
                     </td>
