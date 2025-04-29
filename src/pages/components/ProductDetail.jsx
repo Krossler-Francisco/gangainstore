@@ -1,5 +1,4 @@
 import data from '../store/data/products.json';
-
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaTruck } from 'react-icons/fa';
@@ -32,7 +31,7 @@ function ProductDetail() {
   
     addToCart(productToAdd);
     
-    toast.success(`${product.name} adicionado ao carrinho!`);
+    toast.success(`${product.name} agregado al carrito!`);
 
   };
 

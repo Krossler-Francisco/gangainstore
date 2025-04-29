@@ -73,7 +73,6 @@ function Navbar({ setSearchTerm }) {
                     { user && user.admin === true && <Link to={"/admin"} className="account-option" >Dashboard</Link>}
                     <Link to={"/my-account"} className="account-option" >Escritorio</Link>
                     <Link to={"/my-account/orders"} className="account-option" >Pedidos</Link>
-                    <Link to={"/my-account/addresses"} className="account-option" >Direcciones</Link>
                     <Link to={"/my-account/details"} className="account-option" >Detalles de la cuenta</Link>
                     <Link to={"/my-account/favorites"} className="account-option" >Favoritos</Link>
                     <Link to={"/login"} className="account-option" onClick={logout}>Salir</Link>

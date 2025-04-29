@@ -1,0 +1,40 @@
+.admin-dashboard {
+    height: 100vh;
+    width: 100%;
+    display: grid;
+    grid-template-areas: "navbar main-content";
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+    gap: 1px;
+    color: white;
+    background-color: #363636;
+}
+
+.admin-dashboard .navbar{
+    background-color: #111;
+    grid-area: navbar;
+}
+
+.admin-dashboard .main-content{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    grid-area: main-content;
+}
+
+.admin-dashboard .header{
+    background-color: #111;
+    height: 8rem;
+}
+
+
+.admin-dashboard .content{
+    background-color: #111;
+    height: 100%;
+}
+
+.content-wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
