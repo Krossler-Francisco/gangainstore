@@ -4,11 +4,17 @@ const SimularWebhookPago = () => {
   const handleSimularPago = async () => {
     try {
       const payload = {
-        type: 'payment',
+        action: 'payment.created',
+        api_version: 'v1',
         data: {
-          id: 'fake-payment-id-123',  // Este puede ser cualquier cosa
-          external_reference: '681011c7d63172082f14bb75' // <<< ESTE es el _id real de tu venta
-        }
+          id: 'fake-id-123', // ID falso, no importa ahora
+          external_reference: '681011c7d63172082f14bb75', // ID REAL de tu venta
+        },
+        date_created: new Date().toISOString(),
+        id: Math.floor(Math.random() * 1000000000),
+        live_mode: false,
+        type: 'payment',
+        user_id: 'fake-user-id-123'
       };
 
       const response = await fetch('https://www.gangain.com.ar/api/webhooktesting', {
