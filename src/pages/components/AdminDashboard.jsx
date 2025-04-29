@@ -25,7 +25,7 @@ function AdminDashboard() {
     if (location.pathname === "/orders") return <AdminOrders />;
     if (location.pathname === "/users") return <AdminUsers />;
     if (location.pathname === "/settings") return <AdminSettings />;
-    return null;
+    return console.error("Component not found");
   };
 
   return (
