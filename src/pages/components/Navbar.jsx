@@ -70,6 +70,7 @@ function Navbar({ setSearchTerm }) {
                 <Link className="login-text" to={"/my-account"}>Mi cuenta</Link>
                 {showAccountComponent && (
                   <div className="account-component">
+                    { user && user.admin === true && <Link to={"/admin"} className="account-option" >Dashboard</Link>}
                     <Link to={"/my-account"} className="account-option" >Escritorio</Link>
                     <Link to={"/my-account/orders"} className="account-option" >Pedidos</Link>
                     <Link to={"/my-account/addresses"} className="account-option" >Direcciones</Link>

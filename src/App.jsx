@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { CartProvider } from './hooks/useCart';
 import { MercadoPagoProvider } from './context/MercadoPagoContext';
 import { Analytics } from "@vercel/analytics/react"
+import { useAuth } from "./context/AuthContext";
 import Navbar from './pages/components/Navbar';
 import Store from './pages/store/Store';
 import Span from './pages/components/Span';
@@ -15,6 +16,7 @@ import Footer from './pages/components/Footer';
 import PrivacyPolicy from './pages/components/PrivacyPolicy';
 import TermsAndConditions from './pages/components/TermsAndConditions';
 import ConfirmOrder from './pages/components/ConfirmOrder';
+import AdminDashboard from './pages/components/AdminDashboard';
 
 function App() {
   const [filters, setFilters] = useState({
@@ -25,6 +27,8 @@ function App() {
     minPrice: "",
     maxPrice: ""
   });
+
+  const { user } = useAuth();
 
   return (
     <>
@@ -43,6 +47,10 @@ function App() {
               <Route path="/my-account/*" element={<Dashboard/>} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />\
               <Route path="/terms" element={<TermsAndConditions />} />
+              
+              {user && user.admin === true && (
+                <Route path="/admin/*" element={<AdminDashboard />} />
+              )}
             </Routes>
             <Footer/>
             <Toaster />

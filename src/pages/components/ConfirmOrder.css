@@ -203,23 +203,11 @@
   position: relative;
 }
 
-.zip-search {
+.zip-container .shipping-price{
   position: absolute;
-  background: none;
-  display: flex;
-  gap: 4px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 6px 12px;
-  align-items: center;
-  top: 22px;
-  right: 8px;
-  cursor: pointer;
-}
-
-.zip-search .shipping-price {
-  font-size: 12px;
-  font-weight: bold;
+  right: 10px;
+  top: 24px;
+  display: none;
 }
 
 .step-divider {
@@ -252,6 +240,14 @@
     right: 2px;
     cursor: pointer;
   }
+
+  .zip-container .shipping-price{
+    position: absolute;
+    right: 10px;
+    top: 24px;
+    display: initial;
+  }
+
 
   .steps-container {
     padding-inline: 2rem;

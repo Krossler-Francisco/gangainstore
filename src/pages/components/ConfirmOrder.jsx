@@ -173,14 +173,20 @@ function ConfirmOrder() {
                     required
                     placeholder="Código Postal *"
                     value={zipcode}
-                    onChange={(e) => setZipcode(e.target.value)}
-                  />
-                  <button className="zip-search" onClick={searchAddress}>
-                    <p className="shipping-price">
-                      {typeof shippingPrice === "number" ? `$${shippingPrice.toFixed(2)}` : "Consultar"}
-                    </p>
-                    <FiMapPin color="#666" size={14} />
-                  </button>                  
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setZipcode(value);
+
+                      // Buscar automáticamente cuando son 4 o 5 dígitos
+                      if (value.length >= 4 && value.length <= 5) {
+                        const { price } = getShippingPriceByZipcode(value);
+                        setShippingPrice(price);
+                      }
+                    }}
+                      />
+                      {shippingPrice !== null && (
+                      <p className="shipping-price">Envío: ${shippingPrice.toFixed(2)}</p>
+                    )}
                 </div>
               </div>
               <div className="success-form-group">
