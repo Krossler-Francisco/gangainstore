@@ -52,7 +52,9 @@ function App() {
 
               {/* Rutas admin */}
               {user && user.role === "admin" && (
-                <Route path="/admin/*" element={<AdminLayout />} />
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
+                </Route>
               )}
             </Routes>
 
