@@ -24,7 +24,6 @@ function ProductDetail() {
     const productToAdd = {
       id: product._id,
       name: product.name,
-      price: Number(product.price),
       desconto: Number(product.desconto),
       img: product.img1,
       quantity: 1,
