@@ -16,7 +16,7 @@ const VentaSchema = new mongoose.Schema({
     {
       id: String,
       name: String,
-      price: Number,
+      desconto: Number,
       quantity: Number,
       img: String,
     }
