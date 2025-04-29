@@ -21,11 +21,11 @@ function AdminDashboard() {
 
   const renderComponent = () => {
     if (location.pathname === "/admin" || location.pathname === "/admin/") return <AdminHome />;
-    if (location.pathname === "/products") return <AdminProducts />;
-    if (location.pathname === "/orders") return <AdminOrders />;
-    if (location.pathname === "/users") return <AdminUsers />;
-    if (location.pathname === "/settings") return <AdminSettings />;
-    return console.error("Component not found");
+    if (location.pathname === "/admin/products") return <AdminProducts />;
+    if (location.pathname === "/admin/orders") return <AdminOrders />;
+    if (location.pathname === "/admin/users") return <AdminUsers />;
+    if (location.pathname === "/admin/settings") return <AdminSettings />;
+    return null;
   };
 
   return (
