@@ -22,8 +22,7 @@ export default async function handler(req, res) {
 
       if (type === 'payment') {
         try {
-          // 🔥 Simulamos directamente que el pago es aprobado
-          const externalReference = data.external_reference; // 👈 Ahora esperamos que nos mandes el external_reference directamente en el webhook
+          const externalReference = data.external_reference; //
 
           console.log(`✅ Simulando pago aprobado para referencia: ${externalReference}`);
 
