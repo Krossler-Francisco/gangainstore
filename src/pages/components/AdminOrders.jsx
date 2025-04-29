@@ -18,8 +18,10 @@ function AdminOrders() {
   }, []);
 
   const renderEstado = (estado) => {
+    if (typeof estado !== "string") return <span className="estado">Sin estado</span>;
+  
     const estadoFormatted = estado.charAt(0).toUpperCase() + estado.slice(1).toLowerCase();
-
+  
     if (estado.toLowerCase() === "aprobado") {
       return (
         <span className="estado aprobado">
@@ -28,7 +30,7 @@ function AdminOrders() {
         </span>
       );
     }
-
+  
     if (estado.toLowerCase() === "pendiente") {
       return (
         <span className="estado pendiente">
@@ -37,6 +39,7 @@ function AdminOrders() {
         </span>
       );
     }
+  
     return <span className="estado">{estadoFormatted}</span>;
   };
 
