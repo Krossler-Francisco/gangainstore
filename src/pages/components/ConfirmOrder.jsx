@@ -4,6 +4,7 @@ import { useCart } from "../../hooks/useCart";
 import "./ConfirmOrder.css";
 import { FiShoppingCart, FiTruck, FiCreditCard, FiMapPin } from "react-icons/fi";
 import { getShippingPriceByZipcode } from "../../utils/shipping";
+import SimularWebhookPago from "./SimularWebhookPago";
 
 function ConfirmOrder() {
   const mp = window.MercadoPago && new window.MercadoPago('APP_USR-4f89bd10-10f6-4b81-a3e9-abaed15c4452');
@@ -179,6 +180,7 @@ function ConfirmOrder() {
               <div className="success-form-group">
                 <textarea name="details" rows="4" placeholder="Detalles adicionales (Departamento, piso, referencias...)" />
               </div>
+              <SimularWebhookPago />
               {!preferenceId && (
                 <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
               )}

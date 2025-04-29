@@ -20,9 +20,11 @@ export default async function handler(req, res) {
 
     const { type, data } = body;
 
-    res.status(200).send('ok'); // Respondemos rápido
+    res.status(200).send('ok');
 
     setImmediate(async () => {
+      await connectToDatabase();
+
       if (type === 'payment') {
         const paymentId = data.id;
 
@@ -35,8 +37,6 @@ export default async function handler(req, res) {
             const externalReference = payment.external_reference;
 
             console.log(`✅ Pago aprobado. Referencia externa: ${externalReference}`);
-
-            await connectToDatabase();
 
             const venta = await Venta.findById(new mongoose.Types.ObjectId(externalReference));
 
@@ -60,6 +60,5 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('❌ Error en webhook handler:', error);
-    // no podemos hacer res.send acá porque ya respondimos
   }
 }
