@@ -1,6 +1,7 @@
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 import connectToDatabase from './db.js'; 
 import Venta from './models/Venta.js';
+import mongoose from 'mongoose';
 
 const client = new MercadoPagoConfig({
   accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
@@ -12,7 +13,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 🔵 1. Asegurarse que el body es un objeto
     let body = req.body;
     if (typeof body === 'string') {
       body = JSON.parse(body);
@@ -20,43 +20,46 @@ export default async function handler(req, res) {
 
     const { type, data } = body;
 
-    // 🔵 2. Responder rápido a MercadoPago
-    res.status(200).send('ok');
+    res.status(200).send('ok'); // Respondemos rápido
 
-    // 🔵 3. Si el evento es de tipo 'payment'
-    if (type === 'payment') {
-      const paymentId = data.id;
+    setImmediate(async () => {
+      if (type === 'payment') {
+        const paymentId = data.id;
 
-      // 🔵 4. Obtener los datos del pago en MercadoPago
-      const payment = await new Payment(client).get({ id: paymentId });
+        try {
+          const payment = await new Payment(client).get({ id: paymentId });
 
-      if (payment.status === 'approved') {
-        const externalReference = payment.external_reference;
+          console.log('🔵 Payment recibido:', JSON.stringify(payment, null, 2));
 
-        console.log(`✅ Pago aprobado. Referencia externa: ${externalReference}`);
+          if (payment.status === 'approved') {
+            const externalReference = payment.external_reference;
 
-        // 🔵 5. Conectar a la base de datos
-        await connectToDatabase();
+            console.log(`✅ Pago aprobado. Referencia externa: ${externalReference}`);
 
-        // 🔵 6. Buscar y actualizar la venta
-        const venta = await Venta.findById(externalReference);
+            await connectToDatabase();
 
-        if (venta) {
-          venta.estado = 'aprobado';
-          await venta.save();
-          console.log('✅ Venta actualizada correctamente.');
-        } else {
-          console.log('⚠️ Venta no encontrada.');
+            const venta = await Venta.findById(new mongoose.Types.ObjectId(externalReference));
+
+            if (venta) {
+              venta.estado = 'aprobado';
+              await venta.save();
+              console.log('✅ Venta actualizada correctamente.');
+            } else {
+              console.log('⚠️ Venta no encontrada.');
+            }
+          } else {
+            console.log(`⚠️ Pago no aprobado. Estado actual: ${payment.status}`);
+          }
+        } catch (err) {
+          console.error('❌ Error procesando pago:', err);
         }
       } else {
-        console.log(`⚠️ Pago no aprobado. Estado actual: ${payment.status}`);
+        console.log(`⚠️ Evento no manejado: ${type}`);
       }
-    } else {
-      console.log(`⚠️ Evento no manejado: ${type}`);
-    }
+    });
 
   } catch (error) {
-    console.error('❌ Error en webhook:', error);
-    // ⚡ Importante: no podemos hacer res.send acá porque ya respondimos arriba
+    console.error('❌ Error en webhook handler:', error);
+    // no podemos hacer res.send acá porque ya respondimos
   }
 }
