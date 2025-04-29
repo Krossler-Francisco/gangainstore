@@ -11,10 +11,17 @@ function AdminOrders() {
   const [dateOrder, setDateOrder] = useState("newest");
 
   useEffect(() => {
-    fetch("/api/get-pedidos")
-      .then((res) => res.json())
-      .then((data) => setOrders(data))
-      .catch((err) => console.error("Error fetching orders:", err));
+    async function fetchSales() {
+      try {
+        const res = await fetch("/api/get-pedidos");
+        const data = await res.json();
+        setOrders(data);
+      } catch (error) {
+        console.error("Error al obtener los pedidos:", error);
+      }
+    }
+
+    fetchSales();
   }, []);
 
   const renderEstado = (estado) => {
