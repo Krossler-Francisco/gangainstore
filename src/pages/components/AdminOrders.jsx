@@ -84,20 +84,20 @@ function AdminOrders() {
 
   const formatDate = (fechaRaw) => {
     let timestamp;
-
-    if (
-      typeof fechaRaw === "object" &&
-      fechaRaw?.$date?.$numberLong
-    ) {
+  
+    if (typeof fechaRaw === "object" && fechaRaw?.$date?.$numberLong) {
+      // Caso MongoDB con $date y $numberLong
       timestamp = parseInt(fechaRaw.$date.$numberLong, 10);
-    } else if (typeof fechaRaw === "string" && /^\d+$/.test(fechaRaw)) {
-      timestamp = parseInt(fechaRaw, 10);
+    } else if (typeof fechaRaw === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[+-]\d{2}:\d{2}$/.test(fechaRaw)) {
+      // Caso fecha ISO 8601 con zona horaria (Formato tipo "2025-04-29T01:36:16.501+00:00")
+      timestamp = new Date(fechaRaw).getTime();
     } else if (typeof fechaRaw === "number") {
+      // Caso donde ya es un timestamp directo
       timestamp = fechaRaw;
     } else {
       return "Fecha inválida";
     }
-
+  
     const date = new Date(timestamp);
     return isNaN(date.getTime())
       ? "Fecha inválida"
@@ -183,7 +183,7 @@ function AdminOrders() {
                     </td>
                     <td>{order.cliente?.fullname || "Sin nombre"}</td>
                     <td>{renderEstado(order.estado)}</td>
-                    <td>${parseInt(order.total?.$numberInt || "0", 10)}</td>
+                    <td>${parseInt(order.total)}</td>
                     <td className="last-children">
                       <BsThreeDots style={{ cursor: "pointer" }} />
                     </td>
