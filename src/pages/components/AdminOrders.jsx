@@ -18,10 +18,13 @@ function AdminOrders() {
   }, []);
 
   const renderEstado = (estado) => {
-    if (typeof estado !== "string") return <span className="estado">Sin estado</span>;
-  
+    if (typeof estado !== "string") {
+      console.warn("Estado inválido detectado:", estado);
+      return <span className="estado">Sin estado</span>;
+    }
+
     const estadoFormatted = estado.charAt(0).toUpperCase() + estado.slice(1).toLowerCase();
-  
+
     if (estado.toLowerCase() === "aprobado") {
       return (
         <span className="estado aprobado">
@@ -30,7 +33,7 @@ function AdminOrders() {
         </span>
       );
     }
-  
+
     if (estado.toLowerCase() === "pendiente") {
       return (
         <span className="estado pendiente">
@@ -39,28 +42,28 @@ function AdminOrders() {
         </span>
       );
     }
-  
+
     return <span className="estado">{estadoFormatted}</span>;
   };
 
-  const allSelected = orders.length > 0 && orders.every(order => selectedOrders[order._id.$oid]);
+  const allSelected = orders.length > 0 && orders.every(order => selectedOrders[order._id?.$oid]);
   const toggleSelectAll = () => {
     const newSelection = {};
     if (!allSelected) {
       orders.forEach(order => {
-        newSelection[order._id.$oid] = true;
+        if (order._id?.$oid) newSelection[order._id.$oid] = true;
       });
     }
     setSelectedOrders(newSelection);
   };
 
   const getShortId = (_id) => {
-    const idString = typeof _id === "object" && _id.$oid ? _id.$oid : _id;
-    return idString.slice(-6);
+    const idString = typeof _id === "object" && _id?.$oid ? _id.$oid : _id;
+    return idString?.slice(-6) || "------";
   };
 
   const toggleSelect = (id) => {
-    const idString = typeof id === "object" && id.$oid ? id.$oid : id;
+    const idString = typeof id === "object" && id?.$oid ? id.$oid : id;
     setSelectedOrders((prev) => ({
       ...prev,
       [idString]: !prev[idString],
@@ -69,12 +72,10 @@ function AdminOrders() {
 
   const formatDate = (fechaRaw) => {
     let timestamp;
-  
-    // Soporta formato MongoDB exportado
+
     if (
       typeof fechaRaw === "object" &&
-      fechaRaw.$date &&
-      typeof fechaRaw.$date.$numberLong === "string"
+      fechaRaw?.$date?.$numberLong
     ) {
       timestamp = parseInt(fechaRaw.$date.$numberLong, 10);
     } else if (typeof fechaRaw === "string" && /^\d+$/.test(fechaRaw)) {
@@ -84,28 +85,28 @@ function AdminOrders() {
     } else {
       return "Fecha inválida";
     }
-  
+
     const date = new Date(timestamp);
-    if (isNaN(date.getTime())) {
-      return "Fecha inválida";
-    }
-  
-    return date.toLocaleDateString("es-ES", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
+    return isNaN(date.getTime())
+      ? "Fecha inválida"
+      : date.toLocaleDateString("es-ES", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
   };
-  
 
   const filteredOrders = orders
     .filter(order => {
-      if (statusFilter === "all") return true;
-      return order.estado.toLowerCase() === statusFilter;
+      if (!order || !order.estado) {
+        console.warn("Orden sin estado:", order);
+        return false;
+      }
+      return statusFilter === "all" || order.estado.toLowerCase() === statusFilter;
     })
     .sort((a, b) => {
-      const dateA = new Date(a.fecha);
-      const dateB = new Date(b.fecha);
+      const dateA = new Date(a.fecha?.$date?.$numberLong || a.fecha);
+      const dateB = new Date(b.fecha?.$date?.$numberLong || b.fecha);
       return dateOrder === "newest" ? dateB - dateA : dateA - dateB;
     });
 
@@ -113,25 +114,25 @@ function AdminOrders() {
     <div className="orders-container">
       <div className="orders-content">
         <header className="filters-header">
-            <CustomSelect
-              value={statusFilter}
-              onChange={setStatusFilter}
-              options={[
-                { value: "all", label: "Todos" },
-                { value: "pendiente", label: "Pendiente" },
-                { value: "aprobado", label: "Aprobado" },
-              ]}
-            />
-            <CustomSelect
-              value={dateOrder}
-              onChange={setDateOrder}
-              options={[
-                { value: "newest", label: "Más recientes" },
-                { value: "oldest", label: "Más antiguos" },
-              ]}
-            />
-          </header>
-          <div className="table-container">
+          <CustomSelect
+            value={statusFilter}
+            onChange={setStatusFilter}
+            options={[
+              { value: "all", label: "Todos" },
+              { value: "pendiente", label: "Pendiente" },
+              { value: "aprobado", label: "Aprobado" },
+            ]}
+          />
+          <CustomSelect
+            value={dateOrder}
+            onChange={setDateOrder}
+            options={[
+              { value: "newest", label: "Más recientes" },
+              { value: "oldest", label: "Más antiguos" },
+            ]}
+          />
+        </header>
+        <div className="table-container">
           <table>
             <thead>
               <tr>
@@ -151,7 +152,8 @@ function AdminOrders() {
             </thead>
             <tbody>
               {filteredOrders.map((order) => {
-                const id = order._id.$oid;
+                const id = order._id?.$oid;
+                if (!id) return null;
                 const isSelected = selectedOrders[id];
 
                 return (
@@ -167,9 +169,9 @@ function AdminOrders() {
                       #{getShortId(id)}
                       <div className="order-date">{formatDate(order.fecha)}</div>
                     </td>
-                    <td>{order.cliente.fullname}</td>
+                    <td>{order.cliente?.fullname || "Sin nombre"}</td>
                     <td>{renderEstado(order.estado)}</td>
-                    <td>${order.total.$numberInt}</td>
+                    <td>${order.total?.$numberInt || "0"}</td>
                     <td className="last-children">
                       <BsThreeDots style={{ cursor: "pointer" }} />
                     </td>
