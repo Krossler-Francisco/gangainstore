@@ -15,6 +15,7 @@ function ConfirmOrder() {
   const [step, setStep] = useState(1);
   const [zipcode, setZipcode] = useState("");
   const [total, setTotal] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -38,14 +39,18 @@ function ConfirmOrder() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Evita doble envío
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+  
     setStep(2);
-
+  
     const formData = new FormData(e.target);
     const cliente = Object.fromEntries(formData.entries());
     const productos = cart;
     const safeShippingPrice = typeof shippingPrice === "number" ? shippingPrice : 0;
-
-
+  
     try {
       const res = await fetch('/api/data', {
         method: 'POST',
@@ -59,19 +64,21 @@ function ConfirmOrder() {
           },
         }),
       });
-
+  
       const data = await res.json();
       if (!res.ok) {
         setOrderSaveError(true);
         alert(`Error en checkout: ${data.error}`);
+        setIsSubmitting(false); // ⚠️ liberar envío si hay error
         return;
       }
-
+  
       setPreferenceId(data.preferenceId);
       setStep(3);
     } catch (error) {
       console.error('Error en checkout:', error);
       setOrderSaveError(true);
+      setIsSubmitting(false); // ⚠️ liberar envío si hay error
     }
   };
 
@@ -180,7 +187,9 @@ function ConfirmOrder() {
                 <textarea name="details" rows="4" placeholder="Detalles adicionales (Departamento, piso, referencias...)" />
               </div>
               {!preferenceId && (
-                <button type="submit" className="pay-button">CONFIRMAR DATOS</button>
+                <button type="submit" className="pay-button" disabled={isSubmitting}>
+                  {isSubmitting ? "Procesando..." : "CONFIRMAR DATOS"}
+                </button>
               )}
               <div id="wallet_container"></div>
             </form>
