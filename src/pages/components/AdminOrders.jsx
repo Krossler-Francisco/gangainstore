@@ -84,17 +84,35 @@ function AdminOrders() {
 
   const formatDate = (fechaRaw) => {
     try {
-      const timestamp = parseInt(fechaRaw?.$date?.$numberLong, 10);
-      const date = new Date(timestamp);
+      console.log("Fecha recibida:", fechaRaw); // 👈 Log para depuración
+      let date;
   
-      return isNaN(date.getTime())
-        ? "Fecha inválida"
-        : date.toLocaleDateString("es-ES", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          });
+      // Caso 1: formato Mongo con $date.$numberLong
+      if (fechaRaw?.$date?.$numberLong) {
+        const timestamp = parseInt(fechaRaw.$date.$numberLong, 10);
+        date = new Date(timestamp);
+      }
+      // Caso 2: ISO string o Date object
+      else if (typeof fechaRaw === "string" || fechaRaw instanceof Date) {
+        date = new Date(fechaRaw);
+      }
+      // Caso 3: Objeto con $date directamente
+      else if (fechaRaw?.$date) {
+        date = new Date(fechaRaw.$date);
+      }
+  
+      if (!date || isNaN(date.getTime())) {
+        console.warn("Fecha inválida luego de parsear:", date); // 👈 Otro log
+        return "Fecha inválida";
+      }
+  
+      return date.toLocaleDateString("es-ES", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
     } catch (err) {
+      console.error("Error formateando fecha:", err); // 👈 Log de error
       return "Fecha inválida";
     }
   };
