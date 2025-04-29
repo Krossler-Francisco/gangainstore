@@ -51,11 +51,9 @@ function App() {
               </Route>
 
               {/* Rutas admin */}
-              <Route element={<AdminLayout />}>
               {user && user.role === "admin" && (
-                <Route path="/admin/*" element={<AdminDashboard />} />
+                <Route path="/admin/*" element={<AdminLayout />} />
               )}
-              </Route>
             </Routes>
 
             <Toaster />
