@@ -83,29 +83,20 @@ function AdminOrders() {
   };
 
   const formatDate = (fechaRaw) => {
-    let timestamp;
+    try {
+      const timestamp = parseInt(fechaRaw?.$date?.$numberLong, 10);
+      const date = new Date(timestamp);
   
-    if (typeof fechaRaw === "object" && fechaRaw?.$date?.$numberLong) {
-      // Caso MongoDB con $date y $numberLong
-      timestamp = parseInt(fechaRaw.$date.$numberLong, 10);
-    } else if (typeof fechaRaw === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}[+-]\d{2}:\d{2}$/.test(fechaRaw)) {
-      // Caso fecha ISO 8601 con zona horaria (Formato tipo "2025-04-29T01:36:16.501+00:00")
-      timestamp = new Date(fechaRaw).getTime();
-    } else if (typeof fechaRaw === "number") {
-      // Caso donde ya es un timestamp directo
-      timestamp = fechaRaw;
-    } else {
+      return isNaN(date.getTime())
+        ? "Fecha inválida"
+        : date.toLocaleDateString("es-ES", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+    } catch (err) {
       return "Fecha inválida";
     }
-  
-    const date = new Date(timestamp);
-    return isNaN(date.getTime())
-      ? "Fecha inválida"
-      : date.toLocaleDateString("es-ES", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-        });
   };
 
   const filteredOrders = orders
