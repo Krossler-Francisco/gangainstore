@@ -44,16 +44,17 @@ function AdminNavbar() {
           </li>
         </ul>
       </nav>
+
       <footer className="admin-navbar-footer">
-          <nav className="admin-navbar-menu nav-footer">
-            <ul>
-              <li>
-                <Link to="/">
-                  <MdLogout className="menu-icon" /> Salir
-                </Link>
-              </li>
-            </ul>
-          </nav>
+        <nav className="admin-navbar-menu nav-footer">
+          <ul>
+            <li>
+              <Link to="/">
+                <MdLogout className="menu-icon" /> Salir
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </footer>
     </div>
   );
