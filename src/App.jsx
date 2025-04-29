@@ -51,7 +51,7 @@ function App() {
               </Route>
 
               {/* Rutas admin */}
-              {user && user.role === "admin" && (
+              {user && user.admin === "admin" && (
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminDashboard />} />
                 </Route>
