@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./AdminOrders.css";
 import { BsThreeDots } from "react-icons/bs";
 import CustomSelect from "./CustomSelect";
-import { FiCheckSquare, FiSquare, FiCheckCircle, FiClock, FiDownloadCloud } from "react-icons/fi";
+import { FiCheckSquare, FiSquare, FiCheckCircle, FiClock, FiDownloadCloud, FiPrinter  } from "react-icons/fi";
 
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -219,6 +219,9 @@ function AdminOrders() {
 
       <div className="orders-details2">
         <div className="orders-details-content">
+          <button className="print-icon">
+          <FiPrinter />
+          </button>
           {selectedOrder ? (
             <div className="orders-details-container2">
               <div className="orders-details-header2-line">
@@ -237,6 +240,12 @@ function AdminOrders() {
                   <p className="details-client-name">{selectedOrder.cliente?.fullname || "Não informado"}</p>
                   <p className="details-client-info-details">{selectedOrder.cliente?.email || "Não informado"}</p>
                   <p className="details-client-info-details">{selectedOrder.cliente?.phone || "Não informado"}</p>
+                  <p className="details-client-info-details">{selectedOrder.cliente?.dni || "Não informado"}</p>
+                  <p className="details-client-info-details">{selectedOrder.cliente?.street || "Não informado"}</p>
+                  <p className="details-client-info-details">{selectedOrder.cliente?.city || "Não informado"}</p>
+                  <p className="details-client-info-details">{selectedOrder.cliente?.province || "Não informado"}</p>
+                  <p className="details-client-info-details">{selectedOrder.cliente?.details || "Não informado"}</p>
+
                   </div>
                 </header> 
               </div>
@@ -266,8 +275,8 @@ function AdminOrders() {
                     </div>
                 </header> 
               </div>
-              <div className="orders-details-header2-line">
-                <header className="orders-details-header client">
+              <div>
+                <header className="orders-details-header3 client">
                   <div className="paraf">
                     <strong className="strong2">Total:</strong>
                     <p>${parseInt(selectedOrder.total)}</p>
@@ -277,47 +286,6 @@ function AdminOrders() {
               </div>
           ) : (
             <div className="orders-details-container2">
-              <div className="orders-details-header2-line">
-                <header className="orders-details-header">
-                <h1>Detalles</h1>
-                <div className="orders-details-infostate-container">
-                  <p><strong className="orders-details-infostate"></strong></p>
-                  <p></p>
-                </div>
-                </header>
-              </div>
-              <div className="orders-details-header2-line">
-                <header className="orders-details-header client">
-                  <p className="details-cliet">Comprador</p>
-                  <div className="details-client-info">
-                  <p className="details-client-name">​</p>
-                  <p className="details-client-info-details">​                  </p>
-                  <p className="details-client-info-details">​                  </p>
-                  </div>
-                </header> 
-              </div>
-              <div className="orders-details-header2-line">
-                <header className="orders-details-header client">
-                  <p className="details-cliet">Compra</p>
-                  <div className="details-client-info">
-                      <ul className="no-padding">
-                        <div className="details-client-info-item ">
-                            <li >
-                                <img src="" alt="" className="details-client-info-item-img" />
-                              <div className="details-client-info-item-details">
-                                <p>Produto</p>
-                                <div className="flex">
-                                <p className="strong">​
-                                </p>​<p>​</p>
-                                </div>
-                              </div>
-                            </li>
-                        </div>
-                      </ul>
-                    </div>
-                </header> 
-              </div>
-              <p><strong></strong>​</p>
             </div>
           )}
         </div>
