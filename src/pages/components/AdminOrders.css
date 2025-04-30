@@ -282,3 +282,91 @@
         font-size: 16px;
         font-weight: 400;
       }
+
+      @media (max-width: 768px) {
+
+        .orders-container {
+          grid-template-columns: 1fr;
+          padding-bottom: 0px;
+        }
+      
+        .orders-content,
+        .orders-details2 {
+          height: auto;
+        }
+        
+        .orders-content {
+          padding: 16px;
+        }
+
+        .orders-details2 {
+          padding-inline: 16px;
+        }
+
+        .orders-details-content {
+          border: none;
+          background-color: transparent;
+          border-radius: 0px;
+          height: auto;
+        }
+
+        .orders-details-container2 {
+          padding: 0px 16px;
+        }
+
+        .skeleton{
+          display: none;
+        }
+      
+        .print-icon {
+          top: 16px;
+          right: 16px;
+          font-size: 22px;
+        }
+      
+        .orders-details-header h1 {
+          font-size: 28px;
+        }
+      
+        .details-client-name {
+          font-size: 20px;
+        }
+      
+        .details-client-info-details,
+        .details-client-info-item-details {
+          font-size: 12px;
+        }
+      
+        .details-client-info-item img {
+          width: 45px;
+          height: 45px;
+        }
+      
+        .table-container th,
+        .table-container td {
+          font-size: 14px;
+          padding: 8px 10px;
+        }
+      
+        .filters-header {
+          flex-direction: column;
+          gap: 8px;
+        }
+      
+        .filters-header select {
+          padding: 10px 12px;
+          font-size: 14px;
+        }
+      
+        .paraf {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+          font-size: 18px;
+        }
+      
+        .paraf .strong2 {
+          font-size: 14px;
+        }
+      }
+      

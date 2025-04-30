@@ -251,8 +251,8 @@ function AdminOrders() {
 
       <div className="orders-details2">
         <div className="orders-details-content">
-          <button className="print-icon">
-          <FiPrinter />
+          <button className="print-icon skeleton">
+          <FiPrinter/>
           </button>
           {selectedOrder ? (
             <div className="orders-details-container2">
@@ -316,7 +316,7 @@ function AdminOrders() {
               </div>
               </div>
           ) : (
-            <div className="orders-details-container2">
+            <div className="orders-details-container2 skeleton">
             </div>
           )}
         </div>
