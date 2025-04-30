@@ -7,6 +7,11 @@
     padding: 12px 16px;
     cursor: pointer;
     border-radius: 12px;
+    transition: .2s ease;
+  }
+
+  .custom-select:hover {
+    background-color: rgba(252, 252, 252, 0.1);
   }
   
   .custom-select-value {
@@ -21,10 +26,11 @@
   .custom-select-options {
     position: absolute;
     background-color: #111;
-    top: 100%;
+    top: 30px;
     padding: 0;
-    left: 0;
-    width: 100%;
+    left: 0px;
+    width: 99%;
+    z-index: -2;
     border: 1px solid #555;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;

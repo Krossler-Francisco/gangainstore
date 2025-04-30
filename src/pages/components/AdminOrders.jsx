@@ -157,6 +157,38 @@ function AdminOrders() {
               { value: "oldest", label: "Más antiguos" },
             ]}
           />
+          <CustomSelect
+            value={dateOrder}
+            onChange={setDateOrder}
+            options={[
+              { value: "newest", label: "Más recientes" },
+              { value: "oldest", label: "Más antiguos" },
+            ]}
+          />
+          <CustomSelect
+            value={dateOrder}
+            onChange={setDateOrder}
+            options={[
+              { value: "newest", label: "Más recientes" },
+              { value: "oldest", label: "Más antiguos" },
+            ]}
+          />
+          <CustomSelect
+            value={dateOrder}
+            onChange={setDateOrder}
+            options={[
+              { value: "newest", label: "Más recientes" },
+              { value: "oldest", label: "Más antiguos" },
+            ]}
+          />
+          <CustomSelect
+            value={dateOrder}
+            onChange={setDateOrder}
+            options={[
+              { value: "newest", label: "Más recientes" },
+              { value: "oldest", label: "Más antiguos" },
+            ]}
+          />
         </header>
         <div className="table-container">
           <table>
@@ -229,7 +261,7 @@ function AdminOrders() {
                 <h1>Pedido #{getShortId(selectedOrder._id)}</h1>
                 <div className="orders-details-infostate-container">
                   <p><strong className="orders-details-infostate">{renderEstado(selectedOrder.estado)}</strong></p>
-                  <p>Comprado el {formatDate(selectedOrder.fecha)}</p>
+                  <p>Comprado {formatDate(selectedOrder.fecha)}</p>
                 </div>
                 </header>
               </div>
@@ -237,15 +269,14 @@ function AdminOrders() {
                 <header className="orders-details-header client">
                   <p className="details-cliet">Comprador</p>
                   <div className="details-client-info">
-                  <p className="details-client-name">{selectedOrder.cliente?.fullname || "Não informado"}</p>
-                  <p className="details-client-info-details">{selectedOrder.cliente?.email || "Não informado"}</p>
-                  <p className="details-client-info-details">{selectedOrder.cliente?.phone || "Não informado"}</p>
-                  <p className="details-client-info-details">{selectedOrder.cliente?.dni || "Não informado"}</p>
-                  <p className="details-client-info-details">{selectedOrder.cliente?.street || "Não informado"}</p>
-                  <p className="details-client-info-details">{selectedOrder.cliente?.city || "Não informado"}</p>
-                  <p className="details-client-info-details">{selectedOrder.cliente?.province || "Não informado"}</p>
-                  <p className="details-client-info-details">{selectedOrder.cliente?.details || "Não informado"}</p>
-
+                    <p className="details-client-name">{selectedOrder.cliente?.fullname || "Não informado"}</p>
+                    <p className="details-client-info-details">{selectedOrder.cliente?.email || "Não informado"}</p>
+                    <p className="details-client-info-details">{selectedOrder.cliente?.phone || "Não informado"}</p>
+                    <p className="details-client-info-details">{selectedOrder.cliente?.dni || "Não informado"}</p>
+                    <p className="details-client-info-details">{selectedOrder.cliente?.street || "Não informado"}</p>
+                    <p className="details-client-info-details">{selectedOrder.cliente?.city || "Não informado"}</p>
+                    <p className="details-client-info-details">{selectedOrder.cliente?.province || "Não informado"}</p>
+                    <p className="details-client-info-details">{selectedOrder.cliente?.details || "Não informado"}</p>
                   </div>
                 </header> 
               </div>

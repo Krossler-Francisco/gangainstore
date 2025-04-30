@@ -36,6 +36,15 @@ function AdminDashboard() {
       <div className="main-content">
         <div className="header">
           <h2>{getTitle()}</h2>
+          <h2 className="current-date">
+            {(() => {
+              const date = new Date();
+              const day = date.getDate().toString().padStart(2, '0');
+              const month = date.toLocaleString('es-AR', { month: 'long' });
+              const year = date.getFullYear();
+              return `${day} ${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`;
+            })()}
+          </h2>
         </div>
         <div className="content">
           <div className="content-wrapper">

@@ -26,7 +26,19 @@
     background-color: #111;
     height: 8rem;
     padding:0px 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     font-size: 26px;
+}
+
+.header .current-date{
+    font-weight: 400;
+    background-color: #1a1a1a;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 22px;
+    color: #c2c2c2;
 }
 
 .admin-dashboard .content{
