@@ -1,11 +1,11 @@
 .orders-container{
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 4fr 1.5fr;
     height: 100%;
 }
 
 .orders-content{
-    padding: 34px;
+    padding: 34px 0px 34px 34px;
 }
 
 .orders-details2{
@@ -16,6 +16,7 @@
     width: 100%;
     overflow-x: auto;
     color: #9e9e9e;
+    user-select: none;
 }
 
 .table-container table{
@@ -50,12 +51,12 @@
     color: white;
 }
 
-.table-container .checkbox{
+.checkbox{
     translate: 0px 3px;
     font-size: 18px;
 }
 
-.table-container .checkbox2{
+.checkbox2{
     translate: 0px 3px;
     font-size: 16px;
 }
@@ -93,3 +94,163 @@
     color: #888;
     margin-top: 2px;
   }
+
+  .loading-icon{
+    color: white !important;
+    width: 26px;
+    height: 26px;
+    margin-top: 2rem;
+    animation: download 1s linear infinite;
+  }
+
+    @keyframes download {
+        0% {
+            translate: 0px 0px;
+        }
+        50% {
+            translate: 0px -5px;
+        }
+        100% {
+            translate: 0px 0px;
+        }
+    }
+
+
+
+    /* Datails 2 */
+
+    .orders-details-content{
+        border: 1px solid #333;
+        background-color: #222;
+        border-radius: 8px;
+        height: 100%;
+    }
+
+    .orders-details-container2{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .orders-details-header2-line{
+        border-bottom: 1px solid #444;
+    }
+
+    .orders-details-header{
+        padding: 24px;
+        margin-block: .4rem;
+    }
+
+    .orders-details-header h1{
+        font-size: 36px; 
+        color: #e5e5e5;
+        font-weight: 400;
+        margin: 0px;
+    }
+
+    .orders-details-infostate-container{
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+        gap: 12px;
+    }
+
+    .orders-details-infostate-container p{
+        color: #888;
+    }
+
+    .orders-details-infostate{
+        padding: 4px 12px;
+        font-weight: 400;
+        font-size: 16px;
+        color: white;
+        border-radius: 6px;
+        background-color: #444;
+    }
+
+    .orders-details-infostate .checkbox2 {
+        display: none;
+      }
+
+      .details-client-info{
+        padding-left: 22px;
+      }
+
+      .client .details-cliet{
+        color: #888;
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+
+      .details-client-name{
+        font-size: 24px;
+        color: #e5e5e5;
+        font-weight: 400;
+        margin: 0px;
+      }
+
+      .details-client-info-details{
+        font-size: 14px;
+        margin-top: 7px;
+        color: #b5b5b5;
+      }
+
+      .details-client-info-item{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 12px;
+      }
+    
+      .details-client-info-item-list{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .details-client-info-item li{
+        display: flex;
+        gap: 12px;
+      }
+
+      .details-client-info-item img{
+        width: 55px;
+        height: 55px;
+        border: #838383 1px solid;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+
+      .details-client-info-item-details{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        color: #b5b5b5;
+      }
+
+      .flex{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .no-padding{
+        padding: 0px !important;
+      }
+
+      .details-client-info-item-details .strong{
+        color: #e5e5e5;
+        font-size: 18px;
+      }
+
+      .paraf{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 24px;
+      }
+
+      .paraf .strong2{
+        color: #888;
+        font-size: 16px;
+        font-weight: 400;
+      }

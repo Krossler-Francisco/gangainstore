@@ -2,43 +2,45 @@ import { useEffect, useState } from "react";
 import "./AdminOrders.css";
 import { BsThreeDots } from "react-icons/bs";
 import CustomSelect from "./CustomSelect";
-import { FiCheckSquare, FiSquare, FiCheckCircle, FiClock } from "react-icons/fi";
+import { FiCheckSquare, FiSquare, FiCheckCircle, FiClock, FiDownloadCloud } from "react-icons/fi";
 
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
   const [selectedOrders, setSelectedOrders] = useState({});
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateOrder, setDateOrder] = useState("newest");
-
+  const [loading, setLoading] = useState(true);
+  
   useEffect(() => {
     async function fetchSales() {
       try {
         const res = await fetch("/api/get-pedidos");
         const data = await res.json();
         setOrders(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error al obtener los pedidos:", error);
       }
     }
-
+    
     fetchSales();
   }, []);
-
+  
   const getMongoId = (_id) => (typeof _id === "object" ? _id?.$oid : _id);
-
+  
   const getShortId = (_id) => {
     const idString = getMongoId(_id);
     return idString?.slice(-6) || "------";
   };
-
+  
   const renderEstado = (estado) => {
     if (typeof estado !== "string") {
       console.warn("Estado inválido detectado:", estado);
       return <span className="estado">Sin estado</span>;
     }
-
+    
     const estadoFormatted = estado.charAt(0).toUpperCase() + estado.slice(1).toLowerCase();
-
+    
     if (estado.toLowerCase() === "aprobado") {
       return (
         <span className="estado aprobado">
@@ -47,7 +49,7 @@ function AdminOrders() {
         </span>
       );
     }
-
+    
     if (estado.toLowerCase() === "pendiente") {
       return (
         <span className="estado pendiente">
@@ -56,13 +58,13 @@ function AdminOrders() {
         </span>
       );
     }
-
+    
     return <span className="estado">{estadoFormatted}</span>;
   };
 
   const allSelected =
-    orders.length > 0 && orders.every(order => selectedOrders[getMongoId(order._id)]);
-
+  orders.length > 0 && orders.every(order => selectedOrders[getMongoId(order._id)]);
+  
   const toggleSelectAll = () => {
     const newSelection = {};
     if (!allSelected) {
@@ -73,7 +75,7 @@ function AdminOrders() {
     }
     setSelectedOrders(newSelection);
   };
-
+  
   const toggleSelect = (id) => {
     const idString = getMongoId(id);
     setSelectedOrders((prev) => ({
@@ -86,7 +88,7 @@ function AdminOrders() {
     try {
       console.log("Fecha recibida:", fechaRaw); // 👈 Log para depuración
       let date;
-  
+      
       // Caso 1: formato Mongo con $date.$numberLong
       if (fechaRaw?.$date?.$numberLong) {
         const timestamp = parseInt(fechaRaw.$date.$numberLong, 10);
@@ -100,12 +102,12 @@ function AdminOrders() {
       else if (fechaRaw?.$date) {
         date = new Date(fechaRaw.$date);
       }
-  
+      
       if (!date || isNaN(date.getTime())) {
         console.warn("Fecha inválida luego de parsear:", date); // 👈 Otro log
         return "Fecha inválida";
       }
-  
+      
       return date.toLocaleDateString("es-ES", {
         day: "2-digit",
         month: "short",
@@ -130,9 +132,12 @@ function AdminOrders() {
       const dateB = new Date(b.fecha?.$date?.$numberLong || b.fecha);
       return dateOrder === "newest" ? dateB - dateA : dateA - dateB;
     });
-
-  return (
-    <div className="orders-container">
+    
+    const selectedOrderId = Object.keys(selectedOrders).find((id) => selectedOrders[id]);
+    const selectedOrder = orders.find((order) => getMongoId(order._id) === selectedOrderId)
+    
+    return (
+      <div className="orders-container">
       <div className="orders-content">
         <header className="filters-header">
           <CustomSelect
@@ -171,41 +176,151 @@ function AdminOrders() {
                 <th></th>
               </tr>
             </thead>
-            <tbody>
-              {filteredOrders.map((order) => {
-                const id = getMongoId(order._id);
-                if (!id) return null;
-                const isSelected = selectedOrders[id];
+            <tbody className="table-body">
+              {loading ? (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center" }}>
+                    <FiDownloadCloud className="loading-icon" />
+                  </td>
+                </tr>
+              ) : (
+                filteredOrders.map((order) => {
+                  const id = getMongoId(order._id);
+                  if (!id) return null;
+                  const isSelected = selectedOrders[id];
 
-                return (
-                  <tr key={id} className={isSelected ? "selected-row" : ""}>
-                    <td onClick={() => toggleSelect(id)} style={{ cursor: "pointer" }}>
-                      {isSelected ? (
-                        <FiCheckSquare className="checkbox" style={{ color: "#65c61a" }} />
-                      ) : (
-                        <FiSquare className="checkbox" />
-                      )}
-                    </td>
-                    <td>
-                      #{getShortId(id)}
-                      <div className="order-date">{formatDate(order.fecha)}</div>
-                    </td>
-                    <td>{order.cliente?.fullname || "Sin nombre"}</td>
-                    <td>{renderEstado(order.estado)}</td>
-                    <td>${parseInt(order.total)}</td>
-                    <td className="last-children">
-                      <BsThreeDots style={{ cursor: "pointer" }} />
-                    </td>
-                  </tr>
-                );
-              })}
+                  return (
+                    <tr key={id} className={isSelected ? "selected-row" : ""}>
+                      <td onClick={() => toggleSelect(id)} style={{ cursor: "pointer" }}>
+                        {isSelected ? (
+                          <FiCheckSquare className="checkbox" style={{ color: "#65c61a" }} />
+                        ) : (
+                          <FiSquare className="checkbox" />
+                        )}
+                      </td>
+                      <td>
+                        #{getShortId(id)}
+                        <div className="order-date">{formatDate(order.fecha)}</div>
+                      </td>
+                      <td>{order.cliente?.fullname || "Sin nombre"}</td>
+                      <td>{renderEstado(order.estado)}</td>
+                      <td>${parseInt(order.total)}</td>
+                      <td className="last-children">
+                        <BsThreeDots style={{ cursor: "pointer" }} />
+                      </td>
+                    </tr>
+                  );
+                })
+              )}
             </tbody>
           </table>
         </div>
       </div>
 
       <div className="orders-details2">
-        <section>aaaa</section>
+        <div className="orders-details-content">
+          {selectedOrder ? (
+            <div className="orders-details-container2">
+              <div className="orders-details-header2-line">
+                <header className="orders-details-header">
+                <h1>Pedido #{getShortId(selectedOrder._id)}</h1>
+                <div className="orders-details-infostate-container">
+                  <p><strong className="orders-details-infostate">{renderEstado(selectedOrder.estado)}</strong></p>
+                  <p>Comprado el {formatDate(selectedOrder.fecha)}</p>
+                </div>
+                </header>
+              </div>
+              <div className="orders-details-header2-line">
+                <header className="orders-details-header client">
+                  <p className="details-cliet">Comprador</p>
+                  <div className="details-client-info">
+                  <p className="details-client-name">{selectedOrder.cliente?.fullname || "Não informado"}</p>
+                  <p className="details-client-info-details">{selectedOrder.cliente?.email || "Não informado"}</p>
+                  <p className="details-client-info-details">{selectedOrder.cliente?.phone || "Não informado"}</p>
+                  </div>
+                </header> 
+              </div>
+              <div className="orders-details-header2-line">
+                <header className="orders-details-header client">
+                  <p className="details-cliet">Compra</p>
+                  <div className="details-client-info">
+                    {selectedOrder.productos?.length > 0 && (
+                      <ul className="no-padding">
+                        <div className="details-client-info-item">
+                        <div className="details-client-info-item-list">
+                        {selectedOrder.productos.map((item, idx) => (
+                          <li key={idx}>
+                                <img src={item.img} alt={item.name} className="details-client-info-item-img" />
+                              <div className="details-client-info-item-details">
+                                <p>{item.name || "Produto"}</p>
+                                <div className="flex">
+                                <p className="strong">${item.desconto || 0}</p>x<p>{item.quantity}</p>
+                                </div>
+                              </div>
+                            </li>
+                        ))}
+                        </div>
+                        </div>
+                      </ul>
+                    )}
+                    </div>
+                </header> 
+              </div>
+              <div className="orders-details-header2-line">
+                <header className="orders-details-header client">
+                  <div className="paraf">
+                    <strong className="strong2">Total:</strong>
+                    <p>${parseInt(selectedOrder.total)}</p>
+                  </div>
+                </header>
+              </div>
+              </div>
+          ) : (
+            <div className="orders-details-container2">
+              <div className="orders-details-header2-line">
+                <header className="orders-details-header">
+                <h1>Detalles</h1>
+                <div className="orders-details-infostate-container">
+                  <p><strong className="orders-details-infostate"></strong></p>
+                  <p></p>
+                </div>
+                </header>
+              </div>
+              <div className="orders-details-header2-line">
+                <header className="orders-details-header client">
+                  <p className="details-cliet">Comprador</p>
+                  <div className="details-client-info">
+                  <p className="details-client-name">​</p>
+                  <p className="details-client-info-details">​                  </p>
+                  <p className="details-client-info-details">​                  </p>
+                  </div>
+                </header> 
+              </div>
+              <div className="orders-details-header2-line">
+                <header className="orders-details-header client">
+                  <p className="details-cliet">Compra</p>
+                  <div className="details-client-info">
+                      <ul className="no-padding">
+                        <div className="details-client-info-item ">
+                            <li >
+                                <img src="" alt="" className="details-client-info-item-img" />
+                              <div className="details-client-info-item-details">
+                                <p>Produto</p>
+                                <div className="flex">
+                                <p className="strong">​
+                                </p>​<p>​</p>
+                                </div>
+                              </div>
+                            </li>
+                        </div>
+                      </ul>
+                    </div>
+                </header> 
+              </div>
+              <p><strong></strong>​</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
