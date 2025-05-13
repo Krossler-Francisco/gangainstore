@@ -9,7 +9,7 @@
 }
 
 .orders-details2{
-    padding: 34px;
+    padding: 34px ;
 }
 
 .table-container{
@@ -54,7 +54,8 @@
 .checkbox{
     translate: 0px 3px;
     font-size: 18px;
-}
+    
+  }
 
 .checkbox2{
     translate: 0px 3px;
@@ -74,10 +75,48 @@
     color: #FFC107; /* amarillo */
 }
 
+.estado.entregue {
+  color: #3da1f2; /* azul */
+}
+
+.estado.cancelado {
+    color: #f44336; /* rojo */
+  }
+
+  .skeleton{
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    border-radius: 8px;
+    animation: skeleton-loading 1.5s infinite linear;
+}
+
 
 .filters-header {
     display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+
+  .filters-header .reload-btn{
+    background: none;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: white;
+    font-size: 22px;
+    transition: 0.2s ease;
+  }
+
+  .filters-header .reload-btn:hover{
+    background: #444;
+  }
+
+  .filters-header-container{
+    display: flex;
     gap: 10px;
+    align-items: center;
   }
 
 .filters-header select{

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./AdminOrders.css";
 import { BsThreeDots } from "react-icons/bs";
 import CustomSelect from "./CustomSelect";
-import { FiCheckSquare, FiSquare, FiCheckCircle, FiClock, FiDownloadCloud, FiPrinter  } from "react-icons/fi";
+import { FiCheckSquare, FiSquare, FiCheckCircle, FiClock, FiDownloadCloud, FiPrinter, FiPackage, FiLoader, FiXCircle } from "react-icons/fi";
+import EditOrderModal from "./EditOrderModal";
 
 function AdminOrders() {
   const [orders, setOrders] = useState([]);
@@ -10,19 +11,24 @@ function AdminOrders() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [dateOrder, setDateOrder] = useState("newest");
   const [loading, setLoading] = useState(true);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [orderToEdit, setOrderToEdit] = useState(null);
   
-  useEffect(() => {
-    async function fetchSales() {
-      try {
-        const res = await fetch("/api/get-pedidos");
-        const data = await res.json();
-        setOrders(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error al obtener los pedidos:", error);
-      }
+  const fetchSales = async () => {
+    try {
+      setLoading(true); // Opcional: mostrar loading al recargar también
+      const res = await fetch("/api/get-pedidos");
+      const data = await res.json();
+      setOrders(data);
+    } catch (error) {
+      console.error("Error al obtener los pedidos:", error);
+    } finally {
+      setLoading(false);
     }
-    
+  };
+
+  // 2. Ejecutar al montar el componente
+  useEffect(() => {
     fetchSales();
   }, []);
   
@@ -55,6 +61,24 @@ function AdminOrders() {
         <span className="estado pendiente">
           <FiClock className="checkbox2" style={{ color: "#FFC107", marginRight: 6 }} />
           {estadoFormatted}
+        </span>
+      );
+    }
+
+    if (estado.toLowerCase() === "entregue") {
+      return (
+        <span className="estado entregue">
+          <FiPackage className="checkbox2" style={{ marginRight: 6 }} />
+          {estadoFormatted}
+        </span>
+      );
+    }
+
+    if (estado.toLowerCase() === "cancelado") {
+      return (
+        <span className="estado cancelado">
+          <FiXCircle className="checkbox2" style={{ marginRight: 6 }} />
+          Cancelada
         </span>
       );
     }
@@ -119,6 +143,8 @@ function AdminOrders() {
     }
   };
 
+  
+
   const filteredOrders = orders
     .filter(order => {
       if (!order || !order.estado) {
@@ -140,55 +166,28 @@ function AdminOrders() {
       <div className="orders-container">
       <div className="orders-content">
         <header className="filters-header">
-          <CustomSelect
-            value={statusFilter}
-            onChange={setStatusFilter}
-            options={[
-              { value: "all", label: "Todos" },
-              { value: "pendiente", label: "Pendiente" },
-              { value: "aprobado", label: "Aprobado" },
-            ]}
-          />
-          <CustomSelect
-            value={dateOrder}
-            onChange={setDateOrder}
-            options={[
-              { value: "newest", label: "Más recientes" },
-              { value: "oldest", label: "Más antiguos" },
-            ]}
-          />
-          <CustomSelect
-            value={dateOrder}
-            onChange={setDateOrder}
-            options={[
-              { value: "newest", label: "Más recientes" },
-              { value: "oldest", label: "Más antiguos" },
-            ]}
-          />
-          <CustomSelect
-            value={dateOrder}
-            onChange={setDateOrder}
-            options={[
-              { value: "newest", label: "Más recientes" },
-              { value: "oldest", label: "Más antiguos" },
-            ]}
-          />
-          <CustomSelect
-            value={dateOrder}
-            onChange={setDateOrder}
-            options={[
-              { value: "newest", label: "Más recientes" },
-              { value: "oldest", label: "Más antiguos" },
-            ]}
-          />
-          <CustomSelect
-            value={dateOrder}
-            onChange={setDateOrder}
-            options={[
-              { value: "newest", label: "Más recientes" },
-              { value: "oldest", label: "Más antiguos" },
-            ]}
-          />
+          <div className="filters-header-container">
+            <CustomSelect
+              value={statusFilter}
+              onChange={setStatusFilter}
+              options={[
+                { value: "all", label: "Todos" },
+                { value: "pendiente", label: "Pendiente" },
+                { value: "aprobado", label: "Aprobado" },
+                { value: "cancelado", label: "Cancelado" },
+                { value: "entregue", label: "Entregue" },
+              ]}
+              />
+            <CustomSelect
+              value={dateOrder}
+              onChange={setDateOrder}
+              options={[
+                { value: "newest", label: "Más recientes" },
+                { value: "oldest", label: "Más antiguos" },
+              ]}
+              />
+          </div>
+              <FiLoader onClick={fetchSales} className="reload-btn" />
         </header>
         <div className="table-container">
           <table>
@@ -210,11 +209,11 @@ function AdminOrders() {
             </thead>
             <tbody className="table-body">
               {loading ? (
-                <tr>
-                  <td colSpan="6" style={{ textAlign: "center" }}>
+                <tr className="">
+                  <td colSpan="6" className="loading-row">
                     <FiDownloadCloud className="loading-icon" />
                   </td>
-                </tr>
+              </tr>
               ) : (
                 filteredOrders.map((order) => {
                   const id = getMongoId(order._id);
@@ -251,7 +250,7 @@ function AdminOrders() {
 
       <div className="orders-details2">
         <div className="orders-details-content">
-          <button className="print-icon skeleton">
+          <button className="print-icon">
           <FiPrinter/>
           </button>
           {selectedOrder ? (
@@ -316,7 +315,7 @@ function AdminOrders() {
               </div>
               </div>
           ) : (
-            <div className="orders-details-container2 skeleton">
+            <div className="orders-details-container2">
             </div>
           )}
         </div>
